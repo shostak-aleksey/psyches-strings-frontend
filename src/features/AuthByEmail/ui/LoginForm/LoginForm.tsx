@@ -7,30 +7,24 @@ import {
   getLoginIsLoading,
   getLoginPassword,
 } from '../../model/selectors/loginSelectors';
-import {
-  setEmail,
-  setPassword,
-  setLoading,
-  setError,
-} from '../../model/slice/loginSlice';
-import { useCallback } from 'react';
+import { setEmail, setPassword } from '../../model/slice/loginSlice';
+import { memo, useCallback } from 'react';
 // import { loginByEmail } from '../../model/services/loginByEmail';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { VStack } from '@/shared/ui/Stack';
 import { Input } from '@/shared/ui/Input';
-import { useLoginByEmailMutation } from '../../api/loginApi';
+import { loginByEmail } from '../../model/services/loginByEmail';
 
 interface LoginFormProps {
   className?: string;
 }
 
-export const LoginForm = ({ className }: LoginFormProps) => {
+export const LoginForm = memo(({ className }: LoginFormProps) => {
   const dispatch = useAppDispatch();
   const email = useSelector(getLoginEmail);
   const password = useSelector(getLoginPassword);
   const isLoading = useSelector(getLoginIsLoading);
   const error = useSelector(getLoginError);
-  const [loginByEmail] = useLoginByEmailMutation();
 
   const onChangeEmail = useCallback(
     (value: string) => {
@@ -47,38 +41,25 @@ export const LoginForm = ({ className }: LoginFormProps) => {
   );
 
   const onLoginClick = useCallback(async () => {
-    dispatch(setLoading(true));
-    try {
-      const response = await loginByEmail({
-        email,
-        password,
-        role: 'USER',
-      }).unwrap();
-      console.log('Login successful:', response);
-      dispatch(setError(''));
-    } catch (err) {
-      dispatch(setError((err as Error).message || 'Failed to login'));
-    } finally {
-      dispatch(setLoading(false));
-    }
-  }, [dispatch, email, password, loginByEmail]);
+    await dispatch(loginByEmail({ email, password, role: 'USER' }));
+  }, [dispatch, email, password]);
 
   return (
     <VStack gap="16" className={classNames(cls.LoginForm, {}, [className])}>
       <label>
         Login:
-        <Input
+        <input
           value={email}
-          onChange={onChangeEmail}
+          onChange={(e) => onChangeEmail(e.target.value)}
           type="email"
           placeholder="email"
         />
       </label>
       <label>
         Password:
-        <Input
+        <input
           value={password}
-          onChange={onChangePassword}
+          onChange={(e) => onChangePassword(e.target.value)}
           type="password"
           placeholder="Password"
         />
@@ -89,4 +70,4 @@ export const LoginForm = ({ className }: LoginFormProps) => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </VStack>
   );
-};
+});
