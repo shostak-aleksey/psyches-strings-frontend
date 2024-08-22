@@ -10,7 +10,7 @@ import { AxiosInstance } from 'axios';
 import { UserSchema } from '@/entities/User';
 
 import { rtkApi } from '@/shared/api/rtkApi';
-import { LoginSchema } from '@/features/AuthByEmail';
+import { LoginSchema } from '@/features/AuthByUsername';
 
 export interface StateSchema {
   user: UserSchema;

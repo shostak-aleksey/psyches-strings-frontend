@@ -4,7 +4,8 @@ import { memo, useCallback, useState } from 'react';
 import { HStack } from '@/shared/ui/Stack';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User/model/selectors/getUserSelectors';
-import { LoginForm } from '@/features/AuthByEmail';
+import { LoginForm } from '@/features/AuthByUsername';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   className?: string;
@@ -18,21 +19,28 @@ export const Navbar = memo(({ className }: NavbarProps) => {
   if (authData) {
     return (
       <header className={c(cls.Navbar, {}, [className])}>
-        <HStack gap="12">b</HStack>
+        <HStack gap="12">b f</HStack>
       </header>
     );
   }
 
   return (
     <header className={c(cls.Navbar, {}, [className])}>
-      <HStack justify="around" gap="12">
-        <div>SomeLink</div>
-        <div>SomeLink</div>
-        <div>SomeLink</div>
-        <div>SomeLink</div>
-        <div>SomeLink</div>
-        <div>SomeLink</div>
-        <LoginForm />
+      <HStack className="HStack" justify="around" gap="12">
+        <Link className={cls.Link} to="/">
+          Главная
+        </Link>
+        <Link className={cls.Link} to="/about">
+          Обо мне
+        </Link>
+        {/* <Link to="/articles">SomeLink</Link>
+        <Link to="/profile/123">SomeLink</Link> */}
+        <Link className={cls.Link} to="/login">
+          login
+        </Link>
+        <Link className={cls.Link} to="/registration">
+          registration
+        </Link>
       </HStack>
     </header>
   );
