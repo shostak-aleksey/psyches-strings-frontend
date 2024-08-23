@@ -4,7 +4,6 @@ import { memo, useCallback, useState } from 'react';
 import { HStack } from '@/shared/ui/Stack';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User/model/selectors/getUserSelectors';
-import { LoginForm } from '@/features/AuthByUsername';
 import { Link } from 'react-router-dom';
 
 interface NavbarProps {

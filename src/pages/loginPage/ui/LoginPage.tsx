@@ -1,6 +1,6 @@
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './LoginPage.module.scss';
-import { LoginForm } from '@/features/AuthByUsername';
+import { LoginForm } from '@/features/AuthByEmail';
 
 interface LoginPageProps {
   className?: string;
