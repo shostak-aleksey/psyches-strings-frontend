@@ -1,3 +1,4 @@
+// src/app/providers/StoreProvider/config/store.ts
 import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import { CombinedState, Reducer } from 'redux';
 
@@ -7,6 +8,7 @@ import { $api } from '@/shared/api/api';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
+import { loginApi } from '@/features/AuthByEmail/api/loginApi';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -15,6 +17,7 @@ export function createReduxStore(
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     user: userReducer,
+    [loginApi.reducerPath]: loginApi.reducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };
 
@@ -33,7 +36,7 @@ export function createReduxStore(
         thunk: {
           extraArgument: extraArg,
         },
-      }).concat(rtkApi.middleware),
+      }).concat(loginApi.middleware, rtkApi.middleware), // Добавляем loginApi.middleware
   });
 
   // @ts-ignore

@@ -1,17 +1,36 @@
+// src/features/AuthByEmail/api/loginApi.ts
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { User } from '@/entities/User';
-import { rtkApi } from '@/shared/api/rtkApi';
 
-interface LoginByEmailParams {
+interface LoginWithGoogleParams {
+  credential: string;
+}
+
+interface LoginWithEmailParams {
   email: string;
   password: string;
   role: 'USER' | 'ADMIN';
 }
+export interface AuthResponse {
+  user: User;
+  accessToken: string;
+  refreshToken: string;
+}
 
-const loginApi = rtkApi.injectEndpoints({
-  endpoints: (build) => ({
-    LoginByEmail: build.mutation<User, LoginByEmailParams>({
+export const loginApi = createApi({
+  reducerPath: 'loginApi',
+  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+  endpoints: (builder) => ({
+    loginWithGoogle: builder.mutation<AuthResponse, LoginWithGoogleParams>({
       query: (authData) => ({
-        url: '/user/login',
+        url: '/user/google-login',
+        method: 'POST',
+        body: authData,
+      }),
+    }),
+    loginWithEmail: builder.mutation<AuthResponse, LoginWithEmailParams>({
+      query: (authData) => ({
+        url: '/user/registration',
         method: 'POST',
         body: authData,
       }),
@@ -19,4 +38,5 @@ const loginApi = rtkApi.injectEndpoints({
   }),
 });
 
-export const LoginByEmail = loginApi.endpoints.LoginByEmail.initiate;
+export const { useLoginWithGoogleMutation } = loginApi;
+export const { useLoginWithEmailMutation } = loginApi;

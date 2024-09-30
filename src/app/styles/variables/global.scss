@@ -47,6 +47,23 @@
   --overlay-z-index: 100;
 
   // Цвета
+  // --bg-color: red;
+  // --title-color
+  //  -text-color
+  // --primary-color: #6667ab;
+  // --secondary-color: #ac8188;
+  // --link-color:
+  // --button-color:
+  // --overlay-color:
+  //шрифты
+  // --font-family-main:
+  // --font-family-text-redesigned:
+  // размеры
+  // --font-size-s:
+  // --font-size-l:
+  // --font-size-m:
+  // отступы
+  // 2 - 4 - 6 - 8- 10 - 12 - 16 - 20 - 24 - 32 - 40 - 48px - 64px
   --overlay-color: rgba(0 0 0 / 60%);
   --red-light: #f00;
   --red-dark: #ce0505;
@@ -178,6 +195,7 @@
   );
   --gradient-8: linear-gradient(270deg, #9e77ff, #6667ab);
   --gradient-9: linear-gradient(180deg, #6667ab, #e3f0ff);
-  --color-veronika-bg: #efeae4;
+  --gradient-10: linear-gradient(90deg, #cad3f5, #e3f0ff, #e6cff2);
+  --color-bg: #f9f9ff;
   --color-special: #86999f;
 }

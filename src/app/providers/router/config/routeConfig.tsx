@@ -1,6 +1,6 @@
 import { MainPage } from '@/pages/MainPage';
-// import { AboutPage } from '@/pages/AboutPage';
-// import { ProfilePage } from '@/pages/ProfilePage';
+import { AboutPage } from '@/pages/AboutPage';
+import { ProfilePage } from '@/pages/ProfilePage';
 // import { ArticlesPage } from '@/pages/ArticlesPage';
 // import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
 // import { ArticleEditPage } from '@/pages/ArticleEditPage';
@@ -13,12 +13,14 @@ import {
   getRouteLogin,
   getRouteMain,
   getRouteRegistration,
-  //   getRouteAbout,
+  getRouteAbout,
   //   getRouteAdmin,
   //   getRouteArticleCreate,
   //   getRouteArticleDetails,
   //   getRouteArticleEdit,
   getRouteForbidden,
+  getRouteProfile,
+  getRouteCourse,
   //   getRouteArticles,
   //   getRouteProfile,
   //   getRouteSettings,
@@ -27,6 +29,7 @@ import { AppRoutesProps } from '@/shared/types/router';
 // import { SettingsPage } from '@/pages/SettingsPage';
 import { LoginPage } from '@/pages/loginPage/ui/LoginPage';
 import { RegistrationPage } from '@/pages/RegistrationPage';
+import { CoursePage } from '@/pages/CoursePage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -46,19 +49,23 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     path: getRouteForbidden(),
     element: <ForbiddenPage />,
   },
-  //   [AppRoutes.ABOUT]: {
-  //     path: getRouteAbout(),
-  //     element: <AboutPage />,
-  //   },
+  [AppRoutes.ABOUT]: {
+    path: getRouteAbout(),
+    element: <AboutPage />,
+  },
   // [AppRoutes.SETTINGS]: {
   //     path: getRouteSettings(),
   //     element: <SettingsPage />,
   // },
-  // [AppRoutes.PROFILE]: {
-  //     path: getRouteProfile(':id'),
-  //     element: <ProfilePage />,
-  //     authOnly: true,
-  // },
+  [AppRoutes.PROFILE]: {
+    path: getRouteProfile(':id'),
+    element: <ProfilePage />,
+  },
+  [AppRoutes.COURSE]: {
+    path: getRouteCourse(':id'),
+    element: <CoursePage />,
+  },
+
   // [AppRoutes.ARTICLES]: {
   //     path: getRouteArticles(),
   //     element: <ArticlesPage />,

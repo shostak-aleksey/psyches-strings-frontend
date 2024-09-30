@@ -1,0 +1,33 @@
+/* shared/ui/SectionWithSeparator/SectionWithSeparator.module.scss */
+.SectionWithSeparator {
+  position: relative;
+  width: 100%;
+
+  .topSection {
+    position: relative;
+    z-index: 1;
+  }
+
+  .separatorWrapper {
+    position: relative;
+    width: 100%;
+    height: 25px; /* Высота для наложения */
+    overflow: visible;
+    z-index: 0;
+
+    .separator {
+      width: 100%;
+      height: 50px; /* Высота полукруга */
+      border-top-left-radius: 100px; /* Радиус для создания полукруга */
+      border-top-right-radius: 100px; /* Радиус для создания полукруга */
+      position: absolute;
+      top: -25px; /* Позиционирование для наложения на вышестоящий блок */
+    }
+  }
+
+  .bottomSection {
+    position: relative;
+    top: -25px; /* Позиционирование для стыковки с нижестоящим блоком */
+    z-index: 1;
+  }
+}

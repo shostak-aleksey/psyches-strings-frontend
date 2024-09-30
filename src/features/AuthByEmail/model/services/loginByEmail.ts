@@ -1,7 +1,8 @@
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { User } from '@/entities/User';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { LoginByEmail } from '../../api/loginApi';
+import { useLoginWithEmailMutation } from '../../api/loginApi';
+import { storeTokens } from '@/shared/utils/tokenStorage';
+import { AuthResponse } from '../../api/loginApi';
 
 interface LoginByEmailProps {
   email: string;
@@ -10,16 +11,19 @@ interface LoginByEmailProps {
 }
 
 export const loginByEmail = createAsyncThunk<
-  User,
+  AuthResponse,
   LoginByEmailProps,
   ThunkConfig<string>
 >('login/loginByEmail', async (authData, thunkApi) => {
   const { dispatch, rejectWithValue } = thunkApi;
+  const [loginByEmail] = useLoginWithEmailMutation();
 
   try {
-    const response = await dispatch(LoginByEmail(authData)).unwrap();
-    console.log(response);
-    return response;
+    const result = await loginByEmail(authData).unwrap();
+    const { accessToken, refreshToken, user } = result;
+    storeTokens(accessToken, refreshToken);
+    console.log(result);
+    return result;
   } catch (e) {
     console.log(e);
     return rejectWithValue('error');

@@ -3,8 +3,9 @@ export enum AppRoutes {
   LOGIN = 'login',
   REGISTRATION = 'registration',
   //   SETTINGS = 'settings',
-  //   ABOUT = 'about',
-  //   PROFILE = 'profile',
+  ABOUT = 'about',
+  PROFILE = 'profile',
+  COURSE = 'course',
   //   ARTICLES = 'articles',
   //   ARTICLE_DETAILS = 'article_details',
   //   ARTICLE_CREATE = 'article_create',
@@ -18,9 +19,10 @@ export enum AppRoutes {
 export const getRouteMain = () => '/';
 export const getRouteLogin = () => '/login';
 export const getRouteRegistration = () => '/registration';
-// export const getRouteAbout = () => '/about';
+export const getRouteAbout = () => '/about';
 // export const getRouteSettings = () => '/settings';
-// export const getRouteProfile = (id: string) => `/profile/${id}`;
+export const getRouteProfile = (id: string) => `/profile/${id}`;
+export const getRouteCourse = (id: string) => `/course/${id}`;
 // export const getRouteArticles = () => '/articles';
 // export const getRouteArticleDetails = (id: string) => `/articles/${id}`;
 // export const getRouteArticleCreate = () => '/articles/new';
@@ -33,8 +35,9 @@ export const AppRouteByPathPattern: Record<string, AppRoutes> = {
   [getRouteLogin()]: AppRoutes.LOGIN,
   [getRouteRegistration()]: AppRoutes.REGISTRATION,
   //   [getRouteSettings()]: AppRoutes.SETTINGS,
-  //   [getRouteAbout()]: AppRoutes.ABOUT,
-  //   [getRouteProfile(':id')]: AppRoutes.PROFILE,
+  [getRouteAbout()]: AppRoutes.ABOUT,
+  [getRouteProfile(':id')]: AppRoutes.PROFILE,
+  [getRouteCourse(':id')]: AppRoutes.COURSE,
   //   [getRouteArticles()]: AppRoutes.ARTICLES,
   //   [getRouteArticleDetails(':id')]: AppRoutes.ARTICLE_DETAILS,
   //   [getRouteArticleCreate()]: AppRoutes.ARTICLE_CREATE,

@@ -3,21 +3,20 @@ import cls from './LoginForm.module.scss';
 import { useSelector } from 'react-redux';
 import {
   getLoginEmail,
-  getLoginError,
-  getLoginIsLoading,
   getLoginPassword,
 } from '../../model/selectors/loginSelectors';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { VStack } from '@/shared/ui/Stack';
 import { Input } from '@/shared/ui/Input';
-import { loginByEmail } from '../../model/services/loginByEmail';
 import {
   DynamicModuleLoader,
   ReducersList,
 } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { Text } from '@/shared/ui/Text';
+import { useLoginWithEmailMutation } from '../../api/loginApi';
+import { ErrorMessage } from '@/shared/ui/ErrorMessage/ErrorMessage';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   className?: string;
@@ -27,8 +26,9 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
   const dispatch = useAppDispatch();
   const email = useSelector(getLoginEmail);
   const password = useSelector(getLoginPassword);
-  const isLoading = useSelector(getLoginIsLoading);
-  const error = useSelector(getLoginError);
+  const navigate = useNavigate();
+  const [loginByEmail, { isLoading, isSuccess, isError, error }] =
+    useLoginWithEmailMutation();
 
   const initialReducers: ReducersList = {
     loginForm: loginReducer,
@@ -49,8 +49,16 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
   );
 
   const onLoginClick = useCallback(async () => {
-    await dispatch(loginByEmail({ email, password, role: 'USER' }));
-  }, [dispatch, email, password]);
+    loginByEmail({ email, password, role: 'USER' });
+  }, [email, password]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(loginActions.setEmail(''));
+      dispatch(loginActions.setPassword(''));
+      navigate('/main'); // Редирект на главную страницу
+    }
+  }, [isSuccess, dispatch, navigate]);
 
   return (
     <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
@@ -76,7 +84,7 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
         <button onClick={onLoginClick} disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Send'}
         </button>
-        {error && <Text variant={'error'} text={error}></Text>}
+        {isError && <ErrorMessage error={error} />}
       </VStack>
     </DynamicModuleLoader>
   );

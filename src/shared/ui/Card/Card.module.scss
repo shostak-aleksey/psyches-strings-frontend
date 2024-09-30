@@ -1,0 +1,97 @@
+.card {
+  background: #f5eefa;
+  border-radius: 8px;
+  box-shadow: 6px 4px 10px rgba(0, 0, 0, 0.315);
+  overflow: hidden;
+  text-align: start;
+  margin: 16px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  padding: 18px;
+}
+
+.popular {
+  color: #363636;
+  font-size: 14px;
+  text-align: start;
+  font-size: 18px;
+}
+
+.title {
+  font-size: 30px;
+  font-family: sans-serif;
+  line-height: 1.1;
+  margin: 8px 0;
+  text-align: start;
+  color: #000;
+  -o-transition: color 0.3s ease-in-out;
+  -webkit-transition: color 0.3s ease-in-out;
+  -moz-transition: color 0.3s ease-in-out;
+  -ms-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: aqua;
+  }
+}
+
+.description {
+  color: #6e6e6e;
+  font-size: 18px;
+  margin: 8px 0;
+  text-align: start;
+}
+
+.priceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priceSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.price {
+  font-size: 26px;
+  font-weight: 500;
+  color: #000;
+}
+
+.oldPrice {
+  font-size: 16px;
+  color: #888;
+  text-decoration: line-through;
+  margin-left: 8px;
+}
+
+.link {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 8px;
+  display: inline-block;
+  -o-transition: color 0.3s ease-in-out;
+  -webkit-transition: color 0.3s ease-in-out;
+  -moz-transition: color 0.3s ease-in-out;
+  -ms-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: aqua;
+  }
+}

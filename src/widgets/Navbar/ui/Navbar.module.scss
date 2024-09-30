@@ -1,13 +1,121 @@
 .Navbar {
   width: 100%;
-  height: 70px;
-  background: rgb(100, 100, 100);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 0 0 10px 0 #000000;
+  box-shadow: 0 0 15px 0 #a1a1a1;
+  position: relative;
 }
 
 .Link {
-  color: white;
-  // border: none;
+  color: #192340;
   text-decoration: none;
   font-size: x-large;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.Icon {
+  color: #d3cac0;
+  transition: color 0.3s;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.NavTop {
+  display: flex;
+  justify-content: space-around;
+  background-color: #54395a;
+  padding: 10px 30px;
+}
+
+.NavBottom {
+  width: 100%;
+  overflow: hidden;
+  transition:
+    height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
+  height: 0; /* Начальное состояние - скрыто */
+  opacity: 0; /* Начальное состояние - скрыто */
+}
+
+.NavBottom.opened {
+  height: 80px; /* Высота в открытом состоянии */
+  opacity: 1; /* Полная видимость в открытом состоянии */
+}
+
+.SocialLink {
+  color: #d3cac0;
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7em;
+  gap: 10px;
+  transition: color 0.3s;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.arrowUp,
+.arrowDown {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  transition: transform 0.3s ease-in-out;
+}
+
+.arrowUp {
+  border-bottom: 10px solid #ffffff; /* Цвет стрелки */
+}
+
+.arrowDown {
+  border-top: 10px solid #ffffff; /* Цвет стрелки */
+}
+
+.arrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  &.rotating {
+    animation: rotate 0.3s ease;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.googleButton {
+  font-size: x-large;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #192335;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -o-transition: color 0.3s;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  -ms-transition: color 0.3s;
+  transition: color 0.3s;
+  &:hover {
+    color: #2f2f30;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }

@@ -6,7 +6,6 @@ import { initAuthData } from '../services/initAuthData';
 const initialState: UserSchema = {
   _inited: false,
 };
-
 export const userSlice = createSlice({
   name: 'user',
   initialState,
