@@ -50,8 +50,8 @@
   // --bg-color: red;
   // --title-color
   //  -text-color
-  // --primary-color: #6667ab;
-  // --secondary-color: #ac8188;
+  // --primary-color: ;
+  // --secondary-color: ;
   // --link-color:
   // --button-color:
   // --overlay-color:
@@ -64,6 +64,70 @@
   // --font-size-m:
   // отступы
   // 2 - 4 - 6 - 8- 10 - 12 - 16 - 20 - 24 - 32 - 40 - 48px - 64px
+  // const generateWavePath = (offset: number) => {
+  //   const waveHeight = 20;
+  //   const waveLength = 15; // Shorter wave length
+  //   const numWaves = 12; // More waves
+  //   let path = `M0 ${50 + Math.sin(offset) * waveHeight}`;
+
+  //   for (let i = 0; i < numWaves; i++) {
+  //     const x1 = waveLength * (i + 0.5);
+  //     const y1 = 50 + Math.sin(offset + (i + 0.5) * Math.PI) * waveHeight;
+  //     const x2 = waveLength * (i + 1);
+  //     const y2 = 50 + Math.sin(offset + (i + 1) * Math.PI) * waveHeight;
+  //     path += ` S ${x1} ${y1}, ${x2} ${y2}`;
+  //   }
+
+  //   path += ` L 100 50 V 100 H 0 Z`;
+  //   return path;
+  // };
+  // const generateWavePath = (offset: number) => {
+  //   const waveHeight = 5;
+  //   const waveLength = 15;
+  //   const numWaves = 12;
+  //   const verticalOffset = Math.sin(offset) * 10;
+  //   const phaseShift = Math.PI / 4; // Phase shift for dynamic effect
+
+  //   let path = `M0 ${50 + verticalOffset}`;
+
+  //   for (let i = 0; i < numWaves; i++) {
+  //     const x1 = waveLength * (i + 0.5);
+  //     const y1 =
+  //       50 +
+  //       verticalOffset +
+  //       Math.sin(offset + (i + 0.5) * Math.PI + phaseShift) * waveHeight;
+  //     const x2 = waveLength * (i + 1);
+  //     const y2 =
+  //       50 +
+  //       verticalOffset +
+  //       Math.sin(offset + (i + 1) * Math.PI + phaseShift) * waveHeight;
+  //     path += ` S ${x1} ${y1}, ${x2} ${y2}`;
+  //   }
+
+  //   path += ` L 100 ${50 + verticalOffset} V 100 H 0 Z`;
+  //   return path;
+  // };
+  //   const generateWavePath = (offset: number) => {
+  //   const waveHeight = 5;
+  //   const waveLength = 15;
+  //   const numWaves = 12;
+  //   const verticalOffset = Math.cos(offset) * 10; // Using cosine for a different effect
+
+  //   let path = `M0 ${50 + verticalOffset}`;
+
+  //   for (let i = 0; i < numWaves; i++) {
+  //     const x1 = waveLength * (i + 0.5);
+  //     const y1 =
+  //       50 + verticalOffset + Math.cos(offset + (i + 0.5) * Math.PI) * waveHeight;
+  //     const x2 = waveLength * (i + 1);
+  //     const y2 =
+  //       50 + verticalOffset + Math.cos(offset + (i + 1) * Math.PI) * waveHeight;
+  //     path += ` S ${x1} ${y1}, ${x2} ${y2}`;
+  //   }
+
+  //   path += ` L 100 ${50 + verticalOffset} V 100 H 0 Z`;
+  //   return path;
+  // };
   --overlay-color: rgba(0 0 0 / 60%);
   --red-light: #f00;
   --red-dark: #ce0505;
@@ -176,26 +240,100 @@
   --h5: 20px;
   --h6: 16px;
   --div-gap-1: 10px;
-  --gradient-1: linear-gradient(#fff, hsla(33, 26%, 92%, 0.9));
-  --gradient-4: linear-gradient(180deg, #fff, #efeae4);
-  --gradient-2: linear-gradient(0deg, #fff, #f0f2ff);
-  --gradient-3: linear-gradient(90deg, #8da9fc, #b48dd5);
-  --gradient-4: linear-gradient(180deg, #eff1ff, #fff);
-  --gradient-5: linear-gradient(#eff1ff, #eff1ff);
+  --color-bg: #ffffff;
+  --gradient-1: linear-gradient(
+    45deg,
+    #922bfa,
+    #ffdfba
+  ); /* светло-фиолетовый к средне-фиолетовому к светло-розовому к светло-розовому к светло-желтому */
+  --gradient-2: linear-gradient(90deg, #9166bd, #ffdfba);
+  // 957dad, 9166bd, a97dd4, 922bfa /* светло-розовый к светло-розовому к средне-фиолетовому к светло-фиолетовому к светло-желтому */
+  --gradient-3: linear-gradient(
+    180deg,
+    #cbd5fb,
+    #ffdfba,
+    #ffffff
+  ); /* светло-фиолетовый к средне-фиолетовому к светло-розовому к светло-розовому к светло-желтому */
+  --gradient-4: linear-gradient(
+    180deg,
+    #ffffff,
+    #ffdfba,
+    #cbd5fb
+  ); /* светло-розовый к светло-розовому к средне-фиолетовому к светло-фиолетовому к светло-желтому */
+  --gradient-5: linear-gradient(270deg, #cbd5fb, #957dad, #ffdfba);
+  --gradient-5-1: linear-gradient(270deg, #cbd5fb, #ffdfba);
+  --gradient-5-2: linear-gradient(270deg, #ff8e71, #9090ff);
+  // #7b9cfb, #f78da7
+  // #ff8e71, #9090ff
+  // --gradient-5-2: linear-gradient(270deg, #fcbeae, #c1c1f9);
+  // --gradient-5-2: linear-gradient(270deg, #c1c1f9, #eecac1);
+  // fcbeae, ffac97
+  /* светло-фиолетовый к средне-фиолетовому к светло-розовому к светло-розовому к светло-желтому */
   --gradient-6: linear-gradient(
     90deg,
-    hsla(0, 0%, 100%, 0.15),
-    rgba(251, 199, 226, 0.15),
-    rgba(220, 217, 254, 0.15)
-  );
+    #957dad,
+    #cbd5fb,
+    #ffdfba
+  ); /* светло-розовый к светло-розовому к средне-фиолетовому к светло-фиолетовому к светло-желтому */
   --gradient-7: linear-gradient(
     218.15deg,
-    var(--color-secondary) 0%,
-    var(--color-primary) 100%
-  );
-  --gradient-8: linear-gradient(270deg, #9e77ff, #6667ab);
-  --gradient-9: linear-gradient(180deg, #6667ab, #e3f0ff);
-  --gradient-10: linear-gradient(90deg, #cad3f5, #e3f0ff, #e6cff2);
-  --color-bg: #f9f9ff;
-  --color-special: #86999f;
+    #957dad,
+    #ffdfba
+  ); /* светло-фиолетовый к средне-фиолетовому к светло-розовому к светло-розовому к светло-желтому */
+  --gradient-8: linear-gradient(
+    270deg,
+    #957dad,
+    #ffdfba,
+    #cbd5fb
+  ); /* светло-розовый к светло-розовому к средне-фиолетовому к светло-фиолетовому к светло-желтому */
+  --gradient-9: linear-gradient(
+    180deg,
+    #957dad,
+    #ffdfba
+  ); /* светло-фиолетовый к средне-фиолетовому к светло-розовому к светло-розовому к светло-желтому */
+  --gradient-10: linear-gradient(
+    90deg,
+    #957dad,
+    #ffdfba
+  ); /* светло-розовый к светло-розовому к средне-фиолетовому к светло-фиолетовому к светло-желтому */
+  --title-color: #ffffff;
+  --text-color: #ffffff;
+  --primary-color: #ffffff;
+  --link-color: #ffffff;
+  --font-size-s: 12px;
+  --font-size-m: 16px;
+  --font-size-l: 20px;
+  --font-size-xl: 24px;
+  --font-size-b1: 32px;
+  --font-size-b2: 40px;
+  --font-size-b3: 48px;
+  --font-size-b4: 64px;
+  --font-line-s: 18px;
+  --font-line-m: 24px;
+  --font-line-l: 30px;
+  --font-line-xl: 36px;
+  --font-line-b1: 48px;
+  --font-line-b2: 60px;
+  --font-line-b3: 72px;
+  --font-line-b4: 96px;
+  --font-s: var(--font-size-s) / var(--font-line-s) var(--font-family-main);
+  --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+  --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+  --font-b1: var(--font-size-b1) / var(--font-line-b1) var(--font-family-main);
+  --font-b2: var(--font-size-b2) / var(--font-line-b2) var(--font-family-main);
+  --font-b3: var(--font-size-b3) / var(--font-line-b3) var(--font-family-main);
+  --font-b4: var(--font-size-b4) / var(--font-line-b4) var(--font-family-main);
+  --h1: var(--font-size-b4) / var(--font-line-b4) var(--font-family-header);
+  --h2: var(--font-size-b3) / var(--font-line-b3) var(--font-family-header);
+  --h3: var(--font-size-b2) / var(--font-line-b2) var(--font-family-header);
+  --h4: var(--font-size-b1) / var(--font-line-b1) var(--font-family-header);
+  --h5: var(--font-size-l) / var(--font-line-l) var(--font-family-header);
+  --h6: var(--font-size-m) / var(--font-line-m) var(--font-family-header);
+  --p: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --p-bold: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --p-medium: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --p-regular: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --p-light: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+  --p-italic: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
 }

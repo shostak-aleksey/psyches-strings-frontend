@@ -9,6 +9,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 import { loginApi } from '@/features/AuthByEmail/api/loginApi';
+import { curseApi } from '@/pages/MainPage/model/api';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -17,8 +18,9 @@ export function createReduxStore(
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     user: userReducer,
-    [loginApi.reducerPath]: loginApi.reducer,
-    [rtkApi.reducerPath]: rtkApi.reducer,
+    // [loginApi.reducerPath]: loginApi.reducer,
+    // [rtkApi.reducerPath]: rtkApi.reducer,
+    [curseApi.reducerPath]: curseApi.reducer,
   };
 
   const reducerManager = createReducerManager(rootReducers);
@@ -36,7 +38,7 @@ export function createReduxStore(
         thunk: {
           extraArgument: extraArg,
         },
-      }).concat(loginApi.middleware, rtkApi.middleware), // Добавляем loginApi.middleware
+      }).concat(curseApi.middleware), // Добавляем все middleware
   });
 
   // @ts-ignore

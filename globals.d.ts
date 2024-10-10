@@ -11,3 +11,11 @@ type DeepPartial<T> = T extends object
       [P in keyof T]?: DeepPartial<T[P]>;
     }
   : T;
+declare module '*.mp4' {
+  const src: string;
+  export default src;
+}
+declare module '*.jpg' {
+  const src: string;
+  export default src;
+}

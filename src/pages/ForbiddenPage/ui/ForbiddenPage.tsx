@@ -1,10 +1,10 @@
-import { Page } from '@/widgets/Page';
+import { Section } from '@/shared/ui/Section';
 
 const ForbiddenPage = () => {
   return (
-    <Page data-testid="ForbiddenPage">
+    <Section data-testid="ForbiddenPage">
       {'У вас нет доступа к этой странице'}
-    </Page>
+    </Section>
   );
 };
 

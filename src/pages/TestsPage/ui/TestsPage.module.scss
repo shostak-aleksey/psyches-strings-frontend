@@ -1,0 +1,22 @@
+.TestsPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fade84;
+}
+
+.text {
+  font-size: 18px;
+  line-height: 1.5;
+  max-width: 600px;
+  color: #fad993;
+  margin-top: 20px;
+}

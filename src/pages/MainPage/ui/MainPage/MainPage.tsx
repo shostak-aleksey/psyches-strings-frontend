@@ -11,8 +11,5 @@ export const MainPage = ({ className }: MainPageProps) => (
   <div className={classNames(cls.MainPage, {}, [className])}>
     <AboutSection />
     <BestVideoSection />
-    <BestVideoSection />
-    <BestVideoSection />
-    <BestVideoSection />
   </div>
 );

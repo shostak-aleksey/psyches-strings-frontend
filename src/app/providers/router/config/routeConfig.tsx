@@ -21,6 +21,8 @@ import {
   getRouteForbidden,
   getRouteProfile,
   getRouteCourse,
+  getRouteCourses,
+  getRouteTests,
   //   getRouteArticles,
   //   getRouteProfile,
   //   getRouteSettings,
@@ -30,6 +32,8 @@ import { AppRoutesProps } from '@/shared/types/router';
 import { LoginPage } from '@/pages/loginPage/ui/LoginPage';
 import { RegistrationPage } from '@/pages/RegistrationPage';
 import { CoursePage } from '@/pages/CoursePage';
+import { CoursesPage } from '@/pages/CoursesPage';
+import { TestsPage } from '@/pages/TestsPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -65,7 +69,14 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     path: getRouteCourse(':id'),
     element: <CoursePage />,
   },
-
+  [AppRoutes.COURSES]: {
+    path: getRouteCourses(),
+    element: <CoursesPage />,
+  },
+  [AppRoutes.TESTS]: {
+    path: getRouteTests(),
+    element: <TestsPage />,
+  },
   // [AppRoutes.ARTICLES]: {
   //     path: getRouteArticles(),
   //     element: <ArticlesPage />,

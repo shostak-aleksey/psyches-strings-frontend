@@ -9,8 +9,10 @@ import { FaYoutube, FaTelegram } from 'react-icons/fa';
 import { GoogleLogin } from 'react-google-login';
 import {
   getRouteAbout,
+  getRouteCourses,
   getRouteMain,
   getRouteProfile,
+  getRouteTests,
 } from '@/shared/const/router';
 
 interface NavbarProps {
@@ -50,7 +52,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 
   return (
     <header className={classNames(cls.Navbar, {}, [className])}>
-      <HStack
+      {/* <HStack
         justify="between"
         align="center"
         gap="12"
@@ -65,18 +67,12 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           </Link>
         </HStack>
         <HStack justify="around" align="center" gap="32" className={cls.Right}>
-          <Link
-            className={classNames(cls.SocialLink, {}, [cls.Right])}
-            to="/articles"
-          >
+          <Link className={classNames(cls.SocialLink, {})} to="/articles">
             <FaYoutube size={20} />
           </Link>
-          <Link
-            className={classNames(cls.SocialLink, {}, [cls.Right])}
-            to="/articles"
-          >
+          <Link className={classNames(cls.SocialLink, {})} to="/articles">
             <FaTelegram size={20} />
-          </Link>
+          </Link>{' '}
           <span
             onClick={onArrowClick}
             className={classNames(cls.arrows, {
@@ -86,7 +82,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             })}
           />
         </HStack>
-      </HStack>
+      </HStack> */}
       <HStack
         className={classNames(cls.NavBottom, { [cls.opened]: collapsed }, [])}
         justify="around"
@@ -96,13 +92,10 @@ export const Navbar = memo(({ className }: NavbarProps) => {
         <Link className={classNames(cls.Link)} to={getRouteAbout()}>
           Обо мне
         </Link>
-        <Link className={classNames(cls.Link)} to="/about">
-          Марафоны
+        <Link className={classNames(cls.Link)} to={getRouteCourses()}>
+          Видео
         </Link>
-        <Link className={classNames(cls.Link)} to="/login">
-          Курсы
-        </Link>
-        <Link className={classNames(cls.Link)} to="/project">
+        <Link className={classNames(cls.Link)} to={getRouteTests()}>
           Тесты
         </Link>
         <Link className={classNames(cls.Link)} to={getRouteProfile('1')}>

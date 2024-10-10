@@ -13,65 +13,62 @@ interface SectionProps extends TestProps {
   padding?: string;
   margin?: string;
   background?: Colors;
-  border?: boolean;
-  separator?: boolean;
-  separatorHeight?: number;
-  separatorRadius?: number;
-  separatorColor?: Colors;
-  center?: boolean;
+  backgroundImage?: string;
+  backgroundVideo?: string;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 export const Section = memo((props: SectionProps) => {
   const {
     className,
     children,
-    width,
-    height,
-    padding,
-    margin,
-    background = Colors.ColorBg,
-    border = false,
-    separator = false,
-    separatorColor = 'red',
-    separatorHeight = 100,
-    center = false,
+    width = '100%',
+    height = '100vh',
+    padding = 0,
+    margin = 0,
+    background = Colors.Gradient5_2,
+    backgroundImage,
+    backgroundVideo,
+    ref,
   } = props;
 
   const style = {
     padding,
     margin,
     background,
-    width: '100%',
-    height: '100%',
-  };
-
-  const containerStyle = {
     width,
     height,
+    backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
   };
 
   return (
     <section
       style={style}
-      className={classNames(cls.Section, { [cls.center]: center }, [className])}
+      className={classNames(cls.Section, {}, [className])}
       data-testid={props['data-testid'] ?? 'Section'}
+      ref={ref}
     >
-      {separator && (
-        <div
-          className={cls.Separator}
+      {backgroundVideo && (
+        <video
+          src={backgroundVideo}
+          autoPlay
+          muted
+          loop
+          className={cls.backgroundVideo}
           style={{
-            height: separatorHeight,
-            top: `-${separatorHeight}px`,
-            backgroundColor: separatorColor,
+            objectFit: 'contain',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
           }}
         />
       )}
-      <div
-        style={containerStyle}
-        className={classNames(cls.Container, { [cls.border]: border })}
-      >
-        {children}
-      </div>
+      {children}
     </section>
   );
 });

@@ -9,6 +9,8 @@ export enum Colors {
   Gradient3 = 'var(--gradient-3)',
   Gradient4 = 'var(--gradient-4)',
   Gradient5 = 'var(--gradient-5)',
+  Gradient5_1 = 'var(--gradient-5-1)',
+  Gradient5_2 = 'var(--gradient-5-2)',
   Gradient6 = 'var(--gradient-6)',
   Gradient7 = 'var(--gradient-7)',
   Gradient8 = 'var(--gradient-8)',

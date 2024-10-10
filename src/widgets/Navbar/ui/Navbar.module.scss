@@ -3,54 +3,84 @@
   background: var(--color-bg);
   display: flex;
   flex-direction: column;
-  -webkit-box-shadow: 0 0 10px 0 #000000;
-  box-shadow: 0 0 15px 0 #a1a1a1;
   position: relative;
 }
 
 .Link {
-  color: #192340;
-  text-decoration: none;
-  font-size: x-large;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--font-size-l);
+  color: #fade84;
+  // text-shadow: 0px 0px 10px #000000;
 }
 
 .Icon {
-  color: #d3cac0;
+  z-index: 100;
+  color: #ffffff;
+  font-size: (--font-size-l);
+  font-family: 'Lobster';
+  font-weight: bold;
   transition: color 0.3s;
   &:hover {
     color: #ffffff;
   }
 }
+// .Right {
+//   position: absolute;
+//   right: 30px;
+//   top: 50px;
+//   // box-shadow: 2px 0 5px rgb(255, 255, 255);
+// }
+
+// .Left {
+//   position: absolute;
+//   left: 30px;
+//   top: 48px;
+//   //  box-shadow: 2px 0 5px rgb(255, 255, 255);
+// }
 
 .NavTop {
   display: flex;
-  justify-content: space-around;
-  background-color: #54395a;
+  justify-content: space-between;
+  background: var(--gradient-5-2);
+  height: 90px;
   padding: 10px 30px;
+  position: relative;
+  z-index: 0;
 }
 
 .NavBottom {
-  width: 100%;
+  width: 65%;
   overflow: hidden;
   transition:
+    box-shadow 0.3s ease-in-out,
+    top 0.3s ease-in-out,
     height 0.3s ease-in-out,
     opacity 0.3s ease-in-out;
-  height: 0; /* Начальное состояние - скрыто */
-  opacity: 0; /* Начальное состояние - скрыто */
+  height: 70px;
+  opacity: 0;
+  top: 35px;
+  position: absolute;
+  text-shadow: 0px 0px 1.4px #ffffffe1;
+  top: 16px;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  left: 18.75%;
+  z-index: 1;
+  border-radius: 50px;
+  // border: #ffffff 3px solid;
+  // box-shadow: 0px 0px 3px rgb(255, 255, 255);
 }
 
 .NavBottom.opened {
-  height: 80px; /* Высота в открытом состоянии */
-  opacity: 1; /* Полная видимость в открытом состоянии */
+  opacity: 1;
+  position: fixed;
 }
 
 .SocialLink {
-  color: #d3cac0;
+  color: #ffffff;
   display: flex;
   align-items: center;
   font-family: 'Roboto', sans-serif;
-  font-size: 0.7em;
+  font-size: var(--font-size-l);
   gap: 10px;
   transition: color 0.3s;
   &:hover {
@@ -68,11 +98,11 @@
 }
 
 .arrowUp {
-  border-bottom: 10px solid #ffffff; /* Цвет стрелки */
+  border-bottom: 10px solid #fff; /* Цвет стрелки */
 }
 
 .arrowDown {
-  border-top: 10px solid #ffffff; /* Цвет стрелки */
+  border-top: 10px solid #fff; /* Цвет стрелки */
 }
 
 .arrows {
@@ -96,13 +126,14 @@
 }
 
 .googleButton {
-  font-size: x-large;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #192335;
-  border: none;
+  color: #fade84;
+  text-shadow: 0px 0px 1.4px #ffffff;
+  box-shadow: 0px 0px 3px #ffffff;
+  background: none;
+  border-radius: 50px;
+  border: 1px solid #ffffff;
   padding: 10px 20px;
   cursor: pointer;
-  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,7 +143,7 @@
   -ms-transition: color 0.3s;
   transition: color 0.3s;
   &:hover {
-    color: #2f2f30;
+    color: #fff;
   }
 
   &:focus {

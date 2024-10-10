@@ -11,11 +11,13 @@ import { UserSchema } from '@/entities/User';
 
 import { rtkApi } from '@/shared/api/rtkApi';
 import { LoginSchema } from '@/features/AuthByEmail';
+import { loginApi } from '@/features/AuthByEmail/api/loginApi';
+import { curseApi } from '@/pages/MainPage/model/api';
 
 export interface StateSchema {
   user: UserSchema;
-  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
-
+  // [loginApi.reducerPath]: ReturnType<typeof loginApi.reducer>;
+  [curseApi.reducerPath]: ReturnType<typeof curseApi.reducer>;
   // Асинхронные редюсеры
   loginForm?: LoginSchema;
   loginApi?: LoginSchema;
