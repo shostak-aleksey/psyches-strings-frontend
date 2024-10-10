@@ -52,7 +52,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 
   return (
     <header className={classNames(cls.Navbar, {}, [className])}>
-      {/* <HStack
+      <HStack
         justify="between"
         align="center"
         gap="12"
@@ -82,7 +82,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             })}
           />
         </HStack>
-      </HStack> */}
+      </HStack>
       <HStack
         className={classNames(cls.NavBottom, { [cls.opened]: collapsed }, [])}
         justify="around"
