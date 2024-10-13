@@ -4,6 +4,7 @@ export enum FontSize {
   L = 'var(--font-size-l)',
   XL = 'var(--font-size-xl)',
   XXL = 'var(--font-size-xxl)',
+  XXXL = 'var(--font-xxxl)',
 }
 
 export enum FontLine {
@@ -12,6 +13,7 @@ export enum FontLine {
   L = 'var(--font-line-l)',
   XL = 'var(--font-line-xl)',
   XXL = 'var(--font-line-xxl)',
+  XXXL = 'var(--font-xxxl)',
 }
 
 export enum Font {
@@ -20,4 +22,14 @@ export enum Font {
   L = 'var(--font-l)',
   XL = 'var(--font-xl)',
   XXL = 'var(--font-xxl)',
+  XXXL = 'var(--font-xxxl)',
+}
+
+export enum FontWeight {
+  Regular = 400,
+  Medium = 500,
+  SemiBold = 600,
+  Bold = 700,
+  ExtraBold = 800,
+  Black = 900,
 }

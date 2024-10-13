@@ -1,6 +1,7 @@
 .card {
-  background: #f5eefa;
+  background: #ffffff;
   border-radius: 8px;
+  border: 3px solid #ffffff;
   box-shadow: 6px 4px 10px rgba(0, 0, 0, 0.315);
   overflow: hidden;
   text-align: start;
@@ -25,6 +26,18 @@
 
 .content {
   padding: 18px;
+  position: relative;
+  background: #fff5f5;
+  &::after {
+    content: '';
+    position: absolute;
+    top: -160%;
+    left: 0;
+    width: 100%;
+    height: 160%;
+    background: var(--gradient-5-2-05);
+    z-index: 0;
+  }
 }
 
 .popular {
@@ -40,7 +53,7 @@
   line-height: 1.1;
   margin: 8px 0;
   text-align: start;
-  color: #000;
+  color: #192231;
   -o-transition: color 0.3s ease-in-out;
   -webkit-transition: color 0.3s ease-in-out;
   -moz-transition: color 0.3s ease-in-out;
@@ -74,18 +87,18 @@
 .price {
   font-size: 26px;
   font-weight: 500;
-  color: #000;
+  color: #192231;
 }
 
 .oldPrice {
   font-size: 16px;
-  color: #888;
+  color: #707070;
   text-decoration: line-through;
   margin-left: 8px;
 }
 
 .link {
-  color: #000;
+  color: #192231;
   text-decoration: none;
   font-weight: 500;
   font-size: 14px;

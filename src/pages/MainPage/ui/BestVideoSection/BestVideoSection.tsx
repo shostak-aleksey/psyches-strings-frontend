@@ -21,7 +21,8 @@ export const BestVideoSection = ({ className }: BestVideoSectionProps) => {
 
   return (
     <Section
-      background={Colors.Gradient5_2}
+      height={500}
+      background={Colors.White}
       className={classNames(cls.BestVideoSection, {}, [className])}
     >
       <Text h2 size={FontSize.XL} className={cls.title}>
@@ -30,32 +31,36 @@ export const BestVideoSection = ({ className }: BestVideoSectionProps) => {
 
       <GridContainer direction="column" justify="center" gap="32px">
         <Card
-          cardVariant={CardVariant.MARATHON}
-          imageSrc="https://veronikastepanova.com/build/assets/88282325-CctJvOhS.jpg"
+          backgroundColor={Colors.Gradient5_2}
+          cardVariant={CardVariant.VIDEO}
+          imageSrc="https://wallpapers.com/images/hd/jasper-national-park-of-canada-co717bykhndcxbqq.jpg"
           title="«Мне можно!»"
           price="4 900₽"
           oldPrice="7 350₽"
           link="/course/:id"
         />
         <Card
+          backgroundColor={Colors.Gradient5_2}
           cardVariant={CardVariant.VIDEO}
-          imageSrc="https://veronikastepanova.com/build/assets/88282325-CctJvOhS.jpg"
+          imageSrc="https://i.pinimg.com/736x/5c/de/19/5cde19f2da42d37378b9334bde67b082.jpg"
           title="«Мне можно!»"
           price="4 900₽"
           oldPrice="7 350₽"
           link={getRouteCourse('4')}
         />
         <Card
+          backgroundColor={Colors.Gradient5_2}
           cardVariant={CardVariant.VIDEO}
-          imageSrc="https://veronikastepanova.com/build/assets/88282325-CctJvOhS.jpg"
+          imageSrc="https://i.pinimg.com/736x/8d/33/80/8d3380e3d13f368c156df01ada661766.jpg"
           title="«Мне можно!»"
           price="4 900₽"
           oldPrice="7 350₽"
           link={getRouteCourse('3')}
         />
         <Card
+          backgroundColor={Colors.Gradient5_2}
           cardVariant={CardVariant.VIDEO}
-          imageSrc="https://veronikastepanova.com/build/assets/88282325-CctJvOhS.jpg"
+          imageSrc="https://main-cdn.sbermegamarket.ru/big1/hlr-system/141/511/747/652/146/600011877697b0.jpeg"
           title="«Мне можно!»"
           price="4 900₽"
           oldPrice="7 350₽"

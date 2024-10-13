@@ -161,7 +161,8 @@
   --color-coral: #e9967a;
   --color-violet: purple;
   --color-pink: #db7093;
-  --color-heading: #192335;
+  --color-heading: #ffffff;
+  // --color-heading: #192335;
   --color-body: #6b7385;
   --color-white: #fff;
   --color-white-off: #ffffffab;
@@ -288,10 +289,17 @@
   --gradient-5: linear-gradient(270deg, #cbd5fb, #957dad, #ffdfba);
   --gradient-5-1: linear-gradient(270deg, #cbd5fb, #ffdfba);
   --gradient-5-2: linear-gradient(270deg, #ff8e71, #9090ff);
+  --gradient-5-2-05: linear-gradient(
+    270deg,
+    rgba(255, 142, 113, 0.5),
+    rgba(144, 144, 255, 0.5)
+  );
   // #7b9cfb, #f78da7
   // #ff8e71, #9090ff
+  // #fade84
   // --gradient-5-2: linear-gradient(270deg, #fcbeae, #c1c1f9);
   // --gradient-5-2: linear-gradient(270deg, #c1c1f9, #eecac1);
+  //   --gradient-5-2: linear-gradient(270deg, #ff8e71, #9090ff);
   // fcbeae, ffac97
   /* светло-фиолетовый к средне-фиолетовому к светло-розовому к светло-розовому к светло-желтому */
   --gradient-6: linear-gradient(

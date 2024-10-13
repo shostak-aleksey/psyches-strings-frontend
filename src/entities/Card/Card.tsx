@@ -19,6 +19,7 @@ interface CardProps {
   popular?: boolean;
   width?: number;
   cardVariant: CardVariant;
+  backgroundColor?: string;
 }
 
 export const Card = ({
@@ -31,18 +32,21 @@ export const Card = ({
   link,
   cardVariant,
   popular = false,
+  backgroundColor,
 }: CardProps) => {
   return (
     <Link to={link}>
       {cardVariant === CardVariant.VIDEO && (
-        <div className={cls.card} style={{ width: width }}>
-          <img
-            style={{ width: width }}
-            loading="lazy"
-            src={imageSrc}
-            alt={title}
-            className={cls.image}
-          />
+        <div className={cls.card} style={{ width, backgroundColor }}>
+          <div className={cls.imageContainer}>
+            <img
+              style={{ width }}
+              loading="lazy"
+              src={imageSrc}
+              alt={title}
+              className={cls.image}
+            />
+          </div>
           <div className={cls.content}>
             {popular && (
               <span className={cls.popular}>⭐ Популярный продукт</span>
@@ -61,26 +65,28 @@ export const Card = ({
       )}
 
       {cardVariant === CardVariant.MARATHON && (
-        <div className={cls.card} style={{ width: width }}>
-          <img
-            style={{ width: width }}
-            loading="lazy"
-            src={imageSrc}
-            alt={title}
-            className={cls.image}
-          />
-          <div className={cls.content}>
-            {popular && (
-              <span className={cls.popular}>⭐ Популярный продукт</span>
-            )}
-            <h3 className={cls.title}>{title}</h3>
-            {description && <p className={cls.description}>{description}</p>}
-            <div className={cls.priceContainer}>
-              <div className={cls.priceSection}>
-                <span className={cls.price}>{price}</span>
-                {oldPrice && <span className={cls.oldPrice}>{oldPrice}</span>}
+        <div className={cls.card} style={{ width, backgroundColor }}>
+          <div className={cls.contentContainer}>
+            <img
+              style={{ width: '100%' }}
+              loading="lazy"
+              src={imageSrc}
+              alt={title}
+              className={cls.image}
+            />
+            <div className={cls.content}>
+              {popular && (
+                <span className={cls.popular}>⭐ Популярный продукт</span>
+              )}
+              <h3 className={cls.title}>{title}</h3>
+              {description && <p className={cls.description}>{description}</p>}
+              <div className={cls.priceContainer}>
+                <div className={cls.priceSection}>
+                  <span className={cls.price}>{price}</span>
+                  {oldPrice && <span className={cls.oldPrice}>{oldPrice}</span>}
+                </div>
+                <span className={cls.link}>Подробнее →</span>
               </div>
-              <span className={cls.link}>Подробнее →</span>
             </div>
           </div>
         </div>

@@ -15,6 +15,10 @@ export const MainPage = ({ className }: MainPageProps) => (
     className={classNames(cls.MainPage, {}, [className])}
   >
     <AboutSection />
+    <div className={cls.semicircle} />
+    <BestVideoSection />
+    <BestVideoSection />
+    <BestVideoSection />
     <BestVideoSection />
   </Page>
 );

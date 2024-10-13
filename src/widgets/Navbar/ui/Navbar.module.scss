@@ -8,19 +8,19 @@
 
 .Link {
   font-size: var(--font-size-l);
-  color: #fade84;
+  color: #192335;
   // text-shadow: 0px 0px 10px #000000;
 }
 
 .Icon {
   z-index: 100;
-  color: #ffffff;
+  color: #192335;
   font-size: (--font-size-l);
   font-family: 'Lobster';
   font-weight: bold;
   transition: color 0.3s;
   &:hover {
-    color: #ffffff;
+    color: #192335;
   }
 }
 // .Right {
@@ -40,7 +40,9 @@
 .NavTop {
   display: flex;
   justify-content: space-between;
-  background: var(--gradient-5-2);
+  background: #ffffff;
+  box-shadow: 0 0 10px #000000;
+  // background: var(--gradient-5-2);
   height: 90px;
   padding: 10px 30px;
   position: fixed;
@@ -49,9 +51,9 @@
   width: 100%;
   // border-bottom-right-radius: 30px;
   // border-bottom-left-radius: 30px;
-  opacity: 0.7;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(20px);
+  // opacity: 0.7;
+  // -webkit-backdrop-filter: blur(2px);
+  // backdrop-filter: blur(20px);
 }
 
 .NavBottom {
@@ -64,16 +66,16 @@
     opacity 0.3s ease-in-out;
   height: 90px;
   opacity: 0.5;
-  top: 8px;
+  top: 0px;
   position: absolute;
-  text-shadow: 0px 0px 1.4px #ffffffe1;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
+  text-shadow: 0px 0px 1.4px #192335e1;
+  // -webkit-backdrop-filter: blur(2px);
+  // backdrop-filter: blur(2px);
   left: 18.75%;
   z-index: 1;
   border-radius: 10px;
   position: fixed;
-  // border: #ffffff 3px solid;
+  // border: #192335 3px solid;
   // box-shadow: 0px 0px 3px rgb(255, 255, 255);1a1a40
 }
 
@@ -82,7 +84,7 @@
 }
 
 .SocialLink {
-  color: #ffffff;
+  color: #192335;
   display: flex;
   align-items: center;
   font-family: 'Roboto', sans-serif;
@@ -90,7 +92,7 @@
   gap: 10px;
   transition: color 0.3s;
   &:hover {
-    color: #ffffff;
+    color: #192335;
   }
 }
 
@@ -132,12 +134,12 @@
 }
 
 .googleButton {
-  color: #fade84;
-  text-shadow: 0px 0px 1.4px #ffffff;
-  box-shadow: 0px 0px 3px #ffffff;
+  color: #192335;
+  text-shadow: 0px 0px 1.4px #192335;
+  box-shadow: 0px 0px 3px #192335;
   background: none;
   border-radius: 50px;
-  border: 1px solid #ffffff;
+  border: 1px solid #192335;
   padding: 10px 20px;
   cursor: pointer;
   display: flex;
