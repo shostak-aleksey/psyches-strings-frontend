@@ -52,6 +52,7 @@ export const Text = memo((props: TextProps) => {
 
   return (
     <div
+      data-testid={dataTestId}
       className={classNames(
         cls.Text,
         { [cls.bold]: bold, [cls[variant]]: variant },
