@@ -1,7 +1,5 @@
 :root {
-  --font-family-main: consolas, 'Times New Roman', serif;
-  --font-family-text-redesigned: 'Nunito Sans', sans-serif;
-  --font-family-header-redesigned: 'Roboto', sans-serif;
+  --font-family-main: 'Roboto', 'Times New Roman', serif;
 
   // s
   --font-size-s: 14px; /* Изменено с 12px */
@@ -22,6 +20,33 @@
   --font-size-xl: 34px; /* Изменено с 32px */
   --font-line-xl: 42px; /* Изменено с 40px */
   --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+
+  // xxl
+  --font-size-xxl: 42px; /* Изменено с 40px */
+  --font-line-xxl: 50px; /* Изменено с 48px */
+  --font-xxl: var(--font-size-xxl) / var(--font-line-xxl)
+    var(--font-family-main);
+
+  // xxxl
+  --font-size-xxxl: 50px; /* Изменено с 48px */
+  --font-line-xxxl: 58px; /* Изменено с 56px */
+  --font-xxxl: var(--font-size-xxxl) / var(--font-line-xxxl)
+    var(--font-family-main);
+
+  // b1
+  --font-size-b1: 32px; /* Изменено с 30px */
+  --font-line-b1: 40px; /* Изменено с 38px */
+  --font-b1: var(--font-size-b1) / var(--font-line-b1) var(--font-family-main);
+
+  // b2
+  --font-size-b2: 24px; /* Изменено с 22px */
+  --font-line-b2: 32px; /* Изменено с 30px */
+  --font-b2: var(--font-size-b2) / var(--font-line-b2) var(--font-family-main);
+
+  // b3
+  --font-size-b3: 22px; /* Изменено с 20px */
+  --font-line-b3: 30px; /* Изменено с 28px */
+  --font-b3: var(--font-size-b3) / var(--font-line-b3) var(--font-family-main);
 
   // Размеры
   --navbar-height: 60px; /* Изменено с 50px */
@@ -240,7 +265,7 @@
   --h5: 20px;
   --h6: 16px;
   --div-gap-1: 10px;
-  --color-bg: #ffffff;
+  --color-bg: linear-gradient(270deg, #ff8e71, #9090ff);
   --gradient-1: linear-gradient(
     45deg,
     #922bfa,

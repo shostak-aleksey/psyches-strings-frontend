@@ -9,8 +9,8 @@ interface AppProps {
 
 export const App = ({ className }: AppProps) => {
   return (
-    <div className={c('app', {}, [className])}>
+    <main className={c('app', {}, [className])}>
       <Navbar /> <AppRouter />
-    </div>
+    </main>
   );
 };

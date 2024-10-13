@@ -5,9 +5,9 @@ import BackgroundImage1 from '@/shared/assets/BackgroundImage3.jpg';
 
 import { Colors } from '@/shared/const/colors';
 import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
-import { CardVariant } from '@/shared/ui/Card/Card';
+import { CardVariant } from '@/entities/Card/Card';
 import { Button } from '@mui/material';
-import { CardMaterialUi } from '@/shared/ui/Card/CardMaterialUi';
+import { CardMaterialUi } from '@/entities/Card/CardMaterialUi';
 interface TestsPageProps {
   className?: string;
 }

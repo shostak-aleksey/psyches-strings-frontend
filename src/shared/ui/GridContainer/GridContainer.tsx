@@ -7,19 +7,9 @@ interface GridContainerProps {
   direction?: 'row' | 'column';
   justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
   align?: 'start' | 'center' | 'end' | 'stretch';
-  gap?: '0' | '4' | '8' | '12' | '16' | '20' | '24' | '28';
-  padding?:
-    | '0px'
-    | '8px'
-    | '12px'
-    | '16px'
-    | '20px'
-    | '24px'
-    | '28px'
-    | '32px'
-    | '64px'
-    | '100px'
-    | '128px';
+  gap?: string;
+  padding?: string;
+  minmax?: string;
   className?: string;
 }
 
@@ -28,15 +18,21 @@ export const GridContainer: React.FC<GridContainerProps> = ({
   direction = 'row',
   justify = 'start',
   align = 'stretch',
-  gap = '0',
+  gap = '16px',
   padding = '0',
+  minmax = '320px',
   className,
 }) => {
   return (
     <div
       className={classNames(cls.GridContainer, {}, [className])}
       style={{
-        flexDirection: direction,
+        display: 'grid',
+        gridTemplateRows: direction === 'column' ? 'auto' : undefined,
+        gridTemplateColumns:
+          direction === 'row'
+            ? `repeat(auto-fill, minmax(${minmax}, 1fr))`
+            : undefined,
         justifyContent: justify,
         alignItems: align,
         gap: gap,

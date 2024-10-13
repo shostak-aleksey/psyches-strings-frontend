@@ -3,11 +3,10 @@ import cls from './Card.module.scss';
 import { Link } from 'react-router-dom';
 
 export enum CardVariant {
-  DEFAULT = 'default',
-  CLEAR = 'clear',
-  NEW = 'new',
-  DISCOUNT = 'discount',
-  BESTSELLER = 'bestseller',
+  MARATHON = 'marathon',
+  VIDEO = 'video',
+  BOOKS = 'books',
+  TESTS = 'tests',
 }
 interface CardProps {
   className?: string;
@@ -35,7 +34,7 @@ export const Card = ({
 }: CardProps) => {
   return (
     <Link to={link}>
-      {cardVariant === CardVariant.DEFAULT && (
+      {cardVariant === CardVariant.VIDEO && (
         <div className={cls.card} style={{ width: width }}>
           <img
             style={{ width: width }}
@@ -60,7 +59,8 @@ export const Card = ({
           </div>
         </div>
       )}
-      {cardVariant === CardVariant.CLEAR && (
+
+      {cardVariant === CardVariant.MARATHON && (
         <div className={cls.card} style={{ width: width }}>
           <img
             style={{ width: width }}

@@ -3,6 +3,8 @@ import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Section.module.scss';
 import { TestProps } from '@/shared/types/tests';
 import { Colors } from '@/shared/const/colors';
+import { Direction } from '@/shared/const/flex';
+import { Align } from '@/shared/const/flex';
 import { screenSize } from '@/shared/const/screenSize';
 
 interface SectionProps extends TestProps {
@@ -14,7 +16,11 @@ interface SectionProps extends TestProps {
   margin?: string;
   background?: Colors;
   backgroundImage?: string;
-  backgroundVideo?: string;
+  flex?: boolean;
+  gap?: string;
+  flexDirection?: Direction;
+  justifyContent?: Align;
+  alignItems?: Align;
   ref?: React.Ref<HTMLDivElement>;
 }
 
@@ -24,24 +30,31 @@ export const Section = memo((props: SectionProps) => {
     children,
     width = '100%',
     height = '100vh',
-    padding = 0,
+    padding = '90px',
     margin = 0,
-    background = Colors.Gradient5_2,
+    background,
     backgroundImage,
-    backgroundVideo,
+    justifyContent,
+    alignItems,
     ref,
+    gap,
+    flex,
   } = props;
 
   const style = {
+    display: flex ? 'flex' : 'block',
+    justifyContent,
+    gap,
+    alignItems,
     padding,
     margin,
-    background,
     width,
     height,
     backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
+    background,
   };
 
   return (
@@ -51,23 +64,6 @@ export const Section = memo((props: SectionProps) => {
       data-testid={props['data-testid'] ?? 'Section'}
       ref={ref}
     >
-      {backgroundVideo && (
-        <video
-          src={backgroundVideo}
-          autoPlay
-          muted
-          loop
-          className={cls.backgroundVideo}
-          style={{
-            objectFit: 'contain',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-          }}
-        />
-      )}
       {children}
     </section>
   );
