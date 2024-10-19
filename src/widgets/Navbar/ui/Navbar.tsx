@@ -63,7 +63,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             className={classNames(cls.Link, {}, [cls.Icon])}
             to={getRouteMain()}
           >
-            Psyches Strings
+            <></>Psyches Strings
           </Link>
         </HStack>
         <HStack justify="around" align="center" gap="32" className={cls.Right}>

@@ -4,7 +4,7 @@ export enum FontSize {
   L = 'var(--font-size-l)',
   XL = 'var(--font-size-xl)',
   XXL = 'var(--font-size-xxl)',
-  XXXL = 'var(--font-xxxl)',
+  XXXL = 'var(--font-size-xxxl)',
 }
 
 export enum FontLine {
@@ -13,7 +13,7 @@ export enum FontLine {
   L = 'var(--font-line-l)',
   XL = 'var(--font-line-xl)',
   XXL = 'var(--font-line-xxl)',
-  XXXL = 'var(--font-xxxl)',
+  XXXL = 'var(--font-line-xxxl)',
 }
 
 export enum Font {

@@ -1,24 +1,29 @@
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './MainPage.module.scss';
-import { AboutSection } from '../AboutSection/AboutSection';
-import { BestVideoSection } from '../BestVideoSection/BestVideoSection';
 import { Page } from '@/shared/ui/Page/Page';
 import { Colors } from '@/shared/const/colors';
+import { AboutSection } from '../AboutSection/AboutSection';
+import { BestVideoSection } from '../BestVideoSection/BestVideoSection';
+import { PopularGuidesSection } from '../PopularGuidesSection/PopularGuidesSection';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface MainPageProps {
   className?: string;
 }
 
-export const MainPage = ({ className }: MainPageProps) => (
-  <Page
-    background={Colors.Gradient5_2}
-    className={classNames(cls.MainPage, {}, [className])}
-  >
-    <AboutSection />
-    <div className={cls.semicircle} />
-    <BestVideoSection />
-    <BestVideoSection />
-    <BestVideoSection />
-    <BestVideoSection />
-  </Page>
-);
+export const MainPage = ({ className }: MainPageProps) => {
+  return (
+    <Page
+      background={Colors.Gradient1}
+      className={classNames(cls.MainPage, {}, [className])}
+    >
+      <AboutSection />
+
+      <BestVideoSection />
+      <PopularGuidesSection />
+    </Page>
+  );
+};

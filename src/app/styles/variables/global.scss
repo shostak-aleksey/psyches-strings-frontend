@@ -1,5 +1,5 @@
 :root {
-  --font-family-main: 'Roboto', 'Times New Roman', serif;
+  --font-family-main: 'Roboto', serif;
 
   // s
   --font-size-s: 14px; /* Изменено с 12px */
@@ -161,8 +161,8 @@
   --color-coral: #e9967a;
   --color-violet: purple;
   --color-pink: #db7093;
-  --color-heading: #ffffff;
-  // --color-heading: #192335;
+  // --color-heading: #ffffff;
+  --color-heading: #192335;
   --color-body: #6b7385;
   --color-white: #fff;
   --color-white-off: #ffffffab;
@@ -266,7 +266,7 @@
   --h5: 20px;
   --h6: 16px;
   --div-gap-1: 10px;
-  --color-bg: linear-gradient(270deg, #ff8e71, #9090ff);
+  --color-bg: #ffffff;
   --gradient-1: linear-gradient(
     45deg,
     #922bfa,

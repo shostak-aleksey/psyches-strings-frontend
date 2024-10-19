@@ -6,6 +6,10 @@ type OptionalRecord<K extends keyof any, T> = {
   [P in K]?: T;
 };
 
+declare module './gsap/ScrollSmoother.min.js' {
+  export const ScrollSmoother: any; // Замените `any` на более конкретные типы, если они известны
+}
+
 type DeepPartial<T> = T extends object
   ? {
       [P in keyof T]?: DeepPartial<T[P]>;

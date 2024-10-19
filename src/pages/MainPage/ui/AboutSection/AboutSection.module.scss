@@ -1,0 +1,85 @@
+.AboutSection {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    border-radius: 50% 50% 0 0;
+    box-shadow: rgba(0, 0, 0, 0.363) 0px -5px 3px;
+  }
+}
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  border: none;
+
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: var(--gradient-3); /* Use your desired track color */
+    border-radius: 5px;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 20%;
+    background: #9835f6; /* Use your desired thumb color */
+    cursor: pointer;
+    margin-top: -6px; /* Adjust to align thumb with track */
+    border: none; /* Remove the border */
+  }
+
+  &::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #ddd; /* Use your desired track color */
+    border-radius: 5px;
+    border: none;
+  }
+
+  &::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #007bff; /* Use your desired thumb color */
+    cursor: pointer;
+    border: none; /* Remove the border */
+  }
+
+  &::-ms-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+
+  &::-ms-fill-lower {
+    background: #ddd; /* Use your desired track color */
+    border-radius: 5px;
+  }
+
+  &::-ms-fill-upper {
+    background: #ddd; /* Use your desired track color */
+    border-radius: 5px;
+  }
+
+  &::-ms-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ffffff; /* Use your desired thumb color */
+    cursor: pointer;
+    border: none; /* Remove the border */
+  }
+}

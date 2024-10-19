@@ -26,8 +26,8 @@ interface TextProps {
   font?: Font;
   fontWeight?: FontWeight;
   'data-testid'?: string;
-  textColor?: Colors;
-  titleColor?: string;
+  color?: Colors;
+  margin?: string;
 }
 
 export const Text = memo((props: TextProps) => {
@@ -42,50 +42,47 @@ export const Text = memo((props: TextProps) => {
     font = Font.XXL,
     fontWeight = FontWeight.Regular,
     'data-testid': dataTestId = 'Text',
-    titleColor = Colors.Heading,
-    textColor = Colors.Primary,
+    color = Colors.Heading,
+    margin = '0 0 20px 0',
     children,
   } = props;
 
   const baseStyle: CSSProperties = {
     textAlign: align,
     textTransform: 'none' as 'none' | 'capitalize' | 'uppercase' | 'lowercase',
+    margin,
   };
 
   const h1Style: CSSProperties = {
     ...baseStyle,
     fontSize: FontSize.XXXL,
     fontWeight: FontWeight.Bold,
-    lineHeight: '1.2',
-    color: titleColor,
-    margin: '0 0 20px 0',
+    lineHeight: FontLine.XXXL,
+    color: color,
   };
 
   const h2Style: CSSProperties = {
     ...baseStyle,
-    fontSize: '28px',
-    fontWeight: FontWeight.Bold,
-    lineHeight: '1.3',
-    color: titleColor,
-    margin: '0 0 15px 0',
+    fontSize: FontSize.XXL,
+    fontWeight: FontWeight.Regular,
+    lineHeight: FontLine.XXL,
+    color: color,
   };
 
   const h3Style: CSSProperties = {
     ...baseStyle,
-    fontSize: '24px',
-    fontWeight: FontWeight.Bold,
-    lineHeight: '1.4',
-    color: titleColor,
-    margin: '0 0 10px 0',
+    fontSize: FontSize.XL,
+    fontWeight: FontWeight.Regular,
+    lineHeight: FontLine.XL,
+    color: color,
   };
 
   const pStyle: CSSProperties = {
     ...baseStyle,
-    fontSize: '16px',
-    fontWeight: 'normal',
-    lineHeight: '1.6',
-    color: textColor,
-    margin: '0 0 10px 0',
+    fontSize: FontSize.L,
+    fontWeight: FontWeight.Regular,
+    lineHeight: FontLine.L,
+    color: color,
   };
 
   return (

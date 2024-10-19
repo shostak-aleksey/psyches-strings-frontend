@@ -1,7 +1,7 @@
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './AboutPage.module.scss';
 import { Section } from '@/shared/ui/Section';
-import { Card, CardVariant } from '@/entities/Card/Card';
+import { Card, CardVariant } from '@/entities/Card/ui/Card';
 import { Colors } from '@/shared/const/colors';
 
 interface AboutPageProps {
