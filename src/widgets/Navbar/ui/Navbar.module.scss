@@ -1,6 +1,6 @@
 .Navbar {
   width: 100%;
-  background: var(--color-bg);
+  // background: var(--color-bg);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -18,70 +18,80 @@
   font-size: (--font-size-l);
   font-family: 'Lobster';
   font-weight: bold;
-  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  transition:
+    transform 0.3s,
+    color 0.3s;
   &:hover {
     color: var(--color-heading);
+    transform: scale(1.1);
   }
 }
-// .Right {
-//   position: absolute;
-//   right: 30px;
-//   top: 50px;
-//   // box-shadow: 2px 0 5px rgb(255, 255, 255);
-// }
 
-// .Left {
-//   position: absolute;
-//   left: 30px;
-//   top: 48px;
-//   //  box-shadow: 2px 0 5px rgb(255, 255, 255);
-// }
+.Logo {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+.Left {
+  position: fixed;
+  left: 30px;
+  top: 30px;
+  z-index: 1;
+}
+.Right {
+  position: fixed;
+  right: 30px;
+  top: 60px;
+  z-index: 1;
+  // border: #000000 1px solid;
+  border-radius: 50px;
+  background-color: #e7e7e77c;
+  width: 250px;
+  height: 75px;
+}
 
 .NavTop {
   display: flex;
   justify-content: space-between;
-  background: #ffffff;
-  box-shadow: 0 5px 3px #00000063;
-  // background: var(--gradient-5-2);
-  height: 90px;
-  padding: 10px 30px;
-  position: fixed;
-  top: 0px;
-  z-index: 1;
-  width: 100%;
+  // background: #ffffffa4;
+  // box-shadow: 0 5px 3px #00000063;
+  // height: 90px;
+  // padding: 10px 30px;
+  // position: fixed;
+  // top: 0px;
+  // z-index: 1;
+  // width: 100%;
   // border-bottom-right-radius: 30px;
   // border-bottom-left-radius: 30px;
   // opacity: 0.7;
   // -webkit-backdrop-filter: blur(2px);
-  // backdrop-filter: blur(20px);
+  // backdrop-filter: blur(2px);
 }
 
 .NavBottom {
-  width: 65%;
-  overflow: hidden;
-  transition:
-    box-shadow 0.3s ease-in-out,
-    top 0.3s ease-in-out,
-    height 0.3s ease-in-out,
-    opacity 0.3s ease-in-out;
-  height: 90px;
-  opacity: 0.5;
-  top: 0px;
-  position: absolute;
-  text-shadow: 0px 0px 1.4px var(--color-heading) e1;
-  // -webkit-backdrop-filter: blur(2px);
-  // backdrop-filter: blur(2px);
-  left: 18.75%;
+  //   width: 65%;
+  //   overflow: hidden;
+  //   transition:
+  //     box-shadow 0.3s ease-in-out,
+  //     top 0.3s ease-in-out,
+  //     height 0.3s ease-in-out,
+  //     opacity 0.3s ease-in-out;
+  //   height: 90px;
+  //   opacity: 0.5;
+  //   top: 0px;
+  //   position: absolute;
+  //   text-shadow: 0px 0px 1.4px var(--color-heading) e1;
+  //   left: 18.75%;
   z-index: 1;
-  border-radius: 10px;
-  position: fixed;
-  // border: var(--color-heading) 3px solid;
-  // box-shadow: 0px 0px 3px rgb(255, 255, 255);1a1a40
+  //   border-radius: 10px;
+  //   position: fixed;
 }
 
-.NavBottom.opened {
-  opacity: 1;
-}
+// .NavBottom.opened {
+//   opacity: 1;
+// }
 
 .SocialLink {
   color: var(--color-heading);
@@ -106,11 +116,11 @@
 }
 
 .arrowUp {
-  border-bottom: 10px solid #fff; /* Цвет стрелки */
+  border-bottom: 10px solid #000000; /* Цвет стрелки */
 }
 
 .arrowDown {
-  border-top: 10px solid #fff; /* Цвет стрелки */
+  border-top: 10px solid #000000; /* Цвет стрелки */
 }
 
 .arrows {

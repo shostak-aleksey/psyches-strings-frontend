@@ -19,9 +19,6 @@ export const PopularGuidesSection = ({
 }: PopularGuidesSectionProps) => {
   const { data } = useGetCursesQuery();
 
-  console.log(useGetCursesQuery(), 'aa');
-  console.log('data', data);
-
   return (
     <Section
       // padding="0 200px"

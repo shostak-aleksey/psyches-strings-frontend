@@ -11,24 +11,6 @@ interface PageProps {
   padding?: string;
 }
 
-const mediaQueries: { [key: string]: CSSProperties } = {
-  '@media (min-width: 1400px)': {
-    maxWidth: '1320px',
-  },
-  '@media (min-width: 1200px)': {
-    maxWidth: '1140px',
-  },
-  '@media (min-width: 992px)': {
-    maxWidth: '960px',
-  },
-  '@media (min-width: 768px)': {
-    maxWidth: '720px',
-  },
-  '@media (min-width: 576px)': {
-    maxWidth: '540px',
-  },
-};
-
 export const Page = memo((props: PageProps) => {
   const {
     className,
@@ -40,7 +22,7 @@ export const Page = memo((props: PageProps) => {
   const style = {
     background,
     padding,
-    ...mediaQueries,
+    height: '100vh',
   };
 
   return (

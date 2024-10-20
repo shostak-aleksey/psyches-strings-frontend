@@ -6,14 +6,14 @@ import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User/model/selectors/getUserSelectors';
 import { Link } from 'react-router-dom';
 import { FaYoutube, FaTelegram } from 'react-icons/fa';
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
+import Logo from '@/shared/assets/2v.png';
 import {
-  getRouteAbout,
-  getRouteCourses,
   getRouteMain,
-  getRouteProfile,
-  getRouteTests,
+  // getRouteProfile,
+  // getRouteTests,
 } from '@/shared/const/router';
+import { AnimatedText } from '@/shared/ui/AnimatedText/AnimatedText';
 
 interface NavbarProps {
   className?: string;
@@ -49,7 +49,6 @@ export const Navbar = memo(({ className }: NavbarProps) => {
       </header>
     );
   }
-
   return (
     <header className={classNames(cls.Navbar, {}, [className])}>
       <HStack
@@ -63,7 +62,9 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             className={classNames(cls.Link, {}, [cls.Icon])}
             to={getRouteMain()}
           >
-            <></>Psyches Strings
+            <img className={cls.Logo} src={Logo} alt="" />{' '}
+            <AnimatedText text={'Psyches'} />
+            <AnimatedText text={'Strings'} />
           </Link>
         </HStack>
         <HStack justify="around" align="center" gap="32" className={cls.Right}>
@@ -83,25 +84,20 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           />
         </HStack>
       </HStack>
-      <HStack
+      {/* <HStack
         className={classNames(cls.NavBottom, { [cls.opened]: collapsed }, [])}
         justify="around"
         align="center"
         gap="12"
       >
-        <Link className={classNames(cls.Link)} to={getRouteAbout()}>
-          Обо мне
-        </Link>
-        <Link className={classNames(cls.Link)} to={getRouteCourses()}>
-          Видео
-        </Link>
+
         <Link className={classNames(cls.Link)} to={getRouteTests()}>
           Тесты
         </Link>
         <Link className={classNames(cls.Link)} to={getRouteProfile('1')}>
           Профиль
-        </Link>
-        <GoogleLogin
+        </Link> */}
+      {/* <GoogleLogin
           clientId={clientId}
           buttonText="Войти"
           onSuccess={onSuccess}
@@ -116,8 +112,8 @@ export const Navbar = memo(({ className }: NavbarProps) => {
               Войти
             </button>
           )}
-        />
-      </HStack>
+        /> */}
+      {/* </HStack> */}
     </header>
   );
 });

@@ -28,9 +28,10 @@ export const Section = styled.section<SectionProps>`
   align-items: ${(props) => props.align};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  min-height: 300px;
+  width: ${(props) =>
+    props.width !== undefined ? `${props.width}px` : '100vw'};
+  height: ${(props) =>
+    props.height !== undefined ? `${props.height}px` : '100vh'};
   background-image: ${(props) =>
     props.backgroundImage ? `url(${props.backgroundImage})` : 'none'};
   background-size: cover;

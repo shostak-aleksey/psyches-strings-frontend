@@ -17,9 +17,6 @@ interface BestVideoSectionProps {
 export const BestVideoSection = ({ className }: BestVideoSectionProps) => {
   const { data } = useGetCursesQuery();
 
-  console.log(useGetCursesQuery(), 'aa');
-  console.log('data', data);
-
   return (
     <Section
       // height={1300}

@@ -5,6 +5,10 @@ import { Colors } from '@/shared/const/colors';
 import { Button } from '@/shared/ui/Button';
 import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
 import { Text } from '@/shared/ui/Text';
+import { Container } from '@/shared/ui/Container/Container';
+import { AnimatedText } from '@/shared/ui/AnimatedText/AnimatedText';
+import { VStack, HStack } from '@/shared/ui/Stack';
+import backgroundImage from '@/shared/assets/BackgroundImage2.jpg';
 
 interface HeaderSectionProps {
   className?: string;
@@ -12,25 +16,17 @@ interface HeaderSectionProps {
 
 export const HeaderSection = ({ className }: HeaderSectionProps) => {
   return (
-    <Section
-      background={Colors.Gradient1}
-      className={classNames(cls.TestsPage, {}, [className])}
-    >
-      <Text h2 className={cls.title}>
-        TestsPage
-      </Text>
-      <StringCanvas
-        // bezierPoints={[50, 100, 150, 50]}
-        width={1500}
-        height={100}
-      />
-      <Button>aaaaaa</Button>
-      <p className={classNames(cls.text, {}, ['text-xl'])}>
-        {' '}
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellendus
-        consequuntur placeat voluptate! Labore corporis dicta placeat quaerat
-        doloremque accusamus{' '}
-      </p>
+    <Section flex align="center" backgroundImage={backgroundImage}>
+      <Container>
+        <VStack align="center" gap="12">
+          <HStack align="center" gap="128">
+            <AnimatedText text={'Positively'} />
+            <AnimatedText text={'uplifting'} />
+            <AnimatedText text={'landscapes'} />
+          </HStack>
+          <StringCanvas width="100%" height={100} />
+        </VStack>
+      </Container>
     </Section>
   );
 };
