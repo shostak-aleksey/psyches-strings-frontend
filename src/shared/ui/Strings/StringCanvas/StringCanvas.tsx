@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 
 interface StringCanvasProps {
+  className?: string;
   width?: string | number;
   height?: string | number;
   animatePath?: boolean;
@@ -21,6 +22,7 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
   damping = 0.5,
   frequency = 0.3,
   amplitude = 40,
+  className,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);

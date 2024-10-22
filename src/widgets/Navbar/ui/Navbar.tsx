@@ -1,19 +1,20 @@
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Navbar.module.scss';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { HStack } from '@/shared/ui/Stack';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User/model/selectors/getUserSelectors';
 import { Link } from 'react-router-dom';
 import { FaYoutube, FaTelegram } from 'react-icons/fa';
+import Logo from '@/shared/assets/6v.svg';
 // import { GoogleLogin } from 'react-google-login';
-import Logo from '@/shared/assets/2v.png';
 import {
   getRouteMain,
   // getRouteProfile,
   // getRouteTests,
 } from '@/shared/const/router';
 import { AnimatedText } from '@/shared/ui/AnimatedText/AnimatedText';
+import AnimatedSVG from '@/shared/ui/AnimaredSVG/AnimaredSVG';
 
 interface NavbarProps {
   className?: string;
@@ -49,6 +50,18 @@ export const Navbar = memo(({ className }: NavbarProps) => {
       </header>
     );
   }
+  useEffect(() => {
+    // This will run the SVGator script after the component mounts
+    const script = document.createElement('script');
+    script.src = 'path/to/your/svgator/script.js'; // Ensure this path is correct
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up the script when the component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <header className={classNames(cls.Navbar, {}, [className])}>
       <HStack
@@ -62,9 +75,13 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             className={classNames(cls.Link, {}, [cls.Icon])}
             to={getRouteMain()}
           >
-            <img className={cls.Logo} src={Logo} alt="" />{' '}
-            <AnimatedText text={'Psyches'} />
-            <AnimatedText text={'Strings'} />
+            {/* <Logo /> */}
+            <AnimatedSVG />
+            <AnimatedText
+              animationVariant="fadeInTrigger"
+              h3
+              text={'Psyches Strings'}
+            />
           </Link>
         </HStack>
         <HStack justify="around" align="center" gap="32" className={cls.Right}>

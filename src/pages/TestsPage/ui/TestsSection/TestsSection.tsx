@@ -5,12 +5,13 @@ import { Colors } from '@/shared/const/colors';
 
 interface TestsSectionProps {
   className?: string;
+  height: number;
 }
 
-export const TestsSection = ({ className }: TestsSectionProps) => {
+export const TestsSection = ({ className, height }: TestsSectionProps) => {
   return (
     <Section
-      height={800}
+      height={height}
       background={Colors.Gradient1}
       className={classNames(cls.TestsPage, {}, [className])}
     ></Section>
