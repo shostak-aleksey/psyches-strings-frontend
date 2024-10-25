@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     svgr({
       svgrOptions: {
-        exportType: 'default',
+        exportType: 'named',
         svgoConfig: {
           multipass: true,
         },

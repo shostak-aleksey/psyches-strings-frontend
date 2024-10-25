@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ReactNode } from 'react';
 
 interface ContainerProps {
+  height?: string;
   children: ReactNode;
   className?: string;
   padding?: string;
@@ -11,11 +12,13 @@ interface ContainerProps {
   justify?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
   align?: 'start' | 'center' | 'end' | 'stretch';
   gap?: string;
+  isNarrow?: boolean; // New boolean prop
 }
 
 const ContainerStyled = styled.div<ContainerProps>`
   width: 100%;
   max-width: 100%;
+  height: ${(props) => props.height || '100%'};
   padding: ${(props) => props.padding || '0 16px'};
   margin: ${(props) => props.margin || '0 auto'};
   background: ${(props) => props.background || 'transparent'};
@@ -37,7 +40,7 @@ const ContainerStyled = styled.div<ContainerProps>`
     max-width: 1140px;
   }
   @media (min-width: 1400px) {
-    max-width: 1320px;
+    max-width: ${(props) => (props.isNarrow ? '992px' : '1320px')}; // Conditional max-width
   }
 `;
 
@@ -51,6 +54,8 @@ export const Container: React.FC<ContainerProps> = ({
   justify,
   align,
   gap,
+  height,
+  isNarrow, // Include the new prop
 }) => {
   return (
     <ContainerStyled
@@ -62,6 +67,8 @@ export const Container: React.FC<ContainerProps> = ({
       justify={justify}
       align={align}
       gap={gap}
+      height={height}
+      isNarrow={isNarrow} // Pass the new prop
     >
       {children}
     </ContainerStyled>

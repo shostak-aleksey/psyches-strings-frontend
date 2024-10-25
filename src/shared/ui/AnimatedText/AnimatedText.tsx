@@ -5,13 +5,19 @@ import { Colors } from '@/shared/const/colors';
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 interface AnimatedTextProps extends TextProps {
-  text: string;
-  animationVariant?: 'fadeInTrigger' | 'slideUp' | 'fadeIn' | 'rotate'; // Add more variants as needed
+  text?: string | React.ReactNode;
+  children: React.ReactNode;
+  animationVariant?: 'fadeInTrigger' | 'slideUp' | 'fadeIn' | 'rotate';
+  start?: string;
+  end?: string;
 }
 
 export const AnimatedText: React.FC<AnimatedTextProps> = ({
+  children,
   text,
-  animationVariant = 'slideUp', // Default to 'slideUp'
+  animationVariant = 'slideUp',
+  start,
+  end,
   ...textProps
 }) => {
   const textContainerRef = useRef<HTMLHeadingElement>(null);
@@ -21,17 +27,17 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
       const split = new SplitText(textContainerRef.current, { type: 'chars' });
 
       let animationConfig;
+
       switch (animationVariant) {
         case 'fadeIn':
           animationConfig = {
-            // y: -25,
             fontSize: 0,
             opacity: 0,
             stagger: -0.2,
             scrollTrigger: {
               trigger: textContainerRef.current,
-              start: 'top -75%',
-              end: 'bottom -200%',
+              start: start || 'top -75%',
+              end: end || 'bottom -200%',
               scrub: 1,
             },
             ease: 'power1.inOut',
@@ -45,11 +51,11 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
             stagger: -2,
             scrollTrigger: {
               trigger: textContainerRef.current,
-              start: 'top -75%',
-              // end: 'bottom -200%',
-              scrub: 2, // This allows the animation to be tied to the scroll position
+              start: start || 'top -75%',
+              end: end || 'bottom -200%',
+              scrub: 2,
             },
-            duration: 5, // Set the duration of the animation to 2 seconds
+            duration: 5,
             ease: 'power1.inOut',
           };
           break;
@@ -59,8 +65,8 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
             stagger: 0.05,
             scrollTrigger: {
               trigger: textContainerRef.current,
-              start: 'top 75%',
-              end: 'bottom 25%',
+              start: start || 'top 75%',
+              end: end || 'bottom 25%',
               scrub: 1,
             },
             ease: 'power1.inOut',
@@ -69,15 +75,15 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
         case 'slideUp':
         default:
           animationConfig = {
-            y: -200,
-            stagger: 0.009,
+            y: -75,
+            stagger: 0.03,
             scrollTrigger: {
               trigger: textContainerRef.current,
-              start: 'top 25%',
-              end: 'bottom 10%',
+              start: start || 'top 25%',
+              end: end || 'bottom 10%',
               scrub: 2,
             },
-            ease: 'power2.inOut',
+            ease: 'sine.inOut',
           };
           break;
       }
@@ -88,12 +94,12 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
         animation.kill();
       };
     }
-  }, [animationVariant]);
+  }, [animationVariant, start, end]);
 
   return (
     <div>
       <Text {...textProps} color={Colors.White} ref={textContainerRef}>
-        {text}
+        {children ? (text = children) : text}
       </Text>
     </div>
   );

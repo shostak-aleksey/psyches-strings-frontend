@@ -14,7 +14,7 @@ import {
   // getRouteTests,
 } from '@/shared/const/router';
 import { AnimatedText } from '@/shared/ui/AnimatedText/AnimatedText';
-import AnimatedSVG from '@/shared/ui/AnimaredSVG/AnimaredSVG';
+import AnimatedSVG from '@/shared/ui/AnimatedSVG/AnimatedSVG';
 
 interface NavbarProps {
   className?: string;
@@ -76,12 +76,11 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             to={getRouteMain()}
           >
             {/* <Logo /> */}
-            <AnimatedSVG />
+            <AnimatedSVG type={'large'} />
             <AnimatedText
               animationVariant="fadeInTrigger"
               h3
-              text={'Psyches Strings'}
-            />
+              text={'Psyches Strings'} children={undefined}            />
           </Link>
         </HStack>
         <HStack justify="around" align="center" gap="32" className={cls.Right}>
