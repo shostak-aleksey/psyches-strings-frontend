@@ -33,7 +33,6 @@
   width: 75px;
   height: 75px;
   object-fit: contain;
-  fill: red;
 }
 .Left {
   position: fixed;
@@ -117,11 +116,11 @@
 }
 
 .arrowUp {
-  border-bottom: 10px solid #000000; /* Цвет стрелки */
+  border-bottom: 10px solid #333; /* Цвет стрелки */
 }
 
 .arrowDown {
-  border-top: 10px solid #000000; /* Цвет стрелки */
+  border-top: 10px solid #333; /* Цвет стрелки */
 }
 
 .arrows {

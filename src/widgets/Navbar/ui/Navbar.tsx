@@ -5,11 +5,21 @@ import { HStack } from '@/shared/ui/Stack';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User/model/selectors/getUserSelectors';
 import { Link } from 'react-router-dom';
-import { FaYoutube, FaTelegram } from 'react-icons/fa';
+import {
+  FaYoutube,
+  FaTelegram,
+  FaHome,
+  FaStoreAltSlash,
+  FaPeopleArrows,
+  FaPeopleCarry,
+  FaPeriscope,
+  FaUser,
+} from 'react-icons/fa';
 import Logo from '@/shared/assets/6v.svg';
 // import { GoogleLogin } from 'react-google-login';
 import {
   getRouteMain,
+  getRouteProfile,
   // getRouteProfile,
   // getRouteTests,
 } from '@/shared/const/router';
@@ -65,12 +75,11 @@ export const Navbar = memo(({ className }: NavbarProps) => {
   return (
     <header className={classNames(cls.Navbar, {}, [className])}>
       <HStack
-        justify="between"
         align="center"
         gap="12"
         className={classNames(cls.NavTop, {}, [])}
       >
-        <HStack justify="around" align="center" gap="32" className={cls.Left}>
+        <HStack align="center" gap="16" className={cls.Left}>
           <Link
             className={classNames(cls.Link, {}, [cls.Icon])}
             to={getRouteMain()}
@@ -80,15 +89,20 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             <AnimatedText
               animationVariant="fadeInTrigger"
               h3
-              text={'Psyches Strings'} children={undefined}            />
+              text={'Psyches Strings'}
+              children={undefined}
+            />
           </Link>
         </HStack>
-        <HStack justify="around" align="center" gap="32" className={cls.Right}>
-          <Link className={classNames(cls.SocialLink, {})} to="/articles">
-            <FaYoutube size={20} />
+        <HStack justify="around" align="center" className={cls.Right}>
+          <Link className={classNames(cls.SocialLink, {})} to={getRouteMain()}>
+            <FaHome size={20} />
           </Link>
-          <Link className={classNames(cls.SocialLink, {})} to="/articles">
-            <FaTelegram size={20} />
+          <Link
+            className={classNames(cls.SocialLink, {})}
+            to={getRouteProfile('1')}
+          >
+            <FaUser size={20} />
           </Link>{' '}
           <span
             onClick={onArrowClick}

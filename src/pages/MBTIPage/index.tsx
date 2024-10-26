@@ -1,0 +1,1 @@
+ export { MBTIPage } from "./ui/MBTIPage";

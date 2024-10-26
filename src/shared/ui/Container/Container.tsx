@@ -13,6 +13,7 @@ interface ContainerProps {
   align?: 'start' | 'center' | 'end' | 'stretch';
   gap?: string;
   isNarrow?: boolean; // New boolean prop
+  isNarrow2?: boolean; // New boolean prop
 }
 
 const ContainerStyled = styled.div<ContainerProps>`
@@ -40,7 +41,8 @@ const ContainerStyled = styled.div<ContainerProps>`
     max-width: 1140px;
   }
   @media (min-width: 1400px) {
-    max-width: ${(props) => (props.isNarrow ? '992px' : '1320px')}; // Conditional max-width
+    max-width: ${(props) =>
+      props.isNarrow2 ? '760px' : props.isNarrow ? '992px' : '1320px'};
   }
 `;
 
@@ -56,6 +58,7 @@ export const Container: React.FC<ContainerProps> = ({
   gap,
   height,
   isNarrow, // Include the new prop
+  isNarrow2, // Include the new prop
 }) => {
   return (
     <ContainerStyled
@@ -69,6 +72,7 @@ export const Container: React.FC<ContainerProps> = ({
       gap={gap}
       height={height}
       isNarrow={isNarrow} // Pass the new prop
+      isNarrow2={isNarrow2} // Pass the new prop
     >
       {children}
     </ContainerStyled>

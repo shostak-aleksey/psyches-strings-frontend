@@ -18,24 +18,29 @@ interface HeaderSectionProps {
 
 export const HeaderSection = ({ className, children }: HeaderSectionProps) => {
   return (
-    <Section fixed flex align="center" backgroundImage={backgroundImage}>
+    <Section
+      fixed
+      flex
+      align="center"
+      // backgroundImage={backgroundImage}
+    >
       <Container flex justify="center" align="center">
-
         <HStack align="center" gap="28">
           <div
-            style={{
-              // margin: '0 0 200px 0',
-            }}
+            style={
+              {
+                // margin: '0 0 200px 0',
+              }
+            }
           >
             <AnimatedText
-
               animationVariant="slideUp"
               line="1.1em"
               size="130px"
               align="center"
               h1
-              start='top 35%'
-              end='top -20%'
+              start="top 35%"
+              end="top -20%"
             >
               Positively uplifting <br /> landscapes
             </AnimatedText>

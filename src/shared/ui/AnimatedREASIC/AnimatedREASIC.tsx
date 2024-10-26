@@ -2,7 +2,45 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { styled } from 'styled-components';
 
-const AnimatedREASIC: React.FC = () => {
+export interface StyledDivProps {
+  width?: string;
+  height?: string;
+  mdWidth?: string;
+  mdHeight?: string;
+  lgWidth?: string;
+  lgHeight?: string;
+  xlWidth?: string;
+  xlHeight?: string;
+  xxlWidth?: string;
+  xxlHeight?: string;
+}
+
+export const StyledDiv = styled.div<StyledDivProps>`
+  width: 60%;
+  height: 60%;
+  @media (min-width: 576px) {
+    width: ${(props) => props.mdWidth || '60%'}
+    height: ${(props) => props.mdHeight || '60%'}
+  }
+  @media (min-width: 768px) {
+    width: ${(props) => props.lgWidth || '60%'}
+    height: ${(props) => props.lgHeight || '60%'}
+  }
+  @media (min-width: 992px) {
+    width: ${(props) => props.xlWidth || '60%'}
+    height: ${(props) => props.xlHeight || '60%'}
+  }
+  @media (min-width: 1200px) {
+    width: ${(props) => props.xxlWidth || '60%'}
+    height: ${(props) => props.xxlHeight || '60%'}
+  }
+`;
+interface AnimatedREASICProps {
+  width?: string;
+  height?: string;
+}
+
+const AnimatedREASIC: React.FC = ({ width, height }: AnimatedREASICProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -11,7 +49,9 @@ const AnimatedREASIC: React.FC = () => {
 
     const paths = svgElement.querySelectorAll('path');
     const circle = svgElement.querySelector('circle');
-    const originalTransforms = Array.from(paths).map((path) => path.getAttribute('transform') || '');
+    const originalTransforms = Array.from(paths).map(
+      (path) => path.getAttribute('transform') || '',
+    );
 
     paths.forEach((path) => {
       path.setAttribute('transform', 'translate(0, 0)');
@@ -85,42 +125,45 @@ const AnimatedREASIC: React.FC = () => {
       }
     };
   }, []);
-const StyledSvg = styled.svg`
-  z-index: 3;
-  position: relative;
-  overflow: visible;
-  pointer-events: none; // Make the entire SVG non-interactive
+  const StyledSvg = styled.svg`
+    z-index: 3;
+    position: relative;
+    overflow: visible;
+    pointer-events: none; // Make the entire SVG non-interactive
 
-  circle {
-    pointer-events: auto;
-    fill: url(#portalGradient);
-    filter: url(#portalEffect);
-  }
-`;
+    circle {
+      pointer-events: auto;
+      fill: url(#portalGradient);
+      filter: url(#portalEffect);
+    }
+  `;
   return (
-<StyledSvg
-      ref={svgRef}
-      version="1.0"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1000.000000 840.000000"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <defs>
-        <radialGradient id="portalGradient" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" style={{ stopColor: '#fff', stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: '#64a', stopOpacity: 0 }} />
-        </radialGradient>
-        <filter id="portalEffect">
-          <feDropShadow dx="0" dy="0" stdDeviation="10" floodColor="#64e  " />
-        </filter>
-      </defs>
-      <circle cx="500" cy="420" r="400" fill="#64a" />
-            <g
-              transform="translate(0.000000,840.000000) scale(0.100000,-0.100000)"
-              fill="#fff"
-              stroke="none"
-              >
-              <path transform="translate(0.000000,1500.000000) "  d="M2590 8303 c0 -1 67 -114 149 -250 153 -256 604 -1012 1201 -2013
+    <StyledDiv width={width} height={height}>
+      <StyledSvg
+        ref={svgRef}
+        version="1.0"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1000.000000 840.000000"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <defs>
+          <radialGradient id="portalGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style={{ stopColor: '#fff', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#64a', stopOpacity: 0 }} />
+          </radialGradient>
+          <filter id="portalEffect">
+            <feDropShadow dx="0" dy="0" stdDeviation="10" floodColor="#64e  " />
+          </filter>
+        </defs>
+        <circle cx="500" cy="420" r="400" fill="#64a" />
+        <g
+          transform="translate(0.000000,840.000000) scale(0.100000,-0.100000)"
+          fill="#fff"
+          stroke="none"
+        >
+          <path
+            transform="translate(0.000000,1500.000000) "
+            d="M2590 8303 c0 -1 67 -114 149 -250 153 -256 604 -1012 1201 -2013
 188 -316 389 -651 445 -745 56 -93 216 -361 355 -595 139 -234 255 -427 258
 -430 3 -3 7 0 9 7 2 7 89 153 192 325 103 172 423 707 710 1188 288 481 556
 929 596 995 205 341 905 1514 905 1517 0 2 -1085 3 -2410 3 -1326 0 -2410 -1
@@ -151,34 +194,41 @@ m229 -81 l2 -93 -34 0 -35 0 0 88 c0 49 3 92 7 96 4 4 19 6 33 4 25 -3 25 -5
 -12 50 -45 42 -59 -10 -16 -52 -12 -59 5 -7 20 -42 19 -50 -1 -11 -28 -6 -61
 9 -74 13 -10 19 -10 33 4 19 17 72 22 72 7 0 -4 -9 -20 -20 -34 -45 -56 -138
 -40 -160 28 -29 87 51 162 133 124z"
-              />
-              <path transform="translate(0.000000,1500.000000) "
-                d="M5020 7353 l0 -63 70 0 c57 0 74 4 90 20 24 24 25 48 5 77 -13 18
+          />
+          <path
+            transform="translate(0.000000,1500.000000) "
+            d="M5020 7353 l0 -63 70 0 c57 0 74 4 90 20 24 24 25 48 5 77 -13 18
 -27 22 -90 25 l-75 3 0 -62z"
-              />
-              <path transform="translate(0.000000,1500.000000) "
-                d="M4442 6593 c2 -22 9 -29 29 -31 29 -3 54 20 45 43 -3 9 -18 15 -41
+          />
+          <path
+            transform="translate(0.000000,1500.000000) "
+            d="M4442 6593 c2 -22 9 -29 29 -31 29 -3 54 20 45 43 -3 9 -18 15 -41
 15 -34 0 -36 -2 -33 -27z"
-              />
-              <path transform="translate(0.000000,1500.000000) "
-                d="M4687 6563 c-17 -16 -5 -29 23 -25 33 5 39 16 14 26 -20 8 -29 8 -37
+          />
+          <path
+            transform="translate(0.000000,1500.000000) "
+            d="M4687 6563 c-17 -16 -5 -29 23 -25 33 5 39 16 14 26 -20 8 -29 8 -37
 -1z"
-              />
-              <path transform="translate(0.000000,1500.000000) "
-                d="M4890 6485 c-13 -16 -6 -35 15 -35 13 0 35 29 35 44 0 12 -38 5 -50
+          />
+          <path
+            transform="translate(0.000000,1500.000000) "
+            d="M4890 6485 c-13 -16 -6 -35 15 -35 13 0 35 29 35 44 0 12 -38 5 -50
 -9z"
-              />
-              <path transform='translate(1500.000000, -750.000000)'
-                d="M3494 2459 c-9 -16 21 -43 40 -36 9 4 16 16 16 27 0 15 -7 20 -24 20
+          />
+          <path
+            transform="translate(1500.000000, -750.000000)"
+            d="M3494 2459 c-9 -16 21 -43 40 -36 9 4 16 16 16 27 0 15 -7 20 -24 20
 -14 0 -28 -5 -32 -11z"
-              />
-              <path transform='translate(1500.000000, -750.000000)'
-                d="M3475 2300 c3 -5 26 -10 51 -10 24 0 44 5 44 10 0 6 -23 10 -51 10
+          />
+          <path
+            transform="translate(1500.000000, -750.000000)"
+            d="M3475 2300 c3 -5 26 -10 51 -10 24 0 44 5 44 10 0 6 -23 10 -51 10
 -31 0 -48 -4 -44 -10z"
-              />
+          />
 
-              <path transform="translate(1500.000000, -750.000000) "
-                d="M5072 4148 c8 -13 155 -259 328 -548 172 -289 379 -635 460 -770 80
+          <path
+            transform="translate(1500.000000, -750.000000) "
+            d="M5072 4148 c8 -13 155 -259 328 -548 172 -289 379 -635 460 -770 80
 -135 254 -425 385 -645 131 -220 380 -636 553 -925 172 -289 395 -661 494
 -828 100 -166 182 -301 183 -300 2 2 43 71 92 153 349 585 702 1176 788 1320
 57 94 243 406 415 695 282 473 451 756 954 1597 86 144 156 264 156 267 0 3
@@ -207,18 +257,21 @@ c21 -66 38 -124 38 -128 0 -5 -19 -7 -42 -5 -36 2 -44 7 -46 26 -3 18 -10 22
 10 0 6 16 10 35 10 19 0 35 -4 35 -9 0 -36 -46 -71 -95 -71 -41 0 -82 26 -94
 61 -35 102 85 185 160 110z m-661 -76 l0 -95 -40 0 -40 0 0 95 0 95 40 0 40 0
 0 -95z m470 0 l0 -95 -40 0 -40 0 0 95 0 95 40 0 40 0 0 -95z"
-              />
+          />
 
-              <path transform="translate(1500.000000, -750.000000) "
-                d="M7447 3130 c-9 -24 -47 -157 -47 -164 0 -3 23 -6 50 -6 28 0 50 3 50
+          <path
+            transform="translate(1500.000000, -750.000000) "
+            d="M7447 3130 c-9 -24 -47 -157 -47 -164 0 -3 23 -6 50 -6 28 0 50 3 50
 8 -1 27 -49 174 -53 162z"
-              />
-              <path transform="translate(1500.000000, -750.000000) "
-                d="M6910 2345 c0 -14 6 -25 14 -25 9 0 12 8 8 25 -2 14 -8 25 -13 25 -5
+          />
+          <path
+            transform="translate(1500.000000, -750.000000) "
+            d="M6910 2345 c0 -14 6 -25 14 -25 9 0 12 8 8 25 -2 14 -8 25 -13 25 -5
 0 -9 -11 -9 -25z"
-              />
-              <path transform="translate(0.000000, -1500.000000) "
-                d="M4728 3682 c-414 -694 -585 -982 -783 -1312 -100 -168 -329 -552
+          />
+          <path
+            transform="translate(0.000000, -1500.000000) "
+            d="M4728 3682 c-414 -694 -585 -982 -783 -1312 -100 -168 -329 -552
 -510 -855 -462 -775 -815 -1366 -831 -1392 -8 -12 -14 -24 -14 -25 0 -2 1085
 -3 2410 -3 1326 0 2410 1 2410 3 0 3 -465 782 -1183 1982 -209 349 -482 806
 -607 1015 -125 209 -314 524 -419 699 -105 175 -191 323 -191 328 0 4 -3 8 -7
@@ -242,20 +295,21 @@ c21 -66 38 -124 38 -128 0 -5 -19 -7 -42 -5 -36 2 -44 7 -46 26 -3 18 -10 22
 -12 5 -28 -1 -59 -23 -105 15 -87 70 6 21 52 42 91 42 27 0 31 12 9 30 -13 10
 -19 10 -33 -4 -22 -19 -62 -21 -62 -3 0 50 107 71 152 30z m-192 -78 l0 -95
 -30 0 -30 0 0 95 0 95 30 0 30 0 0 -95z"
-              />
-              <path transform="translate(0.000000, -1500.000000) "
-                d="M4950 1121 c-23 -44 0 -111 34 -98 11 5 16 19 16 50 0 60 -28 87 -50
+          />
+          <path
+            transform="translate(0.000000, -1500.000000) "
+            d="M4950 1121 c-23 -44 0 -111 34 -98 11 5 16 19 16 50 0 60 -28 87 -50
 48z"
-              />
-              <path transform="translate(0.000000, -1500.000000) "
-                d="M5464 1056 c-15 -12 -17 -17 -6 -28 15 -15 45 0 50 26 4 20 -18 21
+          />
+          <path
+            transform="translate(0.000000, -1500.000000) "
+            d="M5464 1056 c-15 -12 -17 -17 -6 -28 15 -15 45 0 50 26 4 20 -18 21
 -44 2z"
-              />
+          />
 
-
-
-              <path transform="translate(-1500.000000, 750.000000) "
-                d="M2516 8255 c-3 -9 -153 -263 -333 -563 -179 -301 -423 -709 -541
+          <path
+            transform="translate(-1500.000000, 750.000000) "
+            d="M2516 8255 c-3 -9 -153 -263 -333 -563 -179 -301 -423 -709 -541
 -907 -118 -198 -247 -414 -287 -480 -40 -66 -287 -480 -550 -920 -263 -440
 -525 -878 -582 -974 -57 -95 -102 -175 -100 -177 2 -2 1087 -3 2410 -2 l2407
 3 -108 180 c-60 99 -166 277 -236 395 -71 118 -231 386 -356 595 -125 209
@@ -294,25 +348,30 @@ l-3 -73 -29 0 -30 0 0 95 0 96 40 -3 c22 -1 43 1 46 5 12 12 38 8 62 -9z m460
 35 25 60 25 25 0 35 4 35 15 0 23 -31 31 -45 12 -13 -19 -65 -20 -65 -1 0 12
 28 39 50 47 31 11 79 6 99 -10z m-609 -88 l0 -95 -30 0 -30 0 0 95 0 95 30 0
 30 0 0 -95z"
-              />
-              <path transform="translate(-1500.000000, 750.000000) "
-                d="M1894 5227 c-3 -8 -4 -34 -2 -58 2 -36 7 -44 23 -44 18 0 20 7 20 55
+          />
+          <path
+            transform="translate(-1500.000000, 750.000000) "
+            d="M1894 5227 c-3 -8 -4 -34 -2 -58 2 -36 7 -44 23 -44 18 0 20 7 20 55
 0 44 -3 55 -18 58 -9 2 -20 -3 -23 -11z"
-              />
-              <path transform="translate(-1500.000000, 750.000000) "
-                d="M2487 5233 c-17 -16 -5 -33 23 -33 32 0 37 9 18 28 -13 13 -31 16
+          />
+          <path
+            transform="translate(-1500.000000, 750.000000) "
+            d="M2487 5233 c-17 -16 -5 -33 23 -33 32 0 37 9 18 28 -13 13 -31 16
 -41 5z"
-              />
-              <path transform="translate(-1500.000000, 750.000000) "
-                d="M3144 5226 c-3 -7 -4 -33 -2 -57 2 -36 7 -44 23 -44 25 0 40 50 26
+          />
+          <path
+            transform="translate(-1500.000000, 750.000000) "
+            d="M3144 5226 c-3 -7 -4 -33 -2 -57 2 -36 7 -44 23 -44 25 0 40 50 26
 88 -11 29 -38 36 -47 13z"
-              />
-              <path transform="translate(-1500.000000, 750.000000) "
-                d="M3573 5163 c-21 -8 -16 -43 6 -43 17 0 31 18 31 41 0 10 -17 11 -37
+          />
+          <path
+            transform="translate(-1500.000000, 750.000000) "
+            d="M3573 5163 c-21 -8 -16 -43 6 -43 17 0 31 18 31 41 0 10 -17 11 -37
 2z"
-              />
-              <path transform="translate(1500.000000, 750.000000) "
-                d="M7292 7968 c-99 -167 -281 -472 -404 -678 -124 -206 -413 -690 -643
+          />
+          <path
+            transform="translate(1500.000000, 750.000000) "
+            d="M7292 7968 c-99 -167 -281 -472 -404 -678 -124 -206 -413 -690 -643
 -1075 -415 -695 -509 -853 -953 -1595 l-231 -385 2406 -3 c1324 -1 2408 0
 2411 2 2 3 -60 112 -138 243 -79 131 -259 432 -400 668 -141 237 -411 689
 -600 1005 -188 316 -368 618 -400 670 -48 80 -477 800 -763 1280 -44 74 -86
@@ -352,29 +411,35 @@ l-3 -73 -29 0 -30 0 0 95 0 96 40 -3 c22 -1 43 1 46 5 12 12 38 8 62 -9z m460
 48 -56z m254 43 c21 -16 39 -51 39 -76 0 -19 -6 -21 -61 -21 -52 0 -60 -2 -57
 -17 4 -23 46 -30 54 -9 7 18 49 22 59 6 3 -5 -5 -21 -19 -35 -19 -19 -35 -25
 -70 -25 -38 0 -48 5 -71 32 -54 64 -10 158 73 158 20 0 44 -6 53 -13z"
-              />
-              <path transform="translate(1500.000000, 750.000000) "
-                d="M7594 5265 c-4 -9 -2 -21 4 -27 16 -16 47 -5 47 17 0 26 -42 34 -51
+          />
+          <path
+            transform="translate(1500.000000, 750.000000) "
+            d="M7594 5265 c-4 -9 -2 -21 4 -27 16 -16 47 -5 47 17 0 26 -42 34 -51
 10z"
-              />
-              <path transform="translate(1500.000000, 750.000000) "
-                d="M7570 5110 c0 -23 90 -26 98 -2 2 8 -11 12 -47 12 -28 0 -51 -4 -51
+          />
+          <path
+            transform="translate(1500.000000, 750.000000) "
+            d="M7570 5110 c0 -23 90 -26 98 -2 2 8 -11 12 -47 12 -28 0 -51 -4 -51
 -10z"
-              />
-              <path transform="translate(1500.000000, 750.000000) "
-                d="M6967 5263 c-15 -14 -6 -23 23 -23 22 0 28 4 24 15 -6 15 -35 20 -47
+          />
+          <path
+            transform="translate(1500.000000, 750.000000) "
+            d="M6967 5263 c-15 -14 -6 -23 23 -23 22 0 28 4 24 15 -6 15 -35 20 -47
 8z"
-              />
-              <path transform="translate(1500.000000, 750.000000) "
-                d="M7820 5192 c-19 -16 -20 -19 -7 -30 12 -10 18 -10 31 3 17 18 22 45
+          />
+          <path
+            transform="translate(1500.000000, 750.000000) "
+            d="M7820 5192 c-19 -16 -20 -19 -7 -30 12 -10 18 -10 31 3 17 18 22 45
 7 45 -5 0 -19 -8 -31 -18z"
-              />
-              <path transform="translate(1500.000000, 750.000000) "
-                d="M8437 5264 c-15 -15 -6 -24 24 -24 20 0 29 4 27 13 -5 14 -40 21 -51
+          />
+          <path
+            transform="translate(1500.000000, 750.000000) "
+            d="M8437 5264 c-15 -15 -6 -24 24 -24 20 0 29 4 27 13 -5 14 -40 21 -51
 11z"
-              />
-              <path transform="translate(-1500.000000, -750.000000) "
-                d="M120 4164 c0 -3 42 -76 94 -162 52 -86 154 -258 228 -382 585 -979
+          />
+          <path
+            transform="translate(-1500.000000, -750.000000) "
+            d="M120 4164 c0 -3 42 -76 94 -162 52 -86 154 -258 228 -382 585 -979
 790 -1323 983 -1645 122 -203 356 -595 520 -870 164 -275 363 -607 441 -738
 l142 -238 238 398 c131 219 310 520 399 668 89 149 296 495 460 770 563 945
 692 1161 955 1600 145 242 285 477 311 523 l48 82 -2409 0 c-1326 0 -2410 -3
@@ -412,27 +477,30 @@ m250 17 c42 -29 18 -60 -27 -32 -20 12 -56 4 -47 -11 3 -4 22 -11 42 -14 48
 -30 -71 l-27 -3 -3 95 -3 96 28 0 c15 0 27 -5 27 -12 0 -8 6 -6 17 5 21 21 52
 22 79 3z m-478 -88 l-3 -93 -27 -3 -28 -3 0 95 0 96 30 0 31 0 -3 -92z m282
 -3 l0 -95 -30 0 -30 0 0 95 0 95 30 0 30 0 0 -95z"
-              />
-              <path transform="translate(-1500.000000, -750.000000) "
-                d="M3494 2459 c-9 -16 21 -43 40 -36 9 4 16 16 16 27 0 15 -7 20 -24 20
+          />
+          <path
+            transform="translate(-1500.000000, -750.000000) "
+            d="M3494 2459 c-9 -16 21 -43 40 -36 9 4 16 16 16 27 0 15 -7 20 -24 20
 -14 0 -28 -5 -32 -11z"
-              />
-              <path  transform="translate(-1500.000000, -750.000000) "
-                d="M3475 2300 c3 -5 26 -10 51 -10 24 0 44 5 44 10 0 6 -23 10 -51 10
+          />
+          <path
+            transform="translate(-1500.000000, -750.000000) "
+            d="M3475 2300 c3 -5 26 -10 51 -10 24 0 44 5 44 10 0 6 -23 10 -51 10
 -31 0 -48 -4 -44 -10z"
-              />
-              <path  transform="translate(-1500.000000, -750.000000) "
-                d="M2217 2464 c-16 -16 -6 -34 19 -34 19 0 25 5 22 17 -3 19 -29 29 -41
+          />
+          <path
+            transform="translate(-1500.000000, -750.000000) "
+            d="M2217 2464 c-16 -16 -6 -34 19 -34 19 0 25 5 22 17 -3 19 -29 29 -41
 17z"
-              />
-              <path  transform="translate(-1500.000000, -750.000000) "
-                d="M2557 2453 c-12 -11 -7 -80 6 -91 26 -22 41 6 38 71 -1 19 -6 27 -19
+          />
+          <path
+            transform="translate(-1500.000000, -750.000000) "
+            d="M2557 2453 c-12 -11 -7 -80 6 -91 26 -22 41 6 38 71 -1 19 -6 27 -19
 27 -10 0 -22 -3 -25 -7z"
-              />
- 
-            </g>
-
-          </StyledSvg>
+          />
+        </g>
+      </StyledSvg>
+    </StyledDiv>
   );
 };
 

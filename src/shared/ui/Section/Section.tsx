@@ -10,7 +10,7 @@ interface SectionProps {
   className?: string;
   children?: React.ReactNode;
   width?: screenSize | number;
-  height?: number;
+  height?: string | number;
   padding?: string;
   margin?: string;
   background?: Colors;
@@ -32,13 +32,13 @@ const StyledSection = styled.section<SectionProps>`
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   width: ${(props) => (props.width !== undefined ? `${props.width}px` : '100vw')};
-  height: ${(props) => (props.height !== undefined ? `${props.height}px` : '100vh')};
+  height: ${(props) => (props.height !== undefined ? `${props.height}` : '100vh')};
   background-image: ${(props) => (props.backgroundImage ? `url(${props.backgroundImage})` : 'none')};
   background-size: cover;
   background-o
   background-repeat: no-repeat;
     // background-attachment: fixed; /* Fix the background image */
-  background-attachment: ${(props) => (props.fixed !== undefined ? `fixed` : undefined) };
+  background-attachment: ${(props) => (props.fixed !== undefined ? `fixed` : undefined)};
   background: ${(props) => props.background};
   flex-direction: ${(props) => (props.column ? 'column' : 'row')};
 `;

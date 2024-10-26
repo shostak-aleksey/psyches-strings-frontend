@@ -1,4 +1,3 @@
-import { MainPage } from '@/pages/MainPage';
 import { AboutPage } from '@/pages/AboutPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 // import { ArticlesPage } from '@/pages/ArticlesPage';
@@ -23,6 +22,15 @@ import {
   getRouteCourse,
   getRouteCourses,
   getRouteTests,
+  getRouteMBTI,
+  getRouteEightSpheresOfLife,
+  getRouteEnneagramma,
+  getRouteREASIC,
+  getRouteRecommendations,
+  getRouteResults,
+  getRouteTestInfo,
+  getRouteTypes,
+  getRouteTest,
   //   getRouteArticles,
   //   getRouteProfile,
   //   getRouteSettings,
@@ -34,11 +42,20 @@ import { RegistrationPage } from '@/pages/RegistrationPage';
 import { CoursePage } from '@/pages/CoursePage';
 import { CoursesPage } from '@/pages/CoursesPage';
 import { TestsPage } from '@/pages/TestsPage';
+import { EightSpheresOfLifePage } from '@/pages/EightSpheresOfLifePage';
+import { EnneagrammaPage } from '@/pages/EnneagrammaPage';
+import { MBTIPage } from '@/pages/MBTIPage';
+import { REASICPage } from '@/pages/REASICPage';
+import { ResultsPage } from '@/pages/ResultsPage';
+import { TestInfoPage } from '@/pages/TestInfoPage';
+import { TypesPage } from '@/pages/TypesPage';
+import { RecommendationsPage } from '@/pages/RecommendationsPage';
+import { TestPage } from '@/pages/TestsPage copy';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
     path: getRouteMain(),
-    element: <MainPage />,
+    element: <TestsPage />,
   },
   [AppRoutes.LOGIN]: {
     path: getRouteLogin(),
@@ -61,10 +78,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   //     path: getRouteSettings(),
   //     element: <SettingsPage />,
   // },
-  [AppRoutes.PROFILE]: {
-    path: getRouteProfile(':id'),
-    element: <ProfilePage />,
-  },
   [AppRoutes.COURSE]: {
     path: getRouteCourse(':id'),
     element: <CoursePage />,
@@ -73,9 +86,49 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     path: getRouteCourses(),
     element: <CoursesPage />,
   },
+  [AppRoutes.MBTI]: {
+    path: getRouteMBTI(),
+    element: <MBTIPage />,
+  },
+  [AppRoutes.REASIC]: {
+    path: getRouteREASIC(),
+    element: <REASICPage />,
+  },
+  [AppRoutes.ENNEAGRAMMA]: {
+    path: getRouteEnneagramma(),
+    element: <EnneagrammaPage />,
+  },
+  [AppRoutes.EIGHT_SPHERES_OF_LIFE]: {
+    path: getRouteEightSpheresOfLife(),
+    element: <EightSpheresOfLifePage />,
+  },
+  [AppRoutes.PROFILE]: {
+    path: getRouteProfile(':userId'),
+    element: <ProfilePage />,
+  },
   [AppRoutes.TESTS]: {
     path: getRouteTests(),
     element: <TestsPage />,
+  },
+  [AppRoutes.TEST]: {
+    path: getRouteTest(':testId'),
+    element: <TestPage />,
+  },
+  [AppRoutes.RESULTS]: {
+    path: getRouteResults(':testId', ':userId'),
+    element: <ResultsPage />,
+  },
+  [AppRoutes.TEST_INFO]: {
+    path: getRouteTestInfo(':testId'),
+    element: <TestInfoPage />,
+  },
+  [AppRoutes.TYPES]: {
+    path: getRouteTypes(':typeId'),
+    element: <TypesPage />,
+  },
+  [AppRoutes.RECOMMENDATIONS]: {
+    path: getRouteRecommendations(),
+    element: <RecommendationsPage />,
   },
   // [AppRoutes.ARTICLES]: {
   //     path: getRouteArticles(),

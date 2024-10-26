@@ -1,0 +1,1 @@
+export { EnneagrammaPage } from "./ui/EnneagrammaPage";

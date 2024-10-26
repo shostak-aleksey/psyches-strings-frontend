@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
 
 interface StringCanvasProps {
   className?: string;
@@ -11,18 +10,19 @@ interface StringCanvasProps {
   damping?: number;
   frequency?: number;
   amplitude?: number;
+  animated?: boolean | { amplitude: number; frequency: number; speed: number };
 }
 
 export const StringCanvas: React.FC<StringCanvasProps> = ({
   width = '100%',
   height = 70,
+  elapsed: initialElapsed = 0,
   animatePath = false,
   duration = 3000,
-  elapsed: initialElapsed = 0,
   damping = 0.5,
-  frequency = 0.3,
-  amplitude = 40,
-  className,
+  frequency = 0.05,
+  amplitude = 10,
+  animated = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -63,7 +63,11 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
         animationFrameId = requestAnimationFrame(drawString);
       } else {
         setIsAnimating(false);
-        drawInitialString();
+        if (animated) {
+          startPassiveAnimation();
+        } else {
+          drawInitialString();
+        }
       }
     };
 
@@ -77,11 +81,38 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
       context.stroke();
     };
 
-    drawInitialString();
+    const startPassiveAnimation = () => {
+      if (!context) return;
+      const passiveAmplitude =
+        typeof animated === 'object' ? animated.amplitude : amplitude;
+      const passiveFrequency =
+        typeof animated === 'object' ? animated.frequency : frequency;
+      const passiveSpeed = typeof animated === 'object' ? animated.speed : 1;
+      const passiveDraw = (time: number) => {
+        context.clearRect(0, 0, widthPx || 0, heightPx || 0);
+        context.beginPath();
+        context.moveTo(0, (heightPx || 0) / 2);
+        for (let x = 0; x <= (widthPx || 0); x += 1) {
+          const y =
+            (heightPx || 0) / 2 +
+            passiveAmplitude *
+              Math.sin(
+                (x / (widthPx || 0)) * Math.PI * 2 * passiveFrequency * time,
+              );
+          context.lineTo(x, y);
+        }
+        context.strokeStyle = 'white';
+        context.stroke();
+        animationFrameId = requestAnimationFrame(passiveDraw);
+      };
+      animationFrameId = requestAnimationFrame(passiveDraw);
+    };
 
     if (isAnimating) {
       setStartTime(performance.now());
       animationFrameId = requestAnimationFrame(drawString);
+    } else if (animated) {
+      startPassiveAnimation();
     }
 
     return () => {
@@ -96,65 +127,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
     damping,
     frequency,
     amplitude,
+    animated,
   ]);
-
-  useEffect(() => {
-    if (animatePath) {
-      const path = { x: 0, y: heightPx || 0 };
-      const tl = gsap.timeline({ repeat: -1, yoyo: true });
-
-      tl.to(path, {
-        x: (widthPx || 0) / 2 - 50,
-        duration: 2,
-        onUpdate: () => {
-          const canvas = canvasRef.current;
-          if (!canvas) return;
-          const context = canvas.getContext('2d');
-          if (!context) return;
-          context.clearRect(0, 0, widthPx || 0, heightPx || 0);
-          context.beginPath();
-          context.moveTo(0, (heightPx || 0) / 2);
-          context.lineTo(path.x, path.y);
-          context.strokeStyle = 'white';
-          context.stroke();
-        },
-      })
-        .to(path, {
-          x: (widthPx || 0) / 2 + 50,
-          y: (heightPx || 0) / 2 - 50,
-          duration: 1,
-          onUpdate: () => {
-            const canvas = canvasRef.current;
-            if (!canvas) return;
-            const context = canvas.getContext('2d');
-            if (!context) return;
-            context.clearRect(0, 0, widthPx || 0, heightPx || 0);
-            context.beginPath();
-            context.moveTo(0, (heightPx || 0) / 2);
-            context.lineTo(path.x, path.y);
-            context.strokeStyle = 'white';
-            context.stroke();
-          },
-        })
-        .to(path, {
-          x: widthPx || 0,
-          y: (heightPx || 0) / 2,
-          duration: 2,
-          onUpdate: () => {
-            const canvas = canvasRef.current;
-            if (!canvas) return;
-            const context = canvas.getContext('2d');
-            if (!context) return;
-            context.clearRect(0, 0, widthPx || 0, heightPx || 0);
-            context.beginPath();
-            context.moveTo(0, (heightPx || 0) / 2);
-            context.lineTo(path.x, path.y);
-            context.strokeStyle = 'white';
-            context.stroke();
-          },
-        });
-    }
-  }, [animatePath, widthPx, heightPx]);
 
   const handleClick = () => {
     setIsAnimating(true);

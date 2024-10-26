@@ -1,22 +1,38 @@
-
+import React from 'react';
 import { AnimatedMBTI } from '../AnimatedMBTI/AnimatedMBTI';
 import AnimatedREASIC from '../AnimatedREASIC/AnimatedREASIC';
 
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+// import { styled } from 'styled-components';
+import { AnimatedENNEAGRAMMA } from '../AnimatedENNEAGRAMMA/AnimatedENNEAGRAMMA';
+
+gsap.registerPlugin(MotionPathPlugin);
 
 interface AnimatedSVGProps {
-  type: 'large' | 'small' | 'mbti' | 'REASIC';
+  type: 'large' | 'enneagramma' | 'mbti' | 'REASIC';
   height?: string;
 }
+// const StyledSvg = styled.svg`
+//   z-index: 3;
+//   position: relative;
+//   overflow: visible;
+//   pointer-events: none; // Make the entire SVG non-interactive
 
-
-
+//   circle {
+//     pointer-events: auto;
+//     fill: url(#portalGradient);
+//     filter: url(#portalEffect);
+//   }
+// `;
+// const StyledDiv = styled.div`
+//   width: 100px;
+//   height: 100px;
+// `;
 const AnimatedSVG: React.FC<AnimatedSVGProps> = ({ type }) => {
-
-
   switch (type) {
     case 'large':
       return (
-       <svg
+        <svg
           version="1.0"
           xmlns="http://www.w3.org/2000/svg"
           width="75.000000pt"
@@ -195,73 +211,16 @@ l-75 152 -147 -6 c-605 -25 -1190 233 -1511 667 -278 374 -335 859 -146 1247
           </g>
         </svg>
       );
-    case 'small':
-      return (
-        <>
-          <svg
-            version="1.1"
-            viewBox="0 0 2000 2000"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="enneagram-symbol" viewBox="0 0 2000 2000">
-              <path
-                d="M 1000.00,222.00 A 778.00,778.00, -1.57 0,1 1673.77,1389.00 A 778.00,778.00, -1.57 0,1 326.23,1389.00 A 778.00,778.00, -1.57 0,1 1000.00,222.00 M 1000.00,222.00 L 1673.77,1389.00 326.23,1389.00 Z M 1500.09,404.02 L 1266.09,1731.08 1766.18,864.90 499.91,404.02 733.91,1731.08 233.82,864.90 Z"
-                fill="none"
-                id="symbol-path"
-                stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="15.56"
-              />
-              <text
-                fill="white"
-                font-family="monospace"
-                font-size="144"
-                id="numbers"
-                transform="translate(-43.20,46.80)"
-              >
-                <tspan x="1000.00" y="111.00">
-                  9
-                </tspan>
-                <tspan x="1571.44" y="318.99">
-                  1
-                </tspan>
-                <tspan x="1875.49" y="845.63">
-                  2
-                </tspan>
-                <tspan x="1769.90" y="1444.50">
-                  3
-                </tspan>
-                <tspan x="1304.06" y="1835.39">
-                  4
-                </tspan>
-                <tspan x="695.94" y="1835.39">
-                  5
-                </tspan>
-                <tspan x="230.10" y="1444.50">
-                  6
-                </tspan>
-                <tspan x="124.51" y="845.63">
-                  7
-                </tspan>
-                <tspan x="428.56" y="318.99">
-                  8
-                </tspan>
-              </text>
-            </g>
-          </svg>
-        </>
-      );
+    case 'enneagramma':
+      return <AnimatedENNEAGRAMMA />;
     case 'mbti':
       return (
         <>
-          <AnimatedMBTI/>
+          <AnimatedMBTI />
         </>
       );
     case 'REASIC':
-    return (
-    <AnimatedREASIC/>
-      );
+      return <AnimatedREASIC />;
     default:
       return (
         <svg
