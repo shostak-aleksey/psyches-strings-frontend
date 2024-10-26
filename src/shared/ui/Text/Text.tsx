@@ -16,6 +16,7 @@ export interface TextProps {
   h1?: boolean;
   h2?: boolean;
   h3?: boolean;
+  h4?: boolean;
   p?: boolean;
   variant?: TextVariant;
   align?: TextAlign;
@@ -41,6 +42,7 @@ export const Text = memo(
       h1,
       h2,
       h3,
+      h4,
       p,
       variant = 'primary',
       align = 'left',
@@ -75,25 +77,41 @@ export const Text = memo(
 
     const h1Style: CSSProperties = {
       ...baseStyle,
+      font: Font.XXXL,
       fontWeight: FontWeight.Bold,
+      lineHeight: '1.2',
       color: color,
     };
 
     const h2Style: CSSProperties = {
       ...baseStyle,
-      fontWeight: FontWeight.Regular,
+      font: Font.XXL,
+      fontWeight: FontWeight.Bold,
+      lineHeight: '1.3',
       color: color,
     };
 
     const h3Style: CSSProperties = {
       ...baseStyle,
-      fontWeight: FontWeight.Regular,
+      font: Font.XL,
+      fontWeight: FontWeight.Bold,
+      lineHeight: '1.4',
+      color: color,
+    };
+
+    const h4Style: CSSProperties = {
+      ...baseStyle,
+      font: Font.L,
+      fontWeight: FontWeight.Bold,
+      lineHeight: '1.5',
       color: color,
     };
 
     const pStyle: CSSProperties = {
       ...baseStyle,
+      font: Font.L,
       fontWeight: FontWeight.Regular,
+      lineHeight: '1.6',
       color: color,
     };
 
@@ -128,6 +146,16 @@ export const Text = memo(
           >
             {children}
           </h3>
+        )}
+        {h4 && (
+          <h4
+            className={className}
+            style={h4Style}
+            data-testid={`${dataTestId}.Header`}
+            ref={ref}
+          >
+            {children}
+          </h4>
         )}
         {p && (
           <p

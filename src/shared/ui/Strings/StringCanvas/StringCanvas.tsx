@@ -11,6 +11,8 @@ interface StringCanvasProps {
   frequency?: number;
   amplitude?: number;
   animated?: boolean | { amplitude: number; frequency: number; speed: number };
+  animated2?: boolean | { amplitude: number; frequency: number; speed: number };
+  animated3?: boolean | { amplitude: number; frequency: number; speed: number };
 }
 
 export const StringCanvas: React.FC<StringCanvasProps> = ({
@@ -19,10 +21,12 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
   elapsed: initialElapsed = 0,
   animatePath = false,
   duration = 3000,
-  damping = 0.5,
-  frequency = 0.05,
-  amplitude = 10,
+  damping = 1.5,
+  frequency = 0.5,
+  amplitude = 20,
   animated = false,
+  animated2 = false,
+  animated3 = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -46,7 +50,6 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
       const dampingValue = Math.exp((-elapsed / duration) * damping);
       const frequencyValue = frequency * dampingValue;
       const amplitudeValue = amplitude * dampingValue;
-
       for (let x = 0; x <= (widthPx || 0); x += 1) {
         const y =
           (heightPx || 0) / 2 +
@@ -56,7 +59,6 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
             );
         context.lineTo(x, y);
       }
-
       context.strokeStyle = 'white';
       context.stroke();
       if (elapsed < duration) {
@@ -65,6 +67,10 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
         setIsAnimating(false);
         if (animated) {
           startPassiveAnimation();
+        } else if (animated2) {
+          startPassiveAnimation2();
+        } else if (animated3) {
+          startPassiveAnimation3();
         } else {
           drawInitialString();
         }
@@ -108,11 +114,84 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
       animationFrameId = requestAnimationFrame(passiveDraw);
     };
 
+    const startPassiveAnimation2 = () => {
+      if (!context) return;
+      const passiveAmplitude =
+        typeof animated2 === 'object' ? animated2.amplitude : amplitude;
+      const passiveFrequency =
+        typeof animated2 === 'object' ? animated2.frequency : frequency;
+      const passiveSpeed = typeof animated2 === 'object' ? animated2.speed : 1;
+      const passiveDraw = (time: number) => {
+        context.clearRect(0, 0, widthPx || 0, heightPx || 0);
+        context.beginPath();
+        context.moveTo(0, (heightPx || 0) / 2);
+        for (let x = 0; x <= (widthPx || 0); x += 1) {
+          const y =
+            (heightPx || 0) / 2 +
+            passiveAmplitude *
+              Math.sin(
+                (((widthPx || 0) - x) / (widthPx || 0)) *
+                  Math.PI *
+                  2 *
+                  passiveFrequency *
+                  time,
+              );
+          context.lineTo(x, y);
+        }
+        context.strokeStyle = 'white';
+        context.stroke();
+        animationFrameId = requestAnimationFrame(passiveDraw);
+      };
+      animationFrameId = requestAnimationFrame(passiveDraw);
+    };
+
+    const startPassiveAnimation3 = () => {
+      if (!context) return;
+      const passiveAmplitude =
+        typeof animated3 === 'object' ? animated3.amplitude : amplitude;
+      const passiveFrequency =
+        typeof animated3 === 'object' ? animated3.frequency : frequency;
+      const passiveSpeed = typeof animated3 === 'object' ? animated3.speed : 1;
+      const passiveDraw = (time: number) => {
+        context.clearRect(0, 0, widthPx || 0, heightPx || 0);
+        context.beginPath();
+        context.moveTo(0, (heightPx || 0) / 2);
+        for (let x = 0; x <= (widthPx || 0); x += 1) {
+          const y1 =
+            (heightPx || 0) / 2 +
+            passiveAmplitude *
+              Math.sin(
+                (x / (widthPx || 0)) * Math.PI * 2 * passiveFrequency * time,
+              );
+          const y2 =
+            (heightPx || 0) / 2 +
+            passiveAmplitude *
+              Math.sin(
+                (((widthPx || 0) - x) / (widthPx || 0)) *
+                  Math.PI *
+                  2 *
+                  passiveFrequency *
+                  time,
+              );
+          const y = (y1 + y2) / 2; // Combine both waves
+          context.lineTo(x, y);
+        }
+        context.strokeStyle = 'white';
+        context.stroke();
+        animationFrameId = requestAnimationFrame(passiveDraw);
+      };
+      animationFrameId = requestAnimationFrame(passiveDraw);
+    };
+
     if (isAnimating) {
       setStartTime(performance.now());
       animationFrameId = requestAnimationFrame(drawString);
     } else if (animated) {
       startPassiveAnimation();
+    } else if (animated2) {
+      startPassiveAnimation2();
+    } else if (animated3) {
+      startPassiveAnimation3();
     }
 
     return () => {
@@ -128,6 +207,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
     frequency,
     amplitude,
     animated,
+    animated2,
+    animated3,
   ]);
 
   const handleClick = () => {
@@ -148,10 +229,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
         setHeightPx(height as number);
       }
     };
-
     window.addEventListener('resize', handleResize);
     handleResize();
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };

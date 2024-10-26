@@ -1,5 +1,5 @@
-import { memo, Suspense, useCallback } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { memo, Suspense, useCallback, useEffect } from 'react';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { PageLoader } from '@/widgets/PageLoader';
 import { RequireAuth } from './RequireAuth';
 import { routeConfig } from '../config/routeConfig';
@@ -26,7 +26,17 @@ const AppRouter = () => {
     );
   }, []);
 
-  return <Routes>{Object.values(routeConfig).map(renderWithWrapper)}</Routes>;
+  return (
+    <Routes>
+      {Object.values(routeConfig).map((route) => {
+        if (!route.path) {
+          console.error(`Route path is undefined for route: ${route}`);
+          return null;
+        }
+        return renderWithWrapper(route);
+      })}
+    </Routes>
+  );
 };
 
 export default memo(AppRouter);

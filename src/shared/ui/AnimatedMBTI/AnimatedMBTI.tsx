@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getRouteTest } from '@/shared/const/router';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
+import CustomLink from '../AppLink/AppLink';
 
 export interface AnimatedMBTIProps {}
 
@@ -341,7 +341,10 @@ export const AnimatedMBTI: React.FC<AnimatedMBTIProps> = ({}) => {
           fontSize="100"
           dy=".3em"
         >
-          <Link to={getRouteTest('mbti')}> MBTI </Link>
+          <CustomLink to={getRouteTest('mbti')} className={''}>
+            {' '}
+            MBTI{' '}
+          </CustomLink>
         </text>
       </StyledSvg>
     </StyledDiv>

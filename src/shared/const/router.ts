@@ -25,6 +25,7 @@ export enum AppRoutes {
   FORBIDDEN = 'forbidden',
   // last
   NOT_FOUND = 'not_found',
+  ARTICLE_EDIT = 'ARTICLE_EDIT',
 }
 
 export const getRouteMain = () => '/';

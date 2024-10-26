@@ -50,7 +50,8 @@ import { ResultsPage } from '@/pages/ResultsPage';
 import { TestInfoPage } from '@/pages/TestInfoPage';
 import { TypesPage } from '@/pages/TypesPage';
 import { RecommendationsPage } from '@/pages/RecommendationsPage';
-import { TestPage } from '@/pages/TestsPage copy';
+import { TestPage } from '@/pages/TestPage';
+import { MainPage } from '@/pages/MainPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
@@ -145,11 +146,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   //     element: <ArticleEditPage />,
   //     authOnly: true,
   // },
-  // [AppRoutes.ARTICLE_EDIT]: {
-  //     path: getRouteArticleEdit(':id'),
-  //     element: <ArticleEditPage />,
-  //     authOnly: true,
-  // },
+  [AppRoutes.ARTICLE_EDIT]: {
+    path: '/main',
+    element: <MainPage />,
+    authOnly: true,
+  },
   // [AppRoutes.ADMIN_PANEL]: {
   //     path: getRouteAdmin(),
   //     element: <AdminPanelPage />,

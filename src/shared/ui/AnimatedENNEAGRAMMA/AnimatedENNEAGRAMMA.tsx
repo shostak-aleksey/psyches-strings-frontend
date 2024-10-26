@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getRouteTest } from '@/shared/const/router';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
-
+import CustomLink from '@/shared/ui/AppLink/AppLink';
 export interface AnimatedENNEAGRAMMAProps {}
 
 export const AnimatedENNEAGRAMMA: React.FC<AnimatedENNEAGRAMMAProps> = ({}) => {
@@ -60,7 +59,10 @@ export const AnimatedENNEAGRAMMA: React.FC<AnimatedENNEAGRAMMAProps> = ({}) => {
           fontSize="100"
           dy=".3em"
         >
-          <Link to={getRouteTest('enneagramma')}> Эннеаграмма </Link>
+          <CustomLink to={getRouteTest('enneagramma')} className={''}>
+            {' '}
+            Эннеаграмма{' '}
+          </CustomLink>
         </text>
         <text
           fill="white"

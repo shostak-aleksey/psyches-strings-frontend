@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { styled } from 'styled-components';
+import CustomLink from '../AppLink/AppLink';
+import { getRouteTest } from '@/shared/const/router';
 
 export interface StyledDivProps {
   width?: string;
@@ -49,6 +51,7 @@ const AnimatedREASIC: React.FC = ({ width, height }: AnimatedREASICProps) => {
 
     const paths = svgElement.querySelectorAll('path');
     const circle = svgElement.querySelector('circle');
+    const text = svgElement.querySelector('text');
     const originalTransforms = Array.from(paths).map(
       (path) => path.getAttribute('transform') || '',
     );
@@ -110,18 +113,24 @@ const AnimatedREASIC: React.FC = ({ width, height }: AnimatedREASICProps) => {
       });
     };
 
-    if (circle) {
+    if (circle && text) {
       circle.style.willChange = 'transform';
       circle.addEventListener('mouseenter', onHover);
       circle.addEventListener('mouseleave', onLeave);
+      text.addEventListener('mouseenter', onHover);
+      text.addEventListener('mouseleave', onLeave);
       circle.addEventListener('click', onClick);
+      text.addEventListener('click', onClick);
     }
 
     return () => {
-      if (circle) {
+      if (circle && text) {
         circle.removeEventListener('mouseenter', onHover);
         circle.removeEventListener('mouseleave', onLeave);
+        text.removeEventListener('mouseenter', onHover);
+        text.removeEventListener('mouseleave', onLeave);
         circle.removeEventListener('click', onClick);
+        text.removeEventListener('click', onClick);
       }
     };
   }, []);
@@ -131,6 +140,14 @@ const AnimatedREASIC: React.FC = ({ width, height }: AnimatedREASICProps) => {
     overflow: visible;
     pointer-events: none; // Make the entire SVG non-interactive
 
+    text {
+      pointer-events: none; // Make text non-interactive
+    }
+    a {
+      pointer-events: auto; // Make link interactive
+      text-decoration: none;
+      color: inherit; // Ensure link inherits text color
+    }
     circle {
       pointer-events: auto;
       fill: url(#portalGradient);
@@ -156,6 +173,7 @@ const AnimatedREASIC: React.FC = ({ width, height }: AnimatedREASICProps) => {
           </filter>
         </defs>
         <circle cx="500" cy="420" r="400" fill="#64a" />
+
         <g
           transform="translate(0.000000,840.000000) scale(0.100000,-0.100000)"
           fill="#fff"
@@ -499,6 +517,18 @@ m250 17 c42 -29 18 -60 -27 -32 -20 12 -56 4 -47 -11 3 -4 22 -11 42 -14 48
 27 -10 0 -22 -3 -25 -7z"
           />
         </g>
+        <text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
+          fill="white"
+          fontSize="100"
+          dy=".3em"
+        >
+          <CustomLink to={getRouteTest('reasic')} className={''}>
+            REASIC
+          </CustomLink>
+        </text>
       </StyledSvg>
     </StyledDiv>
   );

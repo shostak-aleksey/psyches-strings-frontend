@@ -5,17 +5,7 @@ import { HStack } from '@/shared/ui/Stack';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from '@/entities/User/model/selectors/getUserSelectors';
 import { Link } from 'react-router-dom';
-import {
-  FaYoutube,
-  FaTelegram,
-  FaHome,
-  FaStoreAltSlash,
-  FaPeopleArrows,
-  FaPeopleCarry,
-  FaPeriscope,
-  FaUser,
-} from 'react-icons/fa';
-import Logo from '@/shared/assets/6v.svg';
+import { FaHome, FaUser } from 'react-icons/fa';
 // import { GoogleLogin } from 'react-google-login';
 import {
   getRouteMain,
@@ -25,6 +15,8 @@ import {
 } from '@/shared/const/router';
 import { AnimatedText } from '@/shared/ui/AnimatedText/AnimatedText';
 import AnimatedSVG from '@/shared/ui/AnimatedSVG/AnimatedSVG';
+// import { AppLink } from '@/shared/ui/AppLink';
+import CustomLink from '@/shared/ui/AppLink/AppLink';
 
 interface NavbarProps {
   className?: string;
@@ -80,7 +72,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
         className={classNames(cls.NavTop, {}, [])}
       >
         <HStack align="center" gap="16" className={cls.Left}>
-          <Link
+          <CustomLink
             className={classNames(cls.Link, {}, [cls.Icon])}
             to={getRouteMain()}
           >
@@ -92,18 +84,21 @@ export const Navbar = memo(({ className }: NavbarProps) => {
               text={'Psyches Strings'}
               children={undefined}
             />
-          </Link>
+          </CustomLink>
         </HStack>
         <HStack justify="around" align="center" className={cls.Right}>
-          <Link className={classNames(cls.SocialLink, {})} to={getRouteMain()}>
+          <CustomLink
+            className={classNames(cls.SocialLink, {})}
+            to={getRouteMain()}
+          >
             <FaHome size={20} />
-          </Link>
-          <Link
+          </CustomLink>
+          <CustomLink
             className={classNames(cls.SocialLink, {})}
             to={getRouteProfile('1')}
           >
             <FaUser size={20} />
-          </Link>{' '}
+          </CustomLink>{' '}
           <span
             onClick={onArrowClick}
             className={classNames(cls.arrows, {

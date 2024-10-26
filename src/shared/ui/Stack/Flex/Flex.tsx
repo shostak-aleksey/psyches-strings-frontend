@@ -66,6 +66,9 @@ export interface FlexProps extends DivProps {
   wrap?: FlexWrap;
   gap?: FlexGap;
   max?: boolean;
+  grow?: number;
+  shrink?: number;
+  basis?: string;
 }
 
 export const Flex = (props: FlexProps) => {
@@ -78,6 +81,9 @@ export const Flex = (props: FlexProps) => {
     wrap = 'nowrap',
     gap,
     max,
+    grow,
+    shrink,
+    basis,
     ...otherProps
   } = props;
 
@@ -94,8 +100,18 @@ export const Flex = (props: FlexProps) => {
     [cls.max]: max,
   };
 
+  const styles: React.CSSProperties = {
+    flexGrow: grow,
+    flexShrink: shrink,
+    flexBasis: basis,
+  };
+
   return (
-    <div className={classNames(cls.Flex, mods, classes)} {...otherProps}>
+    <div
+      className={classNames(cls.Flex, mods, classes)}
+      style={styles}
+      {...otherProps}
+    >
       {children}
     </div>
   );
