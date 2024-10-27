@@ -1,5 +1,5 @@
 import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './registrationPage.module.scss';
+import cls from './RegistrationPage.module.scss';
 
 interface RegistrationPageProps {
   className?: string;
