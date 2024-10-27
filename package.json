@@ -65,6 +65,9 @@
     "vite": "^5.4.1",
     "vite-plugin-svgr": "^4.2.0"
   },
+  "engines": {
+  "node": "20.x"
+},
   "jest": {
     "testEnvironment": "jsdom",
     "setupFilesAfterEnv": [

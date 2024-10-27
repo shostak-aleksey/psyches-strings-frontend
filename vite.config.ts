@@ -22,4 +22,16 @@ export default defineConfig({
     __API__: JSON.stringify('http://localhost:5000'),
     __PROJECT__: JSON.stringify('frontend'),
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Разделение кода на чанки
+          vendor: ['react', 'react-dom', 'gsap'],
+        },
+      },
+    },
+    // Увеличение лимита предупреждения о размере чанка
+    chunkSizeWarningLimit: 1000,
+  },
 });
