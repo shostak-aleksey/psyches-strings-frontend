@@ -1,69 +1,53 @@
 import { classNames } from '@/shared/lib/classNames/classNames';
 import cls from './Navbar.module.scss';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { HStack } from '@/shared/ui/Stack';
-import { useSelector } from 'react-redux';
-import { getUserAuthData } from '@/entities/User/model/selectors/getUserSelectors';
-import { Link } from 'react-router-dom';
 import { FaHome, FaUser } from 'react-icons/fa';
-// import { GoogleLogin } from 'react-google-login';
-import {
-  getRouteMain,
-  getRouteProfile,
-  // getRouteProfile,
-  // getRouteTests,
-} from '@/shared/const/router';
-import { AnimatedText } from '@/shared/ui/AnimatedText/AnimatedText';
-import AnimatedSVG from '@/shared/ui/AnimatedSVG/AnimatedSVG';
-// import { AppLink } from '@/shared/ui/AppLink';
+import { getRouteMain, getRouteProfile } from '@/shared/const/router';
+import { AnimatedText } from '@/entities/AnimatedText/AnimatedText';
 import CustomLink from '@/shared/ui/AppLink/AppLink';
+import AnimatedSVG from '@/features/AnimatedSVG/AnimatedSVG';
+
+import {
+  useInitAuthDataQuery,
+  useLogoutMutation,
+} from '@/entities/User/api/userApi';
+import { getUserAuthData, getUserRole } from '@/entities/User';
+import { Button } from '@/shared/ui/Button';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 interface NavbarProps {
   className?: string;
 }
 
 export const Navbar = memo(({ className }: NavbarProps) => {
-  const clientId =
-    '387774286843-ltq12q54gienljk3ieq3ibe4lkj7u80a.apps.googleusercontent.com';
-  const authData = useSelector(getUserAuthData);
+  const handleGoogleLogin = () => {
+    window.location.href = `${__API__}/auth/google`;
+  };
+
+  const role = getUserRole();
+
+  const { data: user, isLoading, error } = useInitAuthDataQuery();
+
+  const [logout] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+    } catch (error) {
+      console.error('Ошибка при логауте:', error);
+    }
+  };
+
   const [collapsed, setCollapsed] = useState(true);
   const [rotating, setRotating] = useState(false);
 
   const onArrowClick = useCallback(() => {
     setRotating(true);
     setCollapsed((collapsed) => !collapsed);
-    setTimeout(() => setRotating(false), 500); // Убираем класс вращения после завершения анимации
+    setTimeout(() => setRotating(false), 500);
   }, [collapsed]);
 
-  const onSuccess = (response: any) => {
-    console.log('Login Success: currentUser:', response.profileObj);
-    // Здесь вы можете добавить логику для обработки данных пользователя
-  };
-
-  const onFailure = (response: any) => {
-    console.log('Login failed: res:', response);
-    // Здесь вы можете добавить логику для обработки ошибок
-  };
-
-  if (authData) {
-    return (
-      <header className={classNames(cls.Navbar, {}, [className])}>
-        <HStack gap="12">b f</HStack>
-      </header>
-    );
-  }
-  useEffect(() => {
-    // This will run the SVGator script after the component mounts
-    const script = document.createElement('script');
-    script.src = 'path/to/your/svgator/script.js'; // Ensure this path is correct
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Clean up the script when the component unmounts
-      document.body.removeChild(script);
-    };
-  }, []);
   return (
     <header className={classNames(cls.Navbar, {}, [className])}>
       <HStack
@@ -76,7 +60,6 @@ export const Navbar = memo(({ className }: NavbarProps) => {
             className={classNames(cls.Link, {}, [cls.Icon])}
             to={getRouteMain()}
           >
-            {/* <Logo /> */}
             <AnimatedSVG type={'large'} />
             <AnimatedText
               animationVariant="fadeInTrigger"
@@ -87,18 +70,30 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           </CustomLink>
         </HStack>
         <HStack justify="around" align="center" className={cls.Right}>
+          {/* <Button onClick={}>f?</Button> */}
+          {/* <button onClick={handleGoogleLogin3}>ffппп</button> */}
           <CustomLink
             className={classNames(cls.SocialLink, {})}
             to={getRouteMain()}
           >
             <FaHome size={20} />
           </CustomLink>
-          <CustomLink
-            className={classNames(cls.SocialLink, {})}
-            to={getRouteProfile('1')}
-          >
-            <FaUser size={20} />
-          </CustomLink>{' '}
+
+          {user ? (
+            <>
+              <Button onClick={handleLogout}>Выйти</Button>
+            </>
+          ) : (
+            <button onClick={handleGoogleLogin}>Войти через Google</button>
+          )}
+          {user && (
+            <CustomLink
+              className={classNames(cls.SocialLink, {})}
+              to={getRouteProfile(user.id)}
+            >
+              <FaUser size={20} />
+            </CustomLink>
+          )}
           <span
             onClick={onArrowClick}
             className={classNames(cls.arrows, {
@@ -109,36 +104,6 @@ export const Navbar = memo(({ className }: NavbarProps) => {
           />
         </HStack>
       </HStack>
-      {/* <HStack
-        className={classNames(cls.NavBottom, { [cls.opened]: collapsed }, [])}
-        justify="around"
-        align="center"
-        gap="12"
-      >
-
-        <Link className={classNames(cls.Link)} to={getRouteTests()}>
-          Тесты
-        </Link>
-        <Link className={classNames(cls.Link)} to={getRouteProfile('1')}>
-          Профиль
-        </Link> */}
-      {/* <GoogleLogin
-          clientId={clientId}
-          buttonText="Войти"
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          cookiePolicy={'single_host_origin'}
-          render={(renderProps) => (
-            <button
-              onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
-              className={cls.googleButton}
-            >
-              Войти
-            </button>
-          )}
-        /> */}
-      {/* </HStack> */}
     </header>
   );
 });

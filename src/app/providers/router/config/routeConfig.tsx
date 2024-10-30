@@ -4,7 +4,7 @@ import { ProfilePage } from '@/pages/ProfilePage';
 // import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
 // import { ArticleEditPage } from '@/pages/ArticleEditPage';
 // import { AdminPanelPage } from '@/pages/AdminPanelPage';
-// import { UserRole } from '@/entities/User';
+import { UserRole } from '@/entities/User';
 import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import {
@@ -40,7 +40,6 @@ import { AppRoutesProps } from '@/shared/types/router';
 import { LoginPage } from '@/pages/loginPage/ui/LoginPage';
 import { RegistrationPage } from '@/pages/RegistrationPage';
 import { CoursePage } from '@/pages/CoursePage';
-import { CoursesPage } from '@/pages/CoursesPage';
 import { TestsPage } from '@/pages/TestsPage';
 import { EightSpheresOfLifePage } from '@/pages/EightSpheresOfLifePage';
 import { EnneagrammaPage } from '@/pages/EnneagrammaPage';
@@ -85,7 +84,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.COURSES]: {
     path: getRouteCourses(),
-    element: <CoursesPage />,
+    element: <MainPage />,
   },
   [AppRoutes.MBTI]: {
     path: getRouteMBTI(),
@@ -106,6 +105,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.PROFILE]: {
     path: getRouteProfile(':userId'),
     element: <ProfilePage />,
+    authOnly: true,
   },
   [AppRoutes.TESTS]: {
     path: getRouteTests(),
@@ -118,6 +118,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.RESULTS]: {
     path: getRouteResults(':testId', ':userId'),
     element: <ResultsPage />,
+    authOnly: true,
   },
   [AppRoutes.TEST_INFO]: {
     path: getRouteTestInfo(':testId'),
@@ -149,13 +150,12 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.ARTICLE_EDIT]: {
     path: '/main',
     element: <MainPage />,
-    authOnly: true,
   },
   // [AppRoutes.ADMIN_PANEL]: {
-  //     path: getRouteAdmin(),
-  //     element: <AdminPanelPage />,
-  //     authOnly: true,
-  //     roles: [UserRole.MANAGER, UserRole.ADMIN],
+  //   path: getRouteAdmin(),
+  //   element: <AdminPanelPage />,
+  //   authOnly: true,
+  //   roles: [UserRole.ADMIN],
   // },
   // last
   [AppRoutes.NOT_FOUND]: {

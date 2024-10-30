@@ -1,17 +1,14 @@
 export interface User {
   id: string;
-  name: string;
   email: string;
+  googleId: string;
   role: string;
-  password?: string;
-  avatar?: string;
+  type: string[];
 }
 
 export enum UserRole {
   ADMIN = 'ADMIN',
   USER = 'USER',
-  MANAGER = 'MANAGER',
-  GUEST = 'GUEST',
 }
 
 export interface UserSchema {

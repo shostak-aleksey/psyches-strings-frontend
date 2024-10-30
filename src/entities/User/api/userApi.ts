@@ -9,14 +9,35 @@ const userApi = rtkApi.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getUserData: build.query<User, string>({
+    getUserData: build.query<User, void>({
       query: () => ({
         url: `/user`,
         method: 'GET',
       }),
     }),
+    initAuthData: build.query<User, void>({
+      query: () => ({
+        url: `/auth/check`,
+        method: 'GET',
+        credentials: 'include',
+      }),
+      transformResponse: (response: User) => {
+        return response;
+      },
+    }),
+    logout: build.mutation<void, void>({
+      query: () => ({
+        url: `/auth/logout`,
+        method: 'GET',
+        credentials: 'include',
+      }),
+    }),
   }),
 });
 
-export const getUserDataByIdQuery = userApi.endpoints.getUserDataById.initiate;
-export const getUserDataBy = userApi.endpoints.getUserData.initiate;
+export const {
+  useGetUserDataByIdQuery,
+  useGetUserDataQuery,
+  useInitAuthDataQuery,
+  useLogoutMutation,
+} = userApi;

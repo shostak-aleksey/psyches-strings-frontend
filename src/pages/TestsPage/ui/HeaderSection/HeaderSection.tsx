@@ -1,22 +1,14 @@
-import { classNames } from '@/shared/lib/classNames/classNames';
-import cls from './HeaderSection.module.scss';
 import { Section } from '@/shared/ui/Section';
-import { Colors } from '@/shared/const/colors';
-import { Button } from '@/shared/ui/Button';
-import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
-import { Text } from '@/shared/ui/Text';
 import { Container } from '@/shared/ui/Container/Container';
-import { AnimatedText } from '@/shared/ui/AnimatedText/AnimatedText';
-import { VStack, HStack } from '@/shared/ui/Stack';
-import backgroundImage from '@/shared/assets/BackgroundImage2.jpg';
-import { FontLine, FontSize } from '@/shared/const/textStyles';
+import { AnimatedText } from '@/entities/AnimatedText/AnimatedText';
+import { HStack } from '@/shared/ui/Stack';
 
 interface HeaderSectionProps {
   className?: string;
   children?: React.ReactNode;
 }
 
-export const HeaderSection = ({ className, children }: HeaderSectionProps) => {
+export const HeaderSection = ({ children }: HeaderSectionProps) => {
   return (
     <Section
       fixed
@@ -40,7 +32,7 @@ export const HeaderSection = ({ className, children }: HeaderSectionProps) => {
               align="center"
               h1
               start="top 35%"
-              end="top -20%"
+              end="top -30%"
             >
               Positively uplifting <br /> landscapes
             </AnimatedText>

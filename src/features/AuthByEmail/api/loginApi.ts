@@ -1,42 +1,36 @@
-// src/features/AuthByEmail/api/loginApi.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { User } from '@/entities/User';
 
-interface LoginWithGoogleParams {
-  credential: string;
-}
-
-interface LoginWithEmailParams {
-  email: string;
-  password: string;
-  role: 'USER' | 'ADMIN';
-}
-export interface AuthResponse {
-  user: User;
+interface LoginResponse {
+  message(arg0: string, message: any): unknown;
+  success: boolean;
   accessToken: string;
   refreshToken: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    type: Array<string>;
+  };
 }
 
-export const loginApi = createApi({
-  reducerPath: 'loginApi',
-  baseQuery: fetchBaseQuery({ baseUrl: '/api' }),
+export const apiSlice = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: __API__ }),
   endpoints: (builder) => ({
-    loginWithGoogle: builder.mutation<AuthResponse, LoginWithGoogleParams>({
-      query: (authData) => ({
-        url: '/user/google-login',
-        method: 'POST',
-        body: authData,
-      }),
-    }),
-    loginWithEmail: builder.mutation<AuthResponse, LoginWithEmailParams>({
-      query: (authData) => ({
-        url: '/user/registration',
-        method: 'POST',
-        body: authData,
-      }),
+    googleCallback: builder.query({
+      query: () => '/auth/google/callback',
+      transformResponse: (response: LoginResponse) => {
+        // Обработка ответа
+        if (response.success) {
+          // Сохраняем токены в localStorage
+          localStorage.setItem('accessToken', response.accessToken);
+          localStorage.setItem('refreshToken', response.refreshToken);
+        }
+        return response;
+      },
     }),
   }),
 });
 
-export const { useLoginWithGoogleMutation } = loginApi;
-export const { useLoginWithEmailMutation } = loginApi;
+export const { useGoogleCallbackQuery } = apiSlice;

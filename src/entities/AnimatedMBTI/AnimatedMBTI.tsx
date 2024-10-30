@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
 import { getRouteTest } from '@/shared/const/router';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
-import CustomLink from '../AppLink/AppLink';
+import CustomLink from '../../shared/ui/AppLink/AppLink';
 
 export interface AnimatedMBTIProps {}
 

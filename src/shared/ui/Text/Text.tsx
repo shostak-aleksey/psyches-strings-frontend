@@ -76,43 +76,43 @@ export const Text = memo(
     };
 
     const h1Style: CSSProperties = {
-      ...baseStyle,
       font: Font.XXXL,
       fontWeight: FontWeight.Bold,
       lineHeight: '1.2',
       color: color,
+      ...baseStyle,
     };
 
     const h2Style: CSSProperties = {
-      ...baseStyle,
       font: Font.XXL,
       fontWeight: FontWeight.Bold,
       lineHeight: '1.3',
       color: color,
+      ...baseStyle,
     };
 
     const h3Style: CSSProperties = {
-      ...baseStyle,
       font: Font.XL,
       fontWeight: FontWeight.Bold,
       lineHeight: '1.4',
       color: color,
+      ...baseStyle,
     };
 
     const h4Style: CSSProperties = {
-      ...baseStyle,
       font: Font.L,
       fontWeight: FontWeight.Bold,
       lineHeight: '1.5',
       color: color,
+      ...baseStyle,
     };
 
     const pStyle: CSSProperties = {
-      ...baseStyle,
       font: Font.L,
       fontWeight: FontWeight.Regular,
       lineHeight: '1.6',
       color: color,
+      ...baseStyle,
     };
 
     return (

@@ -1,6 +1,6 @@
 import { memo, ReactElement } from 'react';
 import cls from './StickyContentLayout.module.scss';
-import { c } from '@/shared/lib/classNames/classNames';
+import { classNames as c } from '@/shared/lib/classNames/classNames';
 
 interface StickyContentLayoutProps {
   className?: string;

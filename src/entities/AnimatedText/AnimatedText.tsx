@@ -75,12 +75,12 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
         case 'slideUp':
         default:
           animationConfig = {
-            y: -75,
+            y: -100,
             stagger: 0.03,
             scrollTrigger: {
               trigger: textContainerRef.current,
               start: start || 'top 25%',
-              end: end || 'bottom 10%',
+              end: end || 'bottom -10%',
               scrub: 2,
             },
             ease: 'sine.inOut',

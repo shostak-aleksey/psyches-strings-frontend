@@ -1,12 +1,9 @@
 import React from 'react';
-import { AnimatedMBTI } from '../AnimatedMBTI/AnimatedMBTI';
-import AnimatedREASIC from '../AnimatedREASIC/AnimatedREASIC';
 
-import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+import { AnimatedENNEAGRAMMA } from '@/entities/AnimatedENNEAGRAMMA/AnimatedENNEAGRAMMA';
+import { AnimatedMBTI } from '@/entities/AnimatedMBTI/AnimatedMBTI';
+import AnimatedREASIC from '@/entities/AnimatedREASIC/AnimatedREASIC';
 // import { styled } from 'styled-components';
-import { AnimatedENNEAGRAMMA } from '../AnimatedENNEAGRAMMA/AnimatedENNEAGRAMMA';
-
-gsap.registerPlugin(MotionPathPlugin);
 
 interface AnimatedSVGProps {
   type: 'large' | 'enneagramma' | 'mbti' | 'REASIC';
