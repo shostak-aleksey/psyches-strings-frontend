@@ -1,4 +1,5 @@
-import { forwardRef, memo, ReactNode, CSSProperties } from 'react';
+import { forwardRef, memo, ReactNode } from 'react';
+import styled from 'styled-components';
 import {
   FontSize,
   FontLine,
@@ -8,7 +9,7 @@ import {
 import { Colors } from '@/shared/const/colors';
 
 export type TextVariant = 'primary' | 'error' | 'accent';
-export type TextAlign = 'right' | 'left' | 'center';
+export type TextAlign = 'right' | 'left' | 'center' | 'justify';
 
 export interface TextProps {
   className?: string;
@@ -33,7 +34,77 @@ export interface TextProps {
   textTransform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase';
   textDecoration?: 'none' | 'underline' | 'line-through' | 'overline';
   lineHeight?: string;
+  responsiveSizes?: [string, string, string, string, string]; // New prop for responsive font sizes
 }
+
+const adaptiveStyle = (
+  responsiveSizes?: [string, string, string, string, string],
+) => `
+  font-size: ${responsiveSizes ? responsiveSizes[0] : '1rem'};
+  line-height: 1.5;
+  @media (min-width: 576px) {
+    font-size: ${responsiveSizes ? responsiveSizes[1] : '1.25rem'};
+  }
+  @media (min-width: 768px) {
+    font-size: ${responsiveSizes ? responsiveSizes[2] : '1.5rem'};
+  }
+  @media (min-width: 992px) {
+    font-size: ${responsiveSizes ? responsiveSizes[3] : '1.75rem'};
+  }
+  @media (min-width: 1200px) {
+    font-size: ${responsiveSizes ? responsiveSizes[4] : '2rem'};
+  }
+`;
+
+const StyledH1 = styled.h1<TextProps>`
+  font-family: ${(props) => props.font || Font.XXXL};
+  font-weight: ${(props) => props.fontWeight || FontWeight.Bold};
+  line-height: 1.2;
+  color: ${(props) => props.color || Colors.Heading};
+  text-align: ${(props) => props.align || 'left'};
+  text-transform: ${(props) => props.textTransform || 'none'};
+  text-decoration: ${(props) => props.textDecoration || 'none'};
+  margin: ${(props) => props.margin || '0 0 0px 0'};
+  letter-spacing: ${(props) => props.letterSpacing || 'normal'};
+  white-space: ${(props) => props.whiteSpace || 'normal'};
+  max-width: ${(props) => props.maxWidth || 'none'};
+  font-size: ${(props) => props.size || FontSize.XL};
+  line-height: ${(props) => props.lineHeight || FontLine.XL};
+  ${(props) => adaptiveStyle(props.responsiveSizes)}
+`;
+
+const StyledH2 = styled(StyledH1)`
+  font-family: ${(props) => props.font || Font.XL};
+  line-height: 1.3;
+`;
+
+const StyledH3 = styled(StyledH1)`
+  font-family: ${(props) => props.font || Font.L};
+  line-height: 1.4;
+`;
+
+const StyledH4 = styled(StyledH1)`
+  font-family: ${(props) => props.font || Font.M};
+  line-height: 1.5;
+`;
+
+const StyledP = styled.p<TextProps>`
+  font-family: ${(props) => props.font || Font.L};
+  font-weight: ${(props) => props.fontWeight || FontWeight.Regular};
+  line-height: 1.6;
+  color: ${(props) => props.color || Colors.Heading};
+  text-align: ${(props) => props.align || 'left'};
+  text-transform: ${(props) => props.textTransform || 'none'};
+  text-decoration: ${(props) => props.textDecoration || 'none'};
+  margin: ${(props) => props.margin || '0 0 0px 0'};
+  letter-spacing: ${(props) => props.letterSpacing || 'normal'};
+  white-space: ${(props) => props.whiteSpace || 'normal'};
+  max-width: ${(props) => props.maxWidth || 'none'};
+  font-size: ${(props) => props.size || FontSize.M};
+  line-height: ${(props) => props.lineHeight || FontLine.M};
+  ${(props) =>
+    props.responsiveSizes ? adaptiveStyle(props.responsiveSizes) : ''}
+`;
 
 export const Text = memo(
   forwardRef<HTMLDivElement, TextProps>((props, ref) => {
@@ -44,128 +115,61 @@ export const Text = memo(
       h3,
       h4,
       p,
-      variant = 'primary',
-      align = 'left',
-      size = FontSize.XXL,
-      line = FontLine.XXL,
-      font = Font.XXL,
-      fontWeight = FontWeight.Regular,
       'data-testid': dataTestId = 'Text',
-      color = Colors.Heading,
-      margin = '0 0 20px 0',
-      letterSpacing = 'normal',
-      whiteSpace = 'normal',
-      maxWidth = 'none',
-      textTransform = 'none',
-      textDecoration = 'none',
-      lineHeight = line,
       children,
     } = props;
-
-    const baseStyle: CSSProperties = {
-      textAlign: align,
-      textTransform,
-      textDecoration,
-      margin,
-      letterSpacing: `${letterSpacing}px`,
-      whiteSpace,
-      maxWidth,
-      fontSize: size,
-      lineHeight,
-      fontFamily: font,
-    };
-
-    const h1Style: CSSProperties = {
-      font: Font.XXXL,
-      fontWeight: FontWeight.Bold,
-      lineHeight: '1.2',
-      color: color,
-      ...baseStyle,
-    };
-
-    const h2Style: CSSProperties = {
-      font: Font.XXL,
-      fontWeight: FontWeight.Bold,
-      lineHeight: '1.3',
-      color: color,
-      ...baseStyle,
-    };
-
-    const h3Style: CSSProperties = {
-      font: Font.XL,
-      fontWeight: FontWeight.Bold,
-      lineHeight: '1.4',
-      color: color,
-      ...baseStyle,
-    };
-
-    const h4Style: CSSProperties = {
-      font: Font.L,
-      fontWeight: FontWeight.Bold,
-      lineHeight: '1.5',
-      color: color,
-      ...baseStyle,
-    };
-
-    const pStyle: CSSProperties = {
-      font: Font.L,
-      fontWeight: FontWeight.Regular,
-      lineHeight: '1.6',
-      color: color,
-      ...baseStyle,
-    };
 
     return (
       <>
         {h1 && (
-          <h1
+          <StyledH1
             className={className}
-            style={h1Style}
             data-testid={`${dataTestId}.Header`}
             ref={ref}
+            {...props}
           >
             {children}
-          </h1>
+          </StyledH1>
         )}
         {h2 && (
-          <h2
+          <StyledH2
             className={className}
-            style={h2Style}
             data-testid={`${dataTestId}.Header`}
             ref={ref}
+            {...props}
           >
             {children}
-          </h2>
+          </StyledH2>
         )}
         {h3 && (
-          <h3
+          <StyledH3
             className={className}
-            style={h3Style}
             data-testid={`${dataTestId}.Header`}
             ref={ref}
+            {...props}
           >
             {children}
-          </h3>
+          </StyledH3>
         )}
         {h4 && (
-          <h4
+          <StyledH4
             className={className}
-            style={h4Style}
             data-testid={`${dataTestId}.Header`}
             ref={ref}
+            {...props}
           >
             {children}
-          </h4>
+          </StyledH4>
         )}
         {p && (
-          <p
+          <StyledP
             className={className}
-            style={pStyle}
             data-testid={`${dataTestId}.Paragraph`}
             ref={ref}
+            {...props}
           >
             {children}
-          </p>
+          </StyledP>
         )}
       </>
     );

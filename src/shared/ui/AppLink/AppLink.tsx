@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
+import styled from 'styled-components';
 
 interface CustomLinkProps {
   to: string;
   children: React.ReactNode;
   className: string;
 }
+
+const StyledLink = styled.a<{ isAnimating: boolean }>`
+  cursor: ${({ isAnimating }) => (isAnimating ? 'default' : 'pointer')};
+  pointer-events: ${({ isAnimating }) => (isAnimating ? 'none' : 'auto')};
+`;
 
 const CustomLink: React.FC<CustomLinkProps> = ({ to, children, className }) => {
   const navigate = useNavigate();
@@ -64,17 +70,13 @@ const CustomLink: React.FC<CustomLinkProps> = ({ to, children, className }) => {
   };
 
   return (
-    <a
+    <StyledLink
+      isAnimating={isAnimating}
       className={className}
       onClick={() => handleNavigation(to)}
-      style={{
-        cursor: 'pointer',
-        color: '#000',
-        pointerEvents: isAnimating ? 'none' : 'auto',
-      }}
     >
       {children}
-    </a>
+    </StyledLink>
   );
 };
 

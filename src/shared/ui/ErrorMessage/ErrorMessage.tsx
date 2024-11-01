@@ -28,5 +28,5 @@ const getErrorMessage = (
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ error }) => {
   const message = getErrorMessage(error);
-  return message ? <Text variant={'error'} text={message} /> : null;
+  return message ? <Text variant={'error'}>{message}</Text> : null;
 };

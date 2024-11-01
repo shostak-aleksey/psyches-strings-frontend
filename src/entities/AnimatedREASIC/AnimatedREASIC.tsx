@@ -4,45 +4,73 @@ import { styled } from 'styled-components';
 import CustomLink from '../../shared/ui/AppLink/AppLink';
 import { getRouteTest } from '@/shared/const/router';
 
+export const StyledDiv = styled.div<StyledDivProps>`
+  width: ${(props) => props.width || '60%'};
+  height: ${(props) => props.height || '60%'};
+
+  ${(props) =>
+    props.responsiveSizes &&
+    `
+    @media (min-width: 576px) {
+      width: ${props.responsiveSizes[0] || '60%'};
+      height: ${props.responsiveSizes[0] || '60%'};
+    }
+    @media (min-width: 768px) {
+      width: ${props.responsiveSizes[1] || '60%'};
+      height: ${props.responsiveSizes[1] || '60%'};
+    }
+    @media (min-width: 992px) {
+      width: ${props.responsiveSizes[2] || '60%'};
+      height: ${props.responsiveSizes[2] || '60%'};
+    }
+    @media (min-width: 1200px) {
+      width: ${props.responsiveSizes[3] || '60%'};
+      height: ${props.responsiveSizes[3] || '60%'};
+    }
+    @media (min-width: 1400px) {
+      width: ${props.responsiveSizes[4] || '60%'};
+      height: ${props.responsiveSizes[4] || '60%'};
+    }
+  `}
+`;
+
 export interface StyledDivProps {
   width?: string;
   height?: string;
-  mdWidth?: string;
-  mdHeight?: string;
-  lgWidth?: string;
-  lgHeight?: string;
-  xlWidth?: string;
-  xlHeight?: string;
-  xxlWidth?: string;
-  xxlHeight?: string;
+  responsiveSizes?: [string, string, string, string, string];
 }
+const StyledSvg = styled.svg`
+  z-index: 3;
+  position: relative;
+  overflow: visible;
+  pointer-events: none; // Make the entire SVG non-interactive
 
-export const StyledDiv = styled.div<StyledDivProps>`
-  width: 60%;
-  height: 60%;
-  @media (min-width: 576px) {
-    width: ${(props) => props.mdWidth || '60%'}
-    height: ${(props) => props.mdHeight || '60%'}
+  text {
+    pointer-events: none; // Make text non-interactive
   }
-  @media (min-width: 768px) {
-    width: ${(props) => props.lgWidth || '60%'}
-    height: ${(props) => props.lgHeight || '60%'}
+  a {
+    pointer-events: auto; // Make link interactive
+    text-decoration: none;
+    color: inherit; // Ensure link inherits text color
   }
-  @media (min-width: 992px) {
-    width: ${(props) => props.xlWidth || '60%'}
-    height: ${(props) => props.xlHeight || '60%'}
-  }
-  @media (min-width: 1200px) {
-    width: ${(props) => props.xxlWidth || '60%'}
-    height: ${(props) => props.xxlHeight || '60%'}
+  circle {
+    pointer-events: auto;
+    fill: url(#portalGradient);
+    filter: url(#portalEffect);
   }
 `;
+
 interface AnimatedREASICProps {
   width?: string;
   height?: string;
+  responsiveSizes?: [string, string, string, string, string];
 }
 
-const AnimatedREASIC: React.FC = ({ width, height }: AnimatedREASICProps) => {
+const AnimatedREASIC: React.FC = ({
+  width,
+  height,
+  responsiveSizes,
+}: AnimatedREASICProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -134,28 +162,8 @@ const AnimatedREASIC: React.FC = ({ width, height }: AnimatedREASICProps) => {
       }
     };
   }, []);
-  const StyledSvg = styled.svg`
-    z-index: 3;
-    position: relative;
-    overflow: visible;
-    pointer-events: none; // Make the entire SVG non-interactive
-
-    text {
-      pointer-events: none; // Make text non-interactive
-    }
-    a {
-      pointer-events: auto; // Make link interactive
-      text-decoration: none;
-      color: inherit; // Ensure link inherits text color
-    }
-    circle {
-      pointer-events: auto;
-      fill: url(#portalGradient);
-      filter: url(#portalEffect);
-    }
-  `;
   return (
-    <StyledDiv width={width} height={height}>
+    <StyledDiv responsiveSizes={responsiveSizes} width={width} height={height}>
       <StyledSvg
         ref={svgRef}
         version="1.0"

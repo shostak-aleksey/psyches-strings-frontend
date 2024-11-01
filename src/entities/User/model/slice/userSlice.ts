@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserSchema } from '../types/user';
-import { rtkApi } from '@/shared/api/rtkApi';
 
 const initialState: UserSchema = {
   _inited: false,
+  user: undefined,
 };
 
 export const userSlice = createSlice({
@@ -11,20 +11,11 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setAuthData: (state, action: PayloadAction<User>) => {
-      state.authData = action.payload;
+      state.user = action.payload;
     },
     logout: (state) => {
-      state.authData = undefined;
+      state.user = undefined;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      rtkApi.endpoints.initAuthData.matchFulfilled,
-      (state, { payload }) => {
-        state.authData = payload;
-        state._inited = true;
-      },
-    );
   },
 });
 

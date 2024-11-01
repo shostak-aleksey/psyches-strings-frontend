@@ -4,9 +4,28 @@ import { getRouteTest } from '@/shared/const/router';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
 import CustomLink from '../../shared/ui/AppLink/AppLink';
 
-export interface AnimatedMBTIProps {}
+export interface AnimatedMBTIProps {
+  responsiveSizes?: [string, string, string, string, string];
+}
+const StyledSvg = styled.svg`
+  z-index: 3;
+  position: relative;
+  overflow: visible;
+  pointer-events: none;
 
-export const AnimatedMBTI: React.FC<AnimatedMBTIProps> = ({}) => {
+  text {
+    pointer-events: auto;
+  }
+
+  circle {
+    pointer-events: auto;
+    fill: url(#portalGradient2);
+    filter: url(#portalEffect2);
+  }
+`;
+export const AnimatedMBTI: React.FC<AnimatedMBTIProps> = ({
+  responsiveSizes,
+}) => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -215,24 +234,8 @@ export const AnimatedMBTI: React.FC<AnimatedMBTIProps> = ({}) => {
     };
   }, []);
 
-  const StyledSvg = styled.svg`
-    z-index: 3;
-    position: relative;
-    overflow: visible;
-    pointer-events: none;
-
-    text {
-      pointer-events: auto;
-    }
-
-    circle {
-      pointer-events: auto;
-      fill: url(#portalGradient2);
-      filter: url(#portalEffect2);
-    }
-  `;
   return (
-    <StyledDiv>
+    <StyledDiv responsiveSizes={responsiveSizes}>
       <StyledSvg
         ref={svgRef}
         version="1.0"

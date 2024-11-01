@@ -10,15 +10,12 @@ import { AxiosInstance } from 'axios';
 import { UserSchema } from '@/entities/User';
 
 import { rtkApi } from '@/shared/api/rtkApi';
-import { LoginSchema } from '@/features/AuthByEmail';
 
 export interface StateSchema {
   user: UserSchema;
   // [loginApi.reducerPath]: ReturnType<typeof loginApi.reducer>;
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>;
   // Асинхронные редюсеры
-  loginForm?: LoginSchema;
-  loginApi?: LoginSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

@@ -7,7 +7,12 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 interface AnimatedTextProps extends TextProps {
   text?: string | React.ReactNode;
   children: React.ReactNode;
-  animationVariant?: 'fadeInTrigger' | 'slideUp' | 'fadeIn' | 'rotate';
+  animationVariant?:
+    | 'fadeInTrigger1'
+    | 'fadeInTrigger'
+    | 'slideUp'
+    | 'fadeIn'
+    | 'rotate';
   start?: string;
   end?: string;
 }
@@ -55,8 +60,27 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
               end: end || 'bottom -200%',
               scrub: 2,
             },
+            delay: 1.1,
             duration: 5,
             ease: 'power1.inOut',
+          };
+          break;
+        case 'fadeInTrigger1':
+          animationConfig = {
+            fontSize: -0,
+            opacity: 0,
+            stagger: -0.07,
+            scrollTrigger: {
+              trigger: textContainerRef.current,
+              start: start || 'top -60%',
+              end: end || 'bottom -2000%',
+              scrub: false,
+              toggleActions: 'play reverse play reverse', // Воспроизводит и при прокрутке назад
+            },
+
+            duration: 0.3, // Установите продолжительность на 1 секунду
+            // Добавьте задержку в 0.1 секунды
+            ease: '   ',
           };
           break;
         case 'rotate':
@@ -75,7 +99,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
         case 'slideUp':
         default:
           animationConfig = {
-            y: -100,
+            y: -150,
             stagger: 0.03,
             scrollTrigger: {
               trigger: textContainerRef.current,

@@ -5,28 +5,37 @@ interface StringCanvasProps {
   width?: string | number;
   height?: string | number;
   animatePath?: boolean;
+  justifySelf?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
+  alignSelf?: 'start' | 'center' | 'end' | 'space-between' | 'space-around';
   duration?: number;
   elapsed?: number;
   damping?: number;
   frequency?: number;
   amplitude?: number;
+  speed?: number;
   animated?: boolean | { amplitude: number; frequency: number; speed: number };
   animated2?: boolean | { amplitude: number; frequency: number; speed: number };
   animated3?: boolean | { amplitude: number; frequency: number; speed: number };
+  animated4?: boolean | { amplitude: number; frequency: number; speed: number };
+  margin?: string; // New prop added for margin
 }
 
 export const StringCanvas: React.FC<StringCanvasProps> = ({
   width = '100%',
   height = 70,
   elapsed: initialElapsed = 0,
-  animatePath = false,
   duration = 3000,
   damping = 1.5,
   frequency = 0.5,
   amplitude = 20,
+  speed = 1,
   animated = false,
   animated2 = false,
   animated3 = false,
+  animated4 = false,
+  justifySelf,
+  alignSelf,
+  margin, // New prop used here
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -71,6 +80,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
           startPassiveAnimation2();
         } else if (animated3) {
           startPassiveAnimation3();
+        } else if (animated4) {
+          startPassiveAnimation4();
         } else {
           drawInitialString();
         }
@@ -93,7 +104,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
         typeof animated === 'object' ? animated.amplitude : amplitude;
       const passiveFrequency =
         typeof animated === 'object' ? animated.frequency : frequency;
-      const passiveSpeed = typeof animated === 'object' ? animated.speed : 1;
+      const passiveSpeed =
+        typeof animated === 'object' ? animated.speed : speed;
       const passiveDraw = (time: number) => {
         context.clearRect(0, 0, widthPx || 0, heightPx || 0);
         context.beginPath();
@@ -103,7 +115,10 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
             (heightPx || 0) / 2 +
             passiveAmplitude *
               Math.sin(
-                (x / (widthPx || 0)) * Math.PI * 2 * passiveFrequency * time,
+                ((x + time * passiveSpeed) / (widthPx || 0)) *
+                  Math.PI *
+                  2 *
+                  passiveFrequency,
               );
           context.lineTo(x, y);
         }
@@ -120,7 +135,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
         typeof animated2 === 'object' ? animated2.amplitude : amplitude;
       const passiveFrequency =
         typeof animated2 === 'object' ? animated2.frequency : frequency;
-      const passiveSpeed = typeof animated2 === 'object' ? animated2.speed : 1;
+      const passiveSpeed =
+        typeof animated2 === 'object' ? animated2.speed : speed;
       const passiveDraw = (time: number) => {
         context.clearRect(0, 0, widthPx || 0, heightPx || 0);
         context.beginPath();
@@ -130,11 +146,10 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
             (heightPx || 0) / 2 +
             passiveAmplitude *
               Math.sin(
-                (((widthPx || 0) - x) / (widthPx || 0)) *
+                (((widthPx || 0) - x + time * passiveSpeed) / (widthPx || 0)) *
                   Math.PI *
                   2 *
-                  passiveFrequency *
-                  time,
+                  passiveFrequency,
               );
           context.lineTo(x, y);
         }
@@ -151,7 +166,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
         typeof animated3 === 'object' ? animated3.amplitude : amplitude;
       const passiveFrequency =
         typeof animated3 === 'object' ? animated3.frequency : frequency;
-      const passiveSpeed = typeof animated3 === 'object' ? animated3.speed : 1;
+      const passiveSpeed =
+        typeof animated3 === 'object' ? animated3.speed : speed;
       const passiveDraw = (time: number) => {
         context.clearRect(0, 0, widthPx || 0, heightPx || 0);
         context.beginPath();
@@ -161,19 +177,52 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
             (heightPx || 0) / 2 +
             passiveAmplitude *
               Math.sin(
-                (x / (widthPx || 0)) * Math.PI * 2 * passiveFrequency * time,
+                ((x + time * passiveSpeed) / (widthPx || 0)) *
+                  Math.PI *
+                  2 *
+                  passiveFrequency,
               );
           const y2 =
             (heightPx || 0) / 2 +
             passiveAmplitude *
               Math.sin(
-                (((widthPx || 0) - x) / (widthPx || 0)) *
+                (((widthPx || 0) - x + time * passiveSpeed) / (widthPx || 0)) *
                   Math.PI *
                   2 *
-                  passiveFrequency *
-                  time,
+                  passiveFrequency,
               );
           const y = (y1 + y2) / 2; // Combine both waves
+          context.lineTo(x, y);
+        }
+        context.strokeStyle = 'white';
+        context.stroke();
+        animationFrameId = requestAnimationFrame(passiveDraw);
+      };
+      animationFrameId = requestAnimationFrame(passiveDraw);
+    };
+
+    const startPassiveAnimation4 = () => {
+      if (!context) return;
+      const passiveAmplitude =
+        typeof animated4 === 'object' ? animated4.amplitude : amplitude;
+      const passiveFrequency =
+        typeof animated4 === 'object' ? animated4.frequency : frequency;
+      const passiveSpeed =
+        typeof animated4 === 'object' ? animated4.speed : speed;
+      const passiveDraw = (time: number) => {
+        context.clearRect(0, 0, widthPx || 0, heightPx || 0);
+        context.beginPath();
+        context.moveTo(0, (heightPx || 0) / 2);
+        for (let x = 0; x <= (widthPx || 0); x += 1) {
+          const y =
+            (heightPx || 0) / 2 +
+            passiveAmplitude *
+              Math.sin(
+                ((x + time * passiveSpeed) / (widthPx || 0)) *
+                  Math.PI *
+                  2 *
+                  passiveFrequency,
+              );
           context.lineTo(x, y);
         }
         context.strokeStyle = 'white';
@@ -192,6 +241,8 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
       startPassiveAnimation2();
     } else if (animated3) {
       startPassiveAnimation3();
+    } else if (animated4) {
+      startPassiveAnimation4();
     }
 
     return () => {
@@ -206,9 +257,11 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
     damping,
     frequency,
     amplitude,
+    speed,
     animated,
     animated2,
     animated3,
+    animated4,
   ]);
 
   const handleClick = () => {
@@ -241,7 +294,7 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
       ref={canvasRef}
       width={widthPx}
       height={heightPx}
-      style={{ width, height }}
+      style={{ width, height, justifySelf, alignSelf, margin }} // Added margin here
       onClick={handleClick}
     />
   );

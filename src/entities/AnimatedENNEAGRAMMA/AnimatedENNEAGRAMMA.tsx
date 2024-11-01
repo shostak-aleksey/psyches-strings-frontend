@@ -3,27 +3,32 @@ import { styled } from 'styled-components';
 import { getRouteTest } from '@/shared/const/router';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
 import CustomLink from '@/shared/ui/AppLink/AppLink';
-export interface AnimatedENNEAGRAMMAProps {}
+export interface AnimatedENNEAGRAMMAProps {
+  responsiveSizes?: [string, string, string, string, string];
+}
 
-export const AnimatedENNEAGRAMMA: React.FC<AnimatedENNEAGRAMMAProps> = ({}) => {
-  const StyledSvg = styled.svg`
-    z-index: 3;
-    position: relative;
-    overflow: visible;
-    pointer-events: none;
+const StyledSvg = styled.svg`
+  z-index: 3;
+  position: relative;
+  overflow: visible;
+  pointer-events: none;
 
-    text {
-      pointer-events: auto;
-    }
+  text {
+    pointer-events: auto;
+  }
 
-    circle {
-      pointer-events: auto;
-      fill: url(#portalGradient3);
-      filter: url(#portalEffect3);
-    }
-  `;
+  circle {
+    pointer-events: auto;
+    fill: url(#portalGradient3);
+    filter: url(#portalEffect3);
+  }
+`;
+
+export const AnimatedENNEAGRAMMA: React.FC<AnimatedENNEAGRAMMAProps> = ({
+  responsiveSizes,
+}) => {
   return (
-    <StyledDiv>
+    <StyledDiv responsiveSizes={responsiveSizes}>
       <StyledSvg
         version="1.1"
         viewBox="0 0 2000 2000"

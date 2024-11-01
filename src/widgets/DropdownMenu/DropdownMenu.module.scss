@@ -1,0 +1,104 @@
+.DropdownMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  gap: 10px;
+  //   border: 3px solid #ffffff;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 100;
+  width: auto;
+}
+
+.Separator {
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  margin: 10px 0px;
+}
+
+.UserProfile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ProfileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.UserName {
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+.UserProfileLink {
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.Square {
+  margin: 0 15px 0 0;
+}
+
+.DropdownLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  //   margin: 0 0 0 15px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.LogoutButton {
+  color: #fff;
+  transition: color 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  margin: -20px 0 0 0;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+}
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+.profileLink {
+  font-size: 14px;
+  color: #ffffff;
+  text-decoration: none;
+}

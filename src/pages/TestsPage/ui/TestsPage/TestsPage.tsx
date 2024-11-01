@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Container } from '@/shared/ui/Container/Container';
 import { HeaderSection } from '../HeaderSection/HeaderSection';
 import { Page } from '@/shared/ui/Page/Page';
