@@ -12,6 +12,7 @@ import { User } from '@/entities/User';
 import { getRouteTest } from '@/shared/const/router';
 import { FaSquare } from 'react-icons/fa';
 import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
+import { VStack } from '@/shared/ui/Stack';
 
 interface DropdownMenuProps {
   isDropdownVisible: boolean;
@@ -32,6 +33,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   const [logout] = useLogoutMutation();
   const userState = useSelector((state: StateSchema) => state.user);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const DropdownLoginContent = useRef<HTMLDivElement>(null);
 
   console.log('userState', userState, user);
   const handleLogout = useCallback(async () => {
@@ -44,24 +46,22 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   }, [logout, dispatch]);
 
   useEffect(() => {
-    if (dropdownRef.current) {
-      if (isDropdownVisible) {
-        gsap.to(dropdownRef.current, {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          display: 'flex',
-        });
-      } else {
-        gsap.to(dropdownRef.current, {
-          opacity: 0,
-          x: 300,
-          duration: 0.5,
-          display: 'none',
-        });
-      }
+    if (isDropdownVisible) {
+      gsap.to([dropdownRef.current, DropdownLoginContent.current], {
+        opacity: 1,
+        x: userState?.user?.id ? 0 : 20,
+        duration: 0.5,
+        display: 'flex',
+      });
+    } else {
+      gsap.to([dropdownRef.current, DropdownLoginContent.current], {
+        opacity: 0,
+        x: 300,
+        duration: 0.5,
+        display: 'none',
+      });
     }
-  }, [isDropdownVisible]);
+  }, [isDropdownVisible, userState?.user?.id]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,8 +91,8 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             </div>
             <div>
               <Text p className={cls.name}>
-                {user?.name?.givenName || ''}{' '}
-                {user?.name?.familyName || 'имя пользователя'}
+                {user?.name?.givenName || 'имя пользователя'}{' '}
+                {user?.name?.familyName || ''}
               </Text>
               <a href="#" className={cls.profileLink}>
                 Настройки профиля
@@ -141,7 +141,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
           </button>
         </>
       ) : (
-        <>
+        <VStack ref={DropdownLoginContent} className={cls.DropdownLoginContent}>
           <Text align="left" p className={cls.DropdownText}>
             Авторизация необходима для сохранения и отслеживания ваших тестов.
           </Text>
@@ -155,7 +155,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
               Войти через Google
             </Text>
           </button>
-        </>
+        </VStack>
       )}
     </div>
   );
