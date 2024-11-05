@@ -4,7 +4,7 @@ import { useLogoutMutation } from '@/entities/User/api/userApi';
 import { userActions } from '@/entities/User/model/slice/userSlice';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { StateSchema } from '@/app/providers/StoreProvider';
-import CustomLink from '@/shared/ui/AppLink/AppLink';
+import CustomLink from '@/shared/ui/AppLink/CustomLink';
 import cls from './DropdownMenu.module.scss';
 import { Text } from '@/shared/ui/Text';
 import gsap from 'gsap';

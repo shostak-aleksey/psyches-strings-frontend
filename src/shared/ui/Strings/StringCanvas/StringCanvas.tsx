@@ -13,8 +13,6 @@ interface StringCanvasProps {
   frequency?: number;
   amplitude?: number;
   speed?: number;
-  animated?: boolean | { amplitude: number; frequency: number; speed: number };
-  animated2?: boolean | { amplitude: number; frequency: number; speed: number };
   animated3?: boolean | { amplitude: number; frequency: number; speed: number };
   animated4?: boolean | { amplitude: number; frequency: number; speed: number };
   margin?: string; // New prop added for margin
@@ -22,15 +20,13 @@ interface StringCanvasProps {
 
 export const StringCanvas: React.FC<StringCanvasProps> = ({
   width = '100%',
-  height = 70,
+  height = 10,
   elapsed: initialElapsed = 0,
   duration = 3000,
   damping = 1.5,
-  frequency = 0.5,
-  amplitude = 20,
-  speed = 1,
-  animated = false,
-  animated2 = false,
+  frequency = 200,
+  amplitude = 4,
+  speed = 0.05,
   animated3 = false,
   animated4 = false,
   justifySelf,
@@ -42,7 +38,26 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
   const [widthPx, setWidthPx] = useState<number | undefined>();
   const [heightPx, setHeightPx] = useState<number | undefined>();
   const [startTime, setStartTime] = useState<number | null>(null);
-  const [elapsed, setElapsed] = useState<number>(initialElapsed);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof width === 'string' && width.endsWith('%')) {
+        setWidthPx(window.innerWidth * (parseInt(width, 10) / 100));
+      } else {
+        setWidthPx(width as number);
+      }
+      if (typeof height === 'string' && height.endsWith('%')) {
+        setHeightPx(window.innerHeight * (parseInt(height, 10) / 100));
+      } else {
+        setHeightPx(height as number);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [width, height]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -74,11 +89,7 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
         animationFrameId = requestAnimationFrame(drawString);
       } else {
         setIsAnimating(false);
-        if (animated) {
-          startPassiveAnimation();
-        } else if (animated2) {
-          startPassiveAnimation2();
-        } else if (animated3) {
+        if (animated3) {
           startPassiveAnimation3();
         } else if (animated4) {
           startPassiveAnimation4();
@@ -96,68 +107,6 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
       context.lineTo(widthPx || 0, (heightPx || 0) / 2);
       context.strokeStyle = 'white';
       context.stroke();
-    };
-
-    const startPassiveAnimation = () => {
-      if (!context) return;
-      const passiveAmplitude =
-        typeof animated === 'object' ? animated.amplitude : amplitude;
-      const passiveFrequency =
-        typeof animated === 'object' ? animated.frequency : frequency;
-      const passiveSpeed =
-        typeof animated === 'object' ? animated.speed : speed;
-      const passiveDraw = (time: number) => {
-        context.clearRect(0, 0, widthPx || 0, heightPx || 0);
-        context.beginPath();
-        context.moveTo(0, (heightPx || 0) / 2);
-        for (let x = 0; x <= (widthPx || 0); x += 1) {
-          const y =
-            (heightPx || 0) / 2 +
-            passiveAmplitude *
-              Math.sin(
-                ((x + time * passiveSpeed) / (widthPx || 0)) *
-                  Math.PI *
-                  2 *
-                  passiveFrequency,
-              );
-          context.lineTo(x, y);
-        }
-        context.strokeStyle = 'white';
-        context.stroke();
-        animationFrameId = requestAnimationFrame(passiveDraw);
-      };
-      animationFrameId = requestAnimationFrame(passiveDraw);
-    };
-
-    const startPassiveAnimation2 = () => {
-      if (!context) return;
-      const passiveAmplitude =
-        typeof animated2 === 'object' ? animated2.amplitude : amplitude;
-      const passiveFrequency =
-        typeof animated2 === 'object' ? animated2.frequency : frequency;
-      const passiveSpeed =
-        typeof animated2 === 'object' ? animated2.speed : speed;
-      const passiveDraw = (time: number) => {
-        context.clearRect(0, 0, widthPx || 0, heightPx || 0);
-        context.beginPath();
-        context.moveTo(0, (heightPx || 0) / 2);
-        for (let x = 0; x <= (widthPx || 0); x += 1) {
-          const y =
-            (heightPx || 0) / 2 +
-            passiveAmplitude *
-              Math.sin(
-                (((widthPx || 0) - x + time * passiveSpeed) / (widthPx || 0)) *
-                  Math.PI *
-                  2 *
-                  passiveFrequency,
-              );
-          context.lineTo(x, y);
-        }
-        context.strokeStyle = 'white';
-        context.stroke();
-        animationFrameId = requestAnimationFrame(passiveDraw);
-      };
-      animationFrameId = requestAnimationFrame(passiveDraw);
     };
 
     const startPassiveAnimation3 = () => {
@@ -235,10 +184,6 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
     if (isAnimating) {
       setStartTime(performance.now());
       animationFrameId = requestAnimationFrame(drawString);
-    } else if (animated) {
-      startPassiveAnimation();
-    } else if (animated2) {
-      startPassiveAnimation2();
     } else if (animated3) {
       startPassiveAnimation3();
     } else if (animated4) {
@@ -258,8 +203,6 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
     frequency,
     amplitude,
     speed,
-    animated,
-    animated2,
     animated3,
     animated4,
   ]);
@@ -268,26 +211,6 @@ export const StringCanvas: React.FC<StringCanvasProps> = ({
     setIsAnimating(true);
     setStartTime(performance.now());
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (typeof width === 'string' && width.endsWith('%')) {
-        setWidthPx(window.innerWidth * (parseInt(width, 10) / 100));
-      } else {
-        setWidthPx(width as number);
-      }
-      if (typeof height === 'string' && height.endsWith('%')) {
-        setHeightPx(window.innerHeight * (parseInt(height, 10) / 100));
-      } else {
-        setHeightPx(height as number);
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [width, height]);
 
   return (
     <canvas

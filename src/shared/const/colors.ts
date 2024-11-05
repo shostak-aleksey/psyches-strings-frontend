@@ -1,3 +1,4 @@
+import { MainPage } from '@/pages/MainPage';
 export enum Colors {
   OverlayColor = 'var(--overlay-color)',
   RedLight = 'var(--red-light)',
@@ -22,6 +23,7 @@ export enum Colors {
   Secondary = 'var(--color-secondary)',
   Coral = 'var(--color-coral)',
   Violet = 'var(--color-violet)',
+  Purple = 'var(--color-purple)',
   Pink = 'var(--color-pink)',
   Heading = 'var(--color-heading)',
   Body = 'var(--color-body)',
@@ -78,4 +80,6 @@ export enum Colors {
   Vimeo = 'var(--color-vimeo)',
   Twitch = 'var(--color-twitch)',
   Discord = 'var(--color-discord)',
+  DarkGray = 'DarkGray',
+  Main = 'var(--gradient-1)',
 }

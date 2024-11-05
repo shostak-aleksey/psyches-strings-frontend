@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { styled } from 'styled-components';
-import CustomLink from '../../shared/ui/AppLink/AppLink';
+import CustomLink from '../../shared/ui/AppLink/CustomLink';
 import { getRouteTest } from '@/shared/const/router';
 
 export const StyledDiv = styled.div<StyledDivProps>`

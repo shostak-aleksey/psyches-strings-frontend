@@ -32,19 +32,9 @@
     color 0.3s;
   &:hover {
     color: var(--color-heading);
-    transform: scale(1.05);
   }
-  h1 {
-    @media screen and (max-width: 768px) {
-      transform: translateY(5px);
-    }
-    transform: translateY(-5px);
-  }
-  svg {
-    transform: translateY(5px);
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
+  h3 {
+    margin-top: -10px;
   }
 }
 

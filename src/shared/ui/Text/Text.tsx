@@ -68,24 +68,72 @@ const StyledH1 = styled.h1<TextProps>`
   letter-spacing: ${(props) => props.letterSpacing || 'normal'};
   white-space: ${(props) => props.whiteSpace || 'normal'};
   max-width: ${(props) => props.maxWidth || 'none'};
-  font-size: ${(props) => props.size || FontSize.XL};
-  line-height: ${(props) => props.lineHeight || FontLine.XL};
+  font-size: ${(props) => props.size || FontSize.XXXL};
+  line-height: ${(props) => props.lineHeight || FontLine.XXXL};
   ${(props) => adaptiveStyle(props.responsiveSizes)}
 `;
 
-const StyledH2 = styled(StyledH1)`
+const StyledH2 = styled.h2<TextProps>`
   font-family: ${(props) => props.font || Font.XL};
+  font-weight: ${(props) =>
+    props.fontWeight ||
+    FontWeight.Bold}; // Adjust the default font weight if needed
   line-height: 1.3;
+  color: ${(props) => props.color || Colors.Heading};
+  text-align: ${(props) => props.align || 'left'};
+  text-transform: ${(props) => props.textTransform || 'none'};
+  text-decoration: ${(props) => props.textDecoration || 'none'};
+  margin: ${(props) => props.margin || '0 0 0px 0'};
+  letter-spacing: ${(props) => props.letterSpacing || 'normal'};
+  white-space: ${(props) => props.whiteSpace || 'normal'};
+  max-width: ${(props) => props.maxWidth || 'none'};
+  font-size: ${(props) =>
+    props.size || FontSize.XXL}; // Adjust the default font size if needed
+  line-height: ${(props) =>
+    props.lineHeight ||
+    FontLine.XXL}; // Adjust the default line height if needed
 `;
 
-const StyledH3 = styled(StyledH1)`
+const StyledH3 = styled.h3<TextProps>`
   font-family: ${(props) => props.font || Font.L};
+  font-weight: ${(props) =>
+    props.fontWeight ||
+    FontWeight.Bold}; // Adjust the default font weight if needed
   line-height: 1.4;
+  color: ${(props) => props.color || Colors.Heading};
+  text-align: ${(props) => props.align || 'left'};
+  text-transform: ${(props) => props.textTransform || 'none'};
+  text-decoration: ${(props) => props.textDecoration || 'none'};
+  margin: ${(props) => props.margin || '0 0 0px 0'};
+  letter-spacing: ${(props) => props.letterSpacing || 'normal'};
+  white-space: ${(props) => props.whiteSpace || 'normal'};
+  max-width: ${(props) => props.maxWidth || 'none'};
+  font-size: ${(props) =>
+    props.size || FontSize.XL}; // Adjust the default font size if needed
+  line-height: ${(props) =>
+    props.lineHeight ||
+    FontLine.XL}; // Adjust the default line height if needed
 `;
 
-const StyledH4 = styled(StyledH1)`
+const StyledH4 = styled.h4<TextProps>`
   font-family: ${(props) => props.font || Font.M};
+  font-weight: ${(props) =>
+    props.fontWeight ||
+    FontWeight.Bold}; // Adjust the default font weight if needed
   line-height: 1.5;
+  color: ${(props) => props.color || Colors.Heading};
+  text-align: ${(props) => props.align || 'left'};
+  text-transform: ${(props) => props.textTransform || 'none'};
+  text-decoration: ${(props) => props.textDecoration || 'none'};
+  margin: ${(props) => props.margin || '0 0 0px 0'};
+  letter-spacing: ${(props) => props.letterSpacing || 'normal'};
+  white-space: ${(props) => props.whiteSpace || 'normal'};
+  max-width: ${(props) => props.maxWidth || 'none'};
+  font-size: ${(props) =>
+    props.size || FontSize.L}; // Adjust the default font size if needed
+  line-height: ${(props) =>
+    props.lineHeight ||
+    FontLine.XL}; // Adjust the default line height if needed
 `;
 
 const StyledP = styled.p<TextProps>`

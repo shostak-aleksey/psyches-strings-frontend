@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Container } from '@/shared/ui/Container/Container';
 import { Page } from '@/shared/ui/Page/Page';
 import { Section } from '@/shared/ui/Section';
@@ -5,37 +6,29 @@ import { VStack } from '@/shared/ui/Stack';
 import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
 import { Text } from '@/shared/ui/Text';
 import { Questionnaire } from '@/features/Test/Questionnaire';
+import { Colors } from '@/shared/const/colors';
+import { HeaderSection } from '@/pages/TestsPage/ui/HeaderSection/HeaderSection';
+import AnimatedSVG from '@/features/AnimatedSVG/AnimatedSVG';
+import { ResponsiveVisibility } from '@/shared/lib/useMediaQuery/useMediaQuery';
 
 export const TestPage = () => {
+  useEffect(() => {
+    // Прокрутка страницы к началу
+    gsap.to(window, { duration: 0, scrollTo: { y: 0 } });
+  }, []);
+
   return (
     <Page>
-      <Section>
-        <Container flex align="center">
-          <VStack align="center" gap="16">
-            <Text h2>Enneagramma personalty test</Text>
-            <Text h3>Get to know yourself today</Text>
+      <HeaderSection />
+      <Container>
+        <VStack align="center">
+          <Container align="center" className="snap-section">
+            <StringCanvas />
 
-            <StringCanvas
-              animated3={{
-                amplitude: 10,
-                frequency: 0.00001,
-                speed: 0.000015,
-              }}
-            />
-          </VStack>
-        </Container>
-      </Section>
-      <Section>
-        <Container>
-          <Questionnaire />
-        </Container>
-      </Section>
-      <Section>
-        <Container> </Container>
-      </Section>
-      <Section>
-        <Container> </Container>
-      </Section>
+            <Questionnaire />
+          </Container>
+        </VStack>
+      </Container>
     </Page>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { styled } from 'styled-components';
 import { getRouteTest } from '@/shared/const/router';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
-import CustomLink from '../../shared/ui/AppLink/AppLink';
+import CustomLink from '../../shared/ui/AppLink/CustomLink';
 
 export interface AnimatedMBTIProps {
   responsiveSizes?: [string, string, string, string, string];
@@ -344,10 +344,8 @@ export const AnimatedMBTI: React.FC<AnimatedMBTIProps> = ({
           fontSize="100"
           dy=".3em"
         >
-          <CustomLink to={getRouteTest('mbti')} className={''}>
-            {' '}
-            MBTI{' '}
-          </CustomLink>
+          {/* <CustomLink to={getRouteTest('mbti')} className={''}> */} MBTI{' '}
+          {/* </CustomLink> */}
         </text>
       </StyledSvg>
     </StyledDiv>

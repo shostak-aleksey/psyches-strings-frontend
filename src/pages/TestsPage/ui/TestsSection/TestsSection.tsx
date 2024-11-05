@@ -12,7 +12,7 @@ interface TestsSectionProps {
 export const TestsSection = ({ className }: TestsSectionProps) => {
   return (
     <Section
-      height={200}
+      // height={200}
       background={Colors.Gradient1}
       className={classNames(cls.TestsPage, {}, [className])}
     ></Section>

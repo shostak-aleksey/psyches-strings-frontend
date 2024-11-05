@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import { Text, TextProps } from '@/shared/ui/Text';
 import { Colors } from '@/shared/const/colors';
 
@@ -27,7 +27,7 @@ export const AnimatedText: React.FC<AnimatedTextProps> = ({
 }) => {
   const textContainerRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (textContainerRef.current) {
       const split = new SplitText(textContainerRef.current, { type: 'chars' });
 

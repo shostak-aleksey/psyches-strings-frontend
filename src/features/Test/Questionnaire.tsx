@@ -10,6 +10,11 @@ import { HStack, VStack } from '@/shared/ui/Stack';
 import { Text } from '@/shared/ui/Text';
 import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
 import { Button } from '@/shared/ui/Button';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { useNavigate } from 'react-router-dom';
+import { gsap } from 'gsap';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const StyledContainer = styled.div`
   display: flex;
@@ -71,10 +76,7 @@ const CircleButton = styled.button`
   }
 `;
 
-type SelectedOptionsType = {
-  [key: number]: string;
-};
-
+type SelectedOptionsType = { [key: number]: string };
 type StringCanvasProps = {
   amplitude: number;
   frequency: number;
@@ -101,12 +103,10 @@ export const Questionnaire = () => {
     thinkingFeelingQuestions,
     judgingPerceivingQuestions,
   ];
-
   const [answeredIds, setAnsweredIds] = useState<Set<number>>(new Set());
   const [currentQuestions, setCurrentQuestions] = useState(() =>
     getRandomQuestions(questionGroups, 2, answeredIds),
   );
-
   const [selectedOptions, setSelectedOptions] = useState<SelectedOptionsType>(
     {},
   );
@@ -122,46 +122,89 @@ export const Questionnaire = () => {
     ),
   );
 
+  const navigate = useNavigate();
+
   const handleSelect = (questionId: number, option: string) => {
     if (selectedOptions[questionId] !== option) {
-      setSelectedOptions((prev) => ({
-        ...prev,
-        [questionId]: option,
-      }));
-
+      setSelectedOptions((prev) => ({ ...prev, [questionId]: option }));
       setStringCanvasProps((prev) => ({
         ...prev,
-        [questionId]: {
-          amplitude: 17,
-          frequency: 0.0005,
-          speed: 15,
-        },
+        [questionId]: { amplitude: 10, frequency: 4, speed: 0.2 },
       }));
+
+      const firstUnanswered = currentQuestions.find(
+        (question) => !selectedOptions[question.id],
+      );
+
+      if (firstUnanswered) {
+        const element = document.getElementById(
+          `question-${firstUnanswered.id}`,
+        );
+        if (element && element.offsetTop < window.scrollY) {
+          gsap.to(window, {
+            duration: 0.5,
+            scrollTo: { y: window.scrollY - element.offsetTop },
+          });
+          return;
+        }
+      }
+
+      gsap.to(window, {
+        duration: 0.5,
+        scrollTo: { y: window.scrollY + 330 },
+      });
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const unansweredQuestion = currentQuestions.find(
+      (question) => !selectedOptions[question.id],
+    );
+
+    if (unansweredQuestion) {
+      const element = document.getElementById(
+        `question-${unansweredQuestion.id}`,
+      );
+      if (element && element.offsetTop < window.scrollY) {
+        gsap.to(window, {
+          duration: 0.5,
+          scrollTo: { y: element.offsetTop - 150 },
+        });
+        return;
+      }
+
+      const { toast } = await import('react-hot-toast');
+      toast.success('Welcome to the app!');
+
+      return;
+    }
+
     localStorage.setItem('selectedOptions', JSON.stringify(selectedOptions));
     console.log('Сохранено в localStorage:', selectedOptions);
 
-    // Add current question IDs to the answered set
     const newAnsweredIds = new Set(answeredIds);
     currentQuestions.forEach((question) => newAnsweredIds.add(question.id));
     setAnsweredIds(newAnsweredIds);
 
-    // Load the next set of questions
-    setCurrentQuestions(getRandomQuestions(questionGroups, 2, newAnsweredIds));
+    const nextQuestions = getRandomQuestions(questionGroups, 2, newAnsweredIds);
+    setCurrentQuestions(nextQuestions);
+
+    if (nextQuestions.length > 0) {
+      gsap.to(window, { duration: 0.5, scrollTo: { y: window.scrollY + 500 } });
+    } else {
+      navigate('/profile');
+    }
   };
 
   return (
     <StyledContainer>
       {currentQuestions.map((question) => (
-        <VStack align="center" key={question.id}>
-          <Text margin="85px 0 45px 0" h3>
+        <VStack align="center" key={question.id} id={`question-${question.id}`}>
+          <Text h3 margin="85px 0 45px 0">
             {question.text}
           </Text>
           <HStack gap="32" justify="center" align="center">
-            <Text margin="0 0 7px" h4>
+            <Text margin="0 0 7px" h3>
               {question.options[0]}
             </Text>
             <HStack gap="32" justify="center" align="center">
@@ -181,10 +224,19 @@ export const Questionnaire = () => {
               {question.options[question.options.length - 1]}
             </Text>
           </HStack>
-          <StringCanvas animated3={stringCanvasProps[question.id]} />
+          <StringCanvas
+            height={100}
+            animated3={stringCanvasProps[question.id]}
+          />
         </VStack>
       ))}
-      <Button onClick={handleSubmit}>next</Button>
+      <Button
+        variant="secondary"
+        margin="170px 0 330px 0"
+        onClick={handleSubmit}
+      >
+        NEXT
+      </Button>
     </StyledContainer>
   );
 };
