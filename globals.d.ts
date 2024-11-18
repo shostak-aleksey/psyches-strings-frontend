@@ -36,4 +36,6 @@ declare module '*.png' {
 interface Window {
   ScrollTrigger: any;
   ScrollSmoother: any;
+  DrawSVGPlugin: any;
+  SplitText: any;
 }

@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
-import { DrawSVGPlugin } from 'gsap-trial/DrawSVGPlugin';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
 
-gsap.registerPlugin(DrawSVGPlugin);
+// gsap.registerPlugin(window.DrawSVGPlugin);
 
 export interface AnimatedENNEAGRAMMAProps {
   responsiveSizes?: [string, string, string, string, string];
@@ -42,49 +41,53 @@ export const AnimatedENNEAGRAMMA: React.FC<AnimatedENNEAGRAMMAProps> = ({
 
     const timeline = gsap.timeline({ paused: true });
 
-    timeline
-      .to(numbers, {
-        fill: 'white',
-        duration: 1,
-        stagger: 0.1,
-        ease: 'power3.inOut',
-        transformOrigin: '1000px 1000px', // Center of the SVG
-        filter: 'url(#glowEffect)',
-      })
-      .fromTo(
-        enneagramPath,
-        {
-          drawSVG: '0%',
-          stroke: '#64a',
-          duration: 3,
-          ease: 'power1.inOut',
-        },
-        {
-          drawSVG: '100%',
-          stroke: 'white',
-          duration: 2,
-          ease: 'power1.inOut',
-          filter: 'url(#glowEffect)',
-        },
-        0,
-      );
+    // Анимация для чисел
+    timeline.to(numbers, {
+      fill: 'white',
+      duration: 1,
+      stagger: 0.1,
+      ease: 'power3.inOut',
+      transformOrigin: '1000px 1000px',
+      filter: 'url(#glowEffect)',
+    });
 
+    // Анимация для пути символа
+    timeline.fromTo(
+      enneagramPath,
+      {
+        strokeDasharray: '5%',
+        // strokeDashoffset: '0%',
+        stroke: '#64a',
+      },
+      {
+        strokeDasharray: '0%',
+        // strokeDashoffset: '0%',
+        stroke: 'white',
+        duration: 3,
+        ease: 'power1.inOut',
+        filter: 'url(#glowEffect)',
+      },
+      0,
+    );
+
+    // Анимация для круга
     timeline.to(
-      [circle],
+      circle,
       {
         scale: 0,
         duration: 1.5,
-        transformOrigin: '1000px 1000px', // Center of the SVG
+        transformOrigin: '1000px 1000px',
         ease: 'power3.in',
       },
-      // '-=2.5',
+      '-=2.5',
     );
 
+    // Анимация для текста
     timeline.fromTo(
       textElement,
       { opacity: 0, scale: 0 },
       { opacity: 1, scale: 1, duration: 1, ease: 'elastic.out(1, 0.9)' },
-      // '-=1.5',
+      '-=1.5',
     );
 
     const handleMouseEnter = () => timeline.play();
@@ -98,7 +101,6 @@ export const AnimatedENNEAGRAMMA: React.FC<AnimatedENNEAGRAMMAProps> = ({
       svgElement.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
-
   return (
     <StyledDiv responsiveSizes={responsiveSizes}>
       <StyledSvg
