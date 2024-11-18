@@ -19,7 +19,8 @@ export default defineConfig({
   },
   define: {
     __IS_DEV__: JSON.stringify(true),
-    __API__: JSON.stringify('http://localhost:5000/api'),
+    __API__: JSON.stringify('psyches-strings-backend-2.onrender.com/api'),
+    // __API__: JSON.stringify('http://localhost:5000/api'),
     __PROJECT__: JSON.stringify('frontend'),
   },
   build: {
