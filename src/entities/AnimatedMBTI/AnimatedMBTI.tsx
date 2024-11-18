@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { getRouteTest } from '@/shared/const/router';
 import { StyledDiv } from '../AnimatedREASIC/AnimatedREASIC';
 import CustomLink from '../../shared/ui/AppLink/CustomLink';
+import { ModalTriggerWrapper } from '@/widgets/ModalTriggerWrapper/ModalTriggerWrapper';
 
 export interface AnimatedMBTIProps {
   responsiveSizes?: [string, string, string, string, string];
@@ -344,8 +345,7 @@ export const AnimatedMBTI: React.FC<AnimatedMBTIProps> = ({
           fontSize="100"
           dy=".3em"
         >
-          {/* <CustomLink to={getRouteTest('mbti')} className={''}> */} MBTI{' '}
-          {/* </CustomLink> */}
+          MBTI
         </text>
       </StyledSvg>
     </StyledDiv>

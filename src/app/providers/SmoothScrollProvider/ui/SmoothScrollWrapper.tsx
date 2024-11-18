@@ -11,7 +11,8 @@ export const SmoothScrollWrapper = ({ children }: SmoothScrollWrapperProps) => {
       const smoother = ScrollSmoother.create({
         wrapper: '.wrapper',
         content: '.content',
-        smooth: 1.3, // Adjust the smoothness level as needed
+        smooth: 2, // Adjust the smoothness level as needed
+        speed: 0.7,
         effects: true,
       });
 

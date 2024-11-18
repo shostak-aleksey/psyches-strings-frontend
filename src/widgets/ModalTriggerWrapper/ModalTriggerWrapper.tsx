@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useState } from 'react';
 
 const QuestionSelectionModal = lazy(
-  () => import('@/features/Test/QuestionSelectionModal'),
+  () => import('@/features/Test/ui/QuestionSelectionModal'),
 );
 
 interface ModalTriggerWrapperProps {

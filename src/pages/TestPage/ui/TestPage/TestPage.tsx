@@ -1,15 +1,10 @@
 import { useEffect } from 'react';
 import { Container } from '@/shared/ui/Container/Container';
 import { Page } from '@/shared/ui/Page/Page';
-import { Section } from '@/shared/ui/Section';
 import { VStack } from '@/shared/ui/Stack';
 import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
-import { Text } from '@/shared/ui/Text';
-import { Questionnaire } from '@/features/Test/Questionnaire';
-import { Colors } from '@/shared/const/colors';
+import { Questionnaire } from '@/features/Test/ui/Questionnaire';
 import { HeaderSection } from '@/pages/TestsPage/ui/HeaderSection/HeaderSection';
-import AnimatedSVG from '@/features/AnimatedSVG/AnimatedSVG';
-import { ResponsiveVisibility } from '@/shared/lib/useMediaQuery/useMediaQuery';
 
 export const TestPage = () => {
   useEffect(() => {
@@ -25,7 +20,7 @@ export const TestPage = () => {
           <Container align="center" className="snap-section">
             <StringCanvas />
 
-            <Questionnaire />
+            <Questionnaire testId={'67314bc744d8af164d588686'} limit={8} />
           </Container>
         </VStack>
       </Container>

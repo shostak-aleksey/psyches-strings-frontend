@@ -33,8 +33,7 @@ const StyledSection = styled.section<SectionProps>`
   flex-direction: ${(props) => (props.direction ? props.direction : 'row')};
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
-  width: ${(props) =>
-    props.width !== undefined ? `${props.width}px` : '100vw'};
+  width: ${(props) => (props.width !== undefined ? `${props.width}` : '100vw')};
   height: ${(props) =>
     props.height !== undefined ? `${props.height}` : '100vh'};
   background-image: ${(props) =>

@@ -1,5 +1,5 @@
-@import 'reset';
-@import 'variables/global';
+@use 'reset';
+@use 'variables/global';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,7 +20,7 @@
   display: none;
 }
 
-// /* Для Firefox */
+/* Для Firefox */
 // * {
 //   scrollbar-width: thin; /* скрыть скроллбар */
 //   -ms-overflow-style: none; /* для Internet Explorer и Edge */

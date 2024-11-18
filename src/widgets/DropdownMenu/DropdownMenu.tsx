@@ -9,7 +9,7 @@ import cls from './DropdownMenu.module.scss';
 import { Text } from '@/shared/ui/Text';
 import gsap from 'gsap';
 import { User } from '@/entities/User';
-import { getRouteTest } from '@/shared/const/router';
+import { getRouteResults, getRouteTest } from '@/shared/const/router';
 import { FaSquare } from 'react-icons/fa';
 import { StringCanvas } from '@/shared/ui/Strings/StringCanvas/StringCanvas';
 import { VStack } from '@/shared/ui/Stack';
@@ -125,6 +125,26 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             {/* <FaSquare className={cls.Square} size={8} /> */}
           </CustomLink>
           {/* <div className={cls.Separator}></div> */}
+          <StringCanvas
+            alignSelf="center"
+            frequency={10}
+            margin="10px  0 15px 0 "
+            animated4
+            width={200}
+            height={10}
+            speed={0.05}
+            amplitude={1}
+            animatePath
+          />
+          <CustomLink
+            to={getRouteResults(
+              '67314bc744d8af164d588688',
+              '671e6877c25a8103e39c3bbf',
+            )}
+            className={cls.DropdownLink}
+          >
+            результаты теста Y
+          </CustomLink>
           <StringCanvas
             alignSelf="center"
             frequency={10}
